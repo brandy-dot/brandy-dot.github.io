@@ -1,0 +1,1032 @@
+{
+  "meta": {
+    "name": "101HR AI Component Manifest",
+    "version": "2.0.0",
+    "updatedAt": "2026-06-03",
+    "namingRule": "Component/{Category}/{Name}"
+  },
+  "globalStates": [
+    "default",
+    "hover",
+    "active",
+    "focus",
+    "disabled",
+    "loading",
+    "selected",
+    "error"
+  ],
+  "statusSystem": {
+    "task": [
+      "notStarted",
+      "recognizing",
+      "pendingConfirm",
+      "needSupplement",
+      "draft",
+      "partialSuccess",
+      "submitted",
+      "processing",
+      "completed",
+      "failed"
+    ],
+    "employee": [
+      "ready",
+      "needSupplement",
+      "needConfirm",
+      "fieldConflict",
+      "duplicate",
+      "parseFailed",
+      "submitted",
+      "submitFailed",
+      "skipped"
+    ],
+    "field": [
+      "aiRecognized",
+      "aiInferredNeedConfirm",
+      "needSupplement",
+      "conflict",
+      "formatError",
+      "unrecognized",
+      "unmatched"
+    ],
+    "source": [
+      "officialPolicy",
+      "policyInterpretation",
+      "case",
+      "internalRule",
+      "expired",
+      "conflict"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Basic Components",
+      "figmaPage": "Basic Components",
+      "components": [
+        {
+          "name": "Button",
+          "figmaName": "Component/Basic/Button",
+          "codeName": "Button",
+          "className": "hr-c-button",
+          "variants": {
+            "variant": [
+              "primary",
+              "secondary",
+              "ghost",
+              "danger"
+            ],
+            "size": [
+              "sm",
+              "md",
+              "lg"
+            ],
+            "icon": [
+              "none",
+              "leading",
+              "trailing",
+              "only"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "active",
+            "focus",
+            "disabled",
+            "loading"
+          ],
+          "usage": "Use for explicit commands. Avoid using full text buttons for upload, attachment, expand or delete when an icon button is clearer."
+        },
+        {
+          "name": "IconButton",
+          "figmaName": "Component/Basic/IconButton",
+          "codeName": "IconButton",
+          "className": "hr-c-icon-button",
+          "variants": {
+            "tone": [
+              "neutral",
+              "primary",
+              "danger"
+            ],
+            "size": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "active",
+            "focus",
+            "disabled"
+          ],
+          "usage": "Use for upload, attachment, voice, send, expand, collapse, delete, copy and download actions. Tooltip is required."
+        },
+        {
+          "name": "Input",
+          "figmaName": "Component/Basic/Input",
+          "codeName": "Input",
+          "className": "hr-c-input",
+          "variants": {
+            "size": [
+              "sm",
+              "md",
+              "lg"
+            ],
+            "status": [
+              "default",
+              "error",
+              "success",
+              "warning"
+            ],
+            "prefix": [
+              "none",
+              "icon",
+              "text"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "focus",
+            "disabled",
+            "error"
+          ],
+          "usage": "Single-line text input for forms, filters and inline editable fields."
+        },
+        {
+          "name": "Textarea",
+          "figmaName": "Component/Basic/Textarea",
+          "codeName": "Textarea",
+          "className": "hr-c-textarea",
+          "variants": {
+            "density": [
+              "compact",
+              "regular",
+              "expanded"
+            ],
+            "status": [
+              "default",
+              "error",
+              "warning"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "focus",
+            "disabled",
+            "error"
+          ],
+          "usage": "Primary natural-language input for AI tools when the task is input-first."
+        },
+        {
+          "name": "Select",
+          "figmaName": "Component/Basic/Select",
+          "codeName": "Select",
+          "className": "hr-c-select",
+          "variants": {
+            "size": [
+              "sm",
+              "md",
+              "lg"
+            ],
+            "mode": [
+              "single",
+              "multiple"
+            ],
+            "status": [
+              "default",
+              "error"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "focus",
+            "disabled",
+            "error"
+          ],
+          "usage": "Use for tenant, city, status and category choices."
+        },
+        {
+          "name": "Segmented",
+          "figmaName": "Component/Basic/Segmented",
+          "codeName": "Segmented",
+          "className": "hr-c-segmented",
+          "variants": {
+            "size": [
+              "sm",
+              "md"
+            ],
+            "itemCount": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "selected",
+            "disabled"
+          ],
+          "usage": "Use for mutually exclusive modes such as single/batch, today/all, answer modes."
+        },
+        {
+          "name": "Tag",
+          "figmaName": "Component/Basic/Tag",
+          "codeName": "StatusTag",
+          "className": "hr-c-tag",
+          "variants": {
+            "tone": [
+              "neutral",
+              "primary",
+              "success",
+              "warning",
+              "danger",
+              "review",
+              "duplicate",
+              "info"
+            ],
+            "size": [
+              "sm",
+              "md"
+            ]
+          },
+          "states": [
+            "default"
+          ],
+          "usage": "Semantic status only. Do not use colored tags merely for AI feeling."
+        },
+        {
+          "name": "Upload",
+          "figmaName": "Component/Basic/Upload",
+          "codeName": "Upload",
+          "className": "hr-c-upload",
+          "variants": {
+            "mode": [
+              "icon",
+              "dropzone",
+              "fileList"
+            ],
+            "status": [
+              "empty",
+              "uploading",
+              "success",
+              "error"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "focus",
+            "disabled"
+          ],
+          "usage": "Use icon mode in compact AI input bars; use dropzone mode for file-first tasks."
+        }
+      ]
+    },
+    {
+      "name": "Data Components",
+      "figmaPage": "Data Components",
+      "components": [
+        {
+          "name": "Table",
+          "figmaName": "Component/Data/Table",
+          "codeName": "DataTable",
+          "className": "hr-c-table",
+          "variants": {
+            "density": [
+              "compact",
+              "regular"
+            ],
+            "selection": [
+              "none",
+              "checkbox"
+            ],
+            "stickyAction": [
+              "true",
+              "false"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "selected",
+            "loading",
+            "empty"
+          ],
+          "usage": "Primary surface for dense business confirmation and records."
+        },
+        {
+          "name": "RecordList",
+          "figmaName": "Component/Data/RecordList",
+          "codeName": "RecordList",
+          "className": "hr-c-record-list",
+          "variants": {
+            "density": [
+              "compact",
+              "regular"
+            ],
+            "expandable": [
+              "true",
+              "false"
+            ],
+            "actionMode": [
+              "inline",
+              "menu"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "expanded",
+            "empty"
+          ],
+          "usage": "Use for onboarding, ticket, expedite and assistant history records."
+        },
+        {
+          "name": "SourceCard",
+          "figmaName": "Component/Data/SourceCard",
+          "codeName": "SourceCard",
+          "className": "hr-ai-c-source-card",
+          "variants": {
+            "sourceType": [
+              "officialPolicy",
+              "interpretation",
+              "case",
+              "internalRule"
+            ],
+            "emphasis": [
+              "default",
+              "highlight"
+            ]
+          },
+          "states": [
+            "default",
+            "hover"
+          ],
+          "usage": "Use below policy answers to show traceable sources with file title, organization and date."
+        },
+        {
+          "name": "FieldMappingTable",
+          "figmaName": "Component/Data/FieldMappingTable",
+          "codeName": "FieldMappingTable",
+          "className": "hr-ai-b-field-mapping-table",
+          "variants": {
+            "density": [
+              "compact",
+              "regular"
+            ],
+            "editable": [
+              "true",
+              "false"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "Shows customer source field to 101HR standard field mapping."
+        },
+        {
+          "name": "EmployeeReviewTable",
+          "figmaName": "Component/Data/EmployeeReviewTable",
+          "codeName": "EmployeeReviewTable",
+          "className": "hr-ai-b-employee-review-table",
+          "variants": {
+            "mode": [
+              "review",
+              "submitResult"
+            ],
+            "density": [
+              "compact",
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "Confirms employee-level AI extraction, missing fields, conflicts and next action."
+        }
+      ]
+    },
+    {
+      "name": "Navigation Components",
+      "figmaPage": "Navigation Components",
+      "components": [
+        {
+          "name": "AppSidebar",
+          "figmaName": "Component/Navigation/AppSidebar",
+          "codeName": "AppSidebar",
+          "className": "hr-c-app-sidebar",
+          "variants": {
+            "theme": [
+              "lightBlue",
+              "dark"
+            ],
+            "collapsed": [
+              "true",
+              "false"
+            ]
+          },
+          "states": [
+            "default",
+            "selected",
+            "hover"
+          ],
+          "usage": "Global 101HR navigation. Current project should preserve bright blue unless explicitly changed."
+        },
+        {
+          "name": "BackLink",
+          "figmaName": "Component/Navigation/BackLink",
+          "codeName": "BackLink",
+          "className": "hr-c-back-link",
+          "variants": {
+            "target": [
+              "toolset",
+              "previous"
+            ],
+            "icon": [
+              "true",
+              "false"
+            ]
+          },
+          "states": [
+            "default",
+            "hover",
+            "focus"
+          ],
+          "usage": "All sample pages must support returning to the toolset."
+        },
+        {
+          "name": "StepStrip",
+          "figmaName": "Component/Navigation/StepStrip",
+          "codeName": "StepStrip",
+          "className": "hr-ai-c-step-strip",
+          "variants": {
+            "stepCount": [
+              "4",
+              "5",
+              "6"
+            ],
+            "density": [
+              "compact",
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "active",
+            "completed",
+            "disabled"
+          ],
+          "usage": "Shared lightweight AI workflow progress. Do not create page-specific step styles."
+        },
+        {
+          "name": "Tabs",
+          "figmaName": "Component/Navigation/Tabs",
+          "codeName": "Tabs",
+          "className": "hr-c-tabs",
+          "variants": {
+            "mode": [
+              "line",
+              "segmented",
+              "chip"
+            ],
+            "width": [
+              "hug",
+              "fill"
+            ]
+          },
+          "states": [
+            "default",
+            "selected",
+            "disabled"
+          ],
+          "usage": "Use hug-width tabs by default. Avoid one tab becoming oversized."
+        }
+      ]
+    },
+    {
+      "name": "Feedback Components",
+      "figmaPage": "Feedback Components",
+      "components": [
+        {
+          "name": "AIBoundaryAlert",
+          "figmaName": "Component/AI/AIBoundaryAlert",
+          "codeName": "AIBoundaryAlert",
+          "className": "hr-ai-c-boundary-alert",
+          "variants": {
+            "tone": [
+              "info",
+              "warning",
+              "danger"
+            ],
+            "dismissible": [
+              "true",
+              "false"
+            ]
+          },
+          "states": [
+            "default",
+            "closed"
+          ],
+          "usage": "States AI boundaries such as no automatic formal submission."
+        },
+        {
+          "name": "Modal",
+          "figmaName": "Component/Feedback/Modal",
+          "codeName": "Modal",
+          "className": "hr-c-modal",
+          "variants": {
+            "size": [
+              "sm",
+              "md",
+              "lg"
+            ],
+            "tone": [
+              "neutral",
+              "danger",
+              "warning"
+            ]
+          },
+          "states": [
+            "default",
+            "loading"
+          ],
+          "usage": "Use for second confirmation, high-risk actions and destructive operations."
+        },
+        {
+          "name": "Drawer",
+          "figmaName": "Component/Feedback/Drawer",
+          "codeName": "Drawer",
+          "className": "hr-c-drawer",
+          "variants": {
+            "width": [
+              "sm",
+              "md",
+              "lg"
+            ],
+            "position": [
+              "right"
+            ]
+          },
+          "states": [
+            "default",
+            "loading"
+          ],
+          "usage": "Use for operation guides, source details, employee details and edit side tasks."
+        },
+        {
+          "name": "Empty",
+          "figmaName": "Component/Feedback/Empty",
+          "codeName": "Empty",
+          "className": "hr-c-empty",
+          "variants": {
+            "tone": [
+              "neutral",
+              "actionable"
+            ],
+            "density": [
+              "compact",
+              "regular"
+            ]
+          },
+          "states": [
+            "default"
+          ],
+          "usage": "Empty state must include what will appear and the next possible action when relevant."
+        }
+      ]
+    },
+    {
+      "name": "Chart Components",
+      "figmaPage": "Charts",
+      "components": [
+        {
+          "name": "KPI",
+          "figmaName": "Component/Chart/KPI",
+          "codeName": "KpiCard",
+          "className": "hr-c-kpi",
+          "variants": {
+            "trend": [
+              "none",
+              "up",
+              "down"
+            ],
+            "tone": [
+              "neutral",
+              "primary",
+              "success",
+              "warning",
+              "danger"
+            ]
+          },
+          "states": [
+            "default",
+            "loading"
+          ],
+          "usage": "Use for AI ops and product operation metrics."
+        },
+        {
+          "name": "TrendLine",
+          "figmaName": "Component/Chart/TrendLine",
+          "codeName": "TrendLineChart",
+          "className": "hr-c-chart-line",
+          "variants": {
+            "series": [
+              "single",
+              "multiple"
+            ],
+            "density": [
+              "compact",
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "Use for trends over time, not categorical comparisons."
+        },
+        {
+          "name": "FailureDistribution",
+          "figmaName": "Component/Chart/FailureDistribution",
+          "codeName": "FailureDistributionChart",
+          "className": "hr-ai-b-failure-distribution",
+          "variants": {
+            "chartType": [
+              "bar",
+              "donut"
+            ],
+            "density": [
+              "compact",
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "Use in AI operations dashboard for sample and interface failure analysis."
+        }
+      ]
+    },
+    {
+      "name": "AI Components",
+      "figmaPage": "AI Components",
+      "components": [
+        {
+          "name": "AIPrimaryInput",
+          "figmaName": "Component/AI/AIPrimaryInput",
+          "codeName": "AIPrimaryInput",
+          "className": "hr-ai-c-primary-input",
+          "variants": {
+            "mode": [
+              "text",
+              "file",
+              "chat",
+              "policy"
+            ],
+            "tools": [
+              "minimal",
+              "standard",
+              "full"
+            ]
+          },
+          "states": [
+            "default",
+            "focus",
+            "loading",
+            "disabled",
+            "error"
+          ],
+          "usage": "Primary AI input. It must be visually prominent only when user input is the page's primary task."
+        },
+        {
+          "name": "AIProcessDetail",
+          "figmaName": "Component/AI/AIProcessDetail",
+          "codeName": "AIProcessDetail",
+          "className": "hr-ai-c-process-detail",
+          "variants": {
+            "collapsed": [
+              "true",
+              "false"
+            ],
+            "status": [
+              "running",
+              "completed",
+              "failed"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "expanded"
+          ],
+          "usage": "Summarizes AI processing and expands to detailed steps."
+        },
+        {
+          "name": "FieldStatusTag",
+          "figmaName": "Component/AI/FieldStatusTag",
+          "codeName": "FieldStatusTag",
+          "className": "hr-ai-c-field-status-tag",
+          "variants": {
+            "status": [
+              "aiRecognized",
+              "aiInferredNeedConfirm",
+              "needSupplement",
+              "conflict",
+              "formatError",
+              "unrecognized",
+              "unmatched"
+            ]
+          },
+          "states": [
+            "default"
+          ],
+          "usage": "Field-level semantic status. Text must be vertically centered."
+        },
+        {
+          "name": "TrustSummary",
+          "figmaName": "Component/AI/TrustSummary",
+          "codeName": "TrustSummary",
+          "className": "hr-ai-c-trust-summary",
+          "variants": {
+            "sourceHealth": [
+              "current",
+              "old",
+              "conflict"
+            ],
+            "density": [
+              "compact",
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "warning"
+          ],
+          "usage": "Policy assistant answer confidence and source freshness summary."
+        }
+      ]
+    },
+    {
+      "name": "Admin Templates",
+      "figmaPage": "Templates",
+      "components": [
+        {
+          "name": "SmartOnboarding",
+          "figmaName": "Template/AI/SmartOnboarding",
+          "codeName": "SmartOnboardingTool",
+          "className": "hr-ai-t-onboarding",
+          "variants": {
+            "stage": [
+              "input",
+              "review",
+              "submitResult",
+              "records"
+            ],
+            "density": [
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "AI onboarding workbench for resident customer-success users."
+        },
+        {
+          "name": "SmartTicket",
+          "figmaName": "Template/AI/SmartTicket",
+          "codeName": "SmartTicketTool",
+          "className": "hr-ai-t-ticket",
+          "variants": {
+            "stage": [
+              "input",
+              "recognition",
+              "formConfirm",
+              "submitted"
+            ],
+            "density": [
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "Natural-language service-ticket draft and confirmation page."
+        },
+        {
+          "name": "PolicyAssistant",
+          "figmaName": "Template/AI/PolicyAssistant",
+          "codeName": "PolicyAssistant",
+          "className": "hr-ai-t-policy",
+          "variants": {
+            "stage": [
+              "home",
+              "answer",
+              "compare"
+            ],
+            "mode": [
+              "comprehensive",
+              "officialOnly",
+              "caseAssist",
+              "multiCity"
+            ]
+          },
+          "states": [
+            "default",
+            "streaming",
+            "completed",
+            "empty"
+          ],
+          "usage": "Trusted policy answer assistant with source traceability."
+        },
+        {
+          "name": "ServiceExpedite",
+          "figmaName": "Template/AI/ServiceExpedite",
+          "codeName": "ServiceExpediteTool",
+          "className": "hr-ai-t-expedite",
+          "variants": {
+            "stage": [
+              "beforeDecision",
+              "decision",
+              "permissionBlocked",
+              "confirmed"
+            ],
+            "embedded": [
+              "true"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "blocked"
+          ],
+          "usage": "Embedded expedite assistant in service-ticket context."
+        },
+        {
+          "name": "SmartAssistant",
+          "figmaName": "Template/AI/SmartAssistant",
+          "codeName": "SmartAssistantTool",
+          "className": "hr-ai-t-assistant",
+          "variants": {
+            "layout": [
+              "conversationAction"
+            ],
+            "actionState": [
+              "pending",
+              "recognized",
+              "handoff"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "Conversation interface with executable action panel."
+        },
+        {
+          "name": "AIOpsDashboard",
+          "figmaName": "Template/AI/AIOpsDashboard",
+          "codeName": "AIOpsDashboard",
+          "className": "hr-ai-t-ops",
+          "variants": {
+            "view": [
+              "overview",
+              "agentDetail",
+              "failureBackflow"
+            ],
+            "density": [
+              "regular"
+            ]
+          },
+          "states": [
+            "default",
+            "loading",
+            "empty"
+          ],
+          "usage": "AI operations dashboard for agents, dependencies and sample backflow."
+        }
+      ]
+    }
+  ],
+  "interactionPatterns": {
+    "sourceFile": "interaction-guidelines.md",
+    "pageModes": [
+      {
+        "name": "taskProcessing",
+        "label": "任务处理型",
+        "use": "从非结构化资料生成业务草稿，之后以表格/表单确认为主。"
+      },
+      {
+        "name": "intentRouting",
+        "label": "意图分流型",
+        "use": "用户描述需求后，AI 识别业务类型并生成可编辑表单草稿。"
+      },
+      {
+        "name": "trustedQA",
+        "label": "可信问答型",
+        "use": "政策、规则或案例问答，需要结构化答案、来源和追问。"
+      },
+      {
+        "name": "processEmbedded",
+        "label": "流程嵌入型",
+        "use": "在已有业务对象详情中给出 AI 判断和下一步建议。"
+      },
+      {
+        "name": "conversationAction",
+        "label": "对话动作型",
+        "use": "多轮澄清后输出可执行动作、草稿或人工接管。"
+      },
+      {
+        "name": "operationsConfiguration",
+        "label": "运营配置型",
+        "use": "监控 Agent、知识、接口和失败样本，不以前置 AI 输入为主。"
+      }
+    ],
+    "containerModes": [
+      {
+        "name": "fullPage",
+        "use": "完整工作流或独立业务页面。"
+      },
+      {
+        "name": "drawer",
+        "use": "保留当前列表/表单上下文的详情、来源或单对象编辑。"
+      },
+      {
+        "name": "modal",
+        "use": "高风险、不可逆或阻断式确认。"
+      },
+      {
+        "name": "popover",
+        "use": "短说明、字段来源、置信度解释或 tooltip。"
+      },
+      {
+        "name": "inlineExpansion",
+        "use": "记录行或过程详情的快速展开。"
+      },
+      {
+        "name": "toast",
+        "use": "低风险、非阻断的操作反馈。"
+      }
+    ],
+    "layoutModes": [
+      {
+        "name": "oneColumnWorkflow",
+        "use": "顺序型流程、密集表单或结果表需要全宽。"
+      },
+      {
+        "name": "twoColumnSupport",
+        "use": "主对象 + 辅助决策，建议 65/35 或 70/30。"
+      },
+      {
+        "name": "threePaneWorkspace",
+        "use": "左导航、中部主列表/对话、右侧详情/结果三者均长期存在。"
+      },
+      {
+        "name": "listDetail",
+        "use": "记录或对象选择后查看详情。"
+      },
+      {
+        "name": "chatAction",
+        "use": "对话需要和动作面板并存。"
+      }
+    ],
+    "editModes": [
+      {
+        "name": "inlineTableEdit",
+        "use": "低风险、高频、1-3 个字段的行内修正。"
+      },
+      {
+        "name": "inlineFormEdit",
+        "use": "表单本身就是主任务。"
+      },
+      {
+        "name": "drawerEdit",
+        "use": "单对象多字段编辑并需保留列表/表单上下文。"
+      },
+      {
+        "name": "modalEdit",
+        "use": "一个小字段阻断当前操作。"
+      },
+      {
+        "name": "newPageEdit",
+        "use": "对象有独立生命周期、权限、审计和多区块内容。"
+      }
+    ]
+  }
+}

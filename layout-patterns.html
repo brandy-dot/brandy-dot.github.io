@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>布局模式 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>布局模式</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item active" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./delivery-matrix.html">目标闭环</a>
+        </nav>
+      </aside>
+
+      <main class="page">
+        <header class="page-head">
+          <div>
+            <h1>101HR AI 布局模式与产品归类</h1>
+            <p>布局模式页不再展示另一套小样板，而是作为当前 6 个真实产品样板的判断依据：先确定业务主任务，再决定输入、AI 过程、确认区和记录区的位置。</p>
+          </div>
+          <a class="btn primary" href="./product-samples.html">打开产品样板</a>
+        </header>
+
+        <section class="card">
+          <h2>当前样板对照</h2>
+          <p>下面这张表是布局、产品样板和组件库之间的对齐入口。评审时以“当前样板”列的独立页面为准。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead>
+                <tr><th>产品需求</th><th>布局模式</th><th>主任务</th><th>为什么这样布局</th><th>当前样板</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>智能入职</strong><span>驻场客成代客户办理入职</span></td>
+                  <td><span class="tag warn">任务处理型</span></td>
+                  <td>客户资料识别、字段映射、回填检查、人工确认后提交</td>
+                  <td>输入是起点，真正高频操作在员工确认表和异常处理，所以结果区要成为页面主体。</td>
+                  <td><a class="btn primary" href="./smart-onboarding-tool.html">查看样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>智能特单办理</strong><span>自然语言生成服务单草稿</span></td>
+                  <td><span class="tag cyan">意图分流型</span></td>
+                  <td>识别业务类型、抽取员工与办理信息、生成服务单表单</td>
+                  <td>用户不需要先理解特单分类，页面要把“描述需求 → 表单确认”做成主路径。</td>
+                  <td><a class="btn primary" href="./smart-ticket-tool.html">查看样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>AI 政策库 / 小鲲</strong><span>可信政策问答与办理方案</span></td>
+                  <td><span class="tag success">可信问答型</span></td>
+                  <td>输出可溯源、可反馈、可导出的政策方案</td>
+                  <td>保留对话入口，但回答不是聊天气泡，而是结论、依据、清单、风险和来源的结构化方案。</td>
+                  <td><a class="btn primary" href="./smart-policy-assistant.html">查看样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>服务单加急</strong><span>嵌入服务单详情的决策辅助</span></td>
+                  <td><span class="tag danger">流程嵌入型</span></td>
+                  <td>判断是否可加急、权限校验、确认留痕</td>
+                  <td>原服务单详情是上下文主体，AI 是辅助判断区，不能把用户带离正在处理的服务单。</td>
+                  <td><a class="btn primary" href="./service-expedite-tool.html">查看样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>智能助手</strong><span>对话澄清后转动作</span></td>
+                  <td><span class="tag purple">对话动作型</span></td>
+                  <td>多轮澄清后生成政策、服务单、时间线或人工接管动作</td>
+                  <td>对话可以前置，但右侧或下方必须承接可执行动作，否则会停留在普通 Chat。</td>
+                  <td><a class="btn primary" href="./smart-assistant-tool.html">查看样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>智能咨询后台</strong><span>Agent 与知识运营配置</span></td>
+                  <td><span class="tag">运营配置型</span></td>
+                  <td>监控能力、处理失败样本、发布配置并支持回滚</td>
+                  <td>运营用户需要扫指标、查异常、修配置，布局应服务表格和配置详情，而不是客户侧任务流。</td>
+                  <td><a class="btn primary" href="./ai-ops-dashboard.html">查看样板</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>六类布局的统一骨架</h2>
+          <p>统一的是页面骨架和交互语言，不是强行统一成同一种视觉模块。每个页面都应能解释：主任务在哪里、AI 过程在哪里、确认动作在哪里、历史追踪在哪里。</p>
+          <div class="grid-3" style="margin-top:14px">
+            <div class="pattern-card"><span class="tag warn">任务处理型</span><strong>输入轻、结果重</strong><p>适合批量资料处理。输入完成后收敛成摘要，主空间交给结果表和异常优先级。</p></div>
+            <div class="pattern-card"><span class="tag cyan">意图分流型</span><strong>描述需求、确认表单</strong><p>适合用户不懂分类的提单场景。AI 识别摘要要短，业务表单是重点。</p></div>
+            <div class="pattern-card"><span class="tag success">可信问答型</span><strong>问答前置、依据跟随</strong><p>适合政策和知识。允许对话入口前置，但答案必须是可验证方案。</p></div>
+            <div class="pattern-card"><span class="tag danger">流程嵌入型</span><strong>业务详情主导</strong><p>适合服务单加急等流程内辅助。AI 不能抢走原业务上下文。</p></div>
+            <div class="pattern-card"><span class="tag purple">对话动作型</span><strong>对话转动作</strong><p>适合开放式澄清。每轮对话都要沉淀为下一步动作或业务对象。</p></div>
+            <div class="pattern-card"><span class="tag">运营配置型</span><strong>指标、表格、详情</strong><p>适合后台运营。优先支持扫描、筛选、定位异常和发布回滚。</p></div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>布局比例与容器规则</h2>
+          <p>当前产品样板统一使用同一套产品页面宽度规则；差异只发生在内容组织方式，而不是外层容器忽宽忽窄。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>规则</th><th>适用范围</th><th>落地方式</th><th>避免的问题</th></tr></thead>
+              <tbody>
+                <tr><td>外层宽度统一</td><td>6 个独立产品样板</td><td>页面主体按同一产品样板容器宽度，内部模块再按业务分配。</td><td>有的页面铺满，有的页面只占一小块。</td></tr>
+                <tr><td>输入完成后降级</td><td>智能入职、智能特单</td><td>输入区只在首轮突出；生成结果后转为摘要和修改入口。</td><td>输入框长期挤占结果确认空间。</td></tr>
+                <tr><td>AI 过程默认收起</td><td>所有 AI 样板</td><td>展示摘要，详情通过展开查看。</td><td>过程组件抢主任务视线。</td></tr>
+                <tr><td>状态色只表达状态</td><td>字段、员工、任务、来源</td><td>蓝色识别、橙色待补充、黄色冲突、红色失败、绿色完成。</td><td>无意义色条制造“AI 感”。</td></tr>
+                <tr><td>记录区按业务结果设计</td><td>入职记录、服务单记录、运营记录</td><td>展示结果统计、失败原因、下一步，不做普通日志列表。</td><td>记录不可追踪、不可继续处理。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>从样板反推组件</h2>
+          <p>组件库最终应从这些样板反推，而不是让页面反复发明私有样式。下面是当前最稳定的组件归属。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>组件层级</th><th>典型组件</th><th>服务的产品样板</th><th>边界</th></tr></thead>
+              <tbody>
+                <tr><td>基础组件</td><td>Button、IconButton、Input、Textarea、Select、Tabs、Tag、Table、Drawer、Modal、Toast</td><td>全部样板</td><td>不承载业务语义，只保证状态、尺寸、可访问和响应式。</td></tr>
+                <tr><td>AI 通用组合</td><td>AI 边界提示、步骤说明、主任务输入、AI 处理过程、字段状态标签、异常提示</td><td>入职、特单、政策、助手</td><td>表达 AI 介入方式和人工确认边界，不绑定某个业务字段。</td></tr>
+                <tr><td>业务组件</td><td>员工确认表、字段映射表、服务单草稿表单、政策答案包、来源依据卡、加急判断卡</td><td>对应业务样板</td><td>可以有业务字段和专属状态，但要复用基础控件。</td></tr>
+                <tr><td>场景模块</td><td>智能入职工作台、智能特单办理、政策助手回答区、服务单加急侧栏、Agent 运营台</td><td>6 个独立样板</td><td>负责页面级组合，不进入基础组件库。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端落地 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>前端落地</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item active" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./delivery-matrix.html">目标闭环</a>
+        </nav>
+      </aside>
+
+      <main class="page">
+        <header class="page-head">
+          <div>
+            <h1>前端落地标准</h1>
+            <p>统一 token、class、状态枚举、响应式和组件复用边界。目标是让设计规范能直接进入研发实现，而不是停留在展示稿。</p>
+          </div>
+          <span class="tag success">Step 7</span>
+        </header>
+
+        <section class="grid-4">
+          <div class="card"><span class="tag">101HR 基础</span><h3>复用原系统</h3><p>导航、表单、表格、弹窗、抽屉、状态标签优先沿用基础系统能力。</p></div>
+          <div class="card"><span class="tag cyan">AI 扩展</span><h3>只补 AI 语义</h3><p>AI 输入、处理过程、来源、置信、结果应用、人工接管进入扩展层。</p></div>
+          <div class="card"><span class="tag warn">业务组件</span><h3>绑定对象</h3><p>员工、服务单、政策、SLA、Agent 等对象组件按业务域维护。</p></div>
+          <div class="card"><span class="tag purple">场景模块</span><h3>页面级组合</h3><p>工作台、答案区、确认区、运营配置区只在页面/场景层沉淀。</p></div>
+        </section>
+
+        <section class="card section">
+          <h2>Token 标准</h2>
+          <p>产品样板保留 101HR 明亮蓝，不新建深色 AI 品牌。AI 感来自结构、状态和来源可信，不靠大面积渐变和装饰描边。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>类别</th><th>Token</th><th>用途</th><th>边界</th></tr></thead>
+              <tbody>
+                <tr><td>主色</td><td><code>--hr-ai-primary: #006efb</code><br /><code>--hr-ai-nav: #196bfa</code></td><td>主按钮、导航选中、当前步骤、关键链接。</td><td>不要把所有卡片边框染蓝。</td></tr>
+                <tr><td>背景</td><td><code>--hr-ai-bg: #f4f7fb</code><br /><code>--hr-ai-soft: #f8fbff</code></td><td>页面底色、轻量信息块、表格头。</td><td>结果主区优先白底，避免全页浅蓝。</td></tr>
+                <tr><td>状态</td><td><code>success / warning / danger / purple / cyan</code></td><td>成功、待补充、失败、疑似重复、工具/来源。</td><td>状态色只用于标签、少量背景和关键风险。</td></tr>
+                <tr><td>间距</td><td><code>8 / 12 / 16 / 20 / 24 / 32</code></td><td>控件、组件、卡片、页面区块。</td><td>模块间距大于模块内间距，不能全页面 16px 一刀切。</td></tr>
+                <tr><td>圆角</td><td><code>4 / 8 / 10 / 12</code></td><td>按钮 4px，输入 6-8px，卡片 10-12px。</td><td>工作台类 B 端页面避免过度圆润。</td></tr>
+                <tr><td>阴影</td><td><code>--shadow-soft</code></td><td>页面主卡、浮层、输入 Dock。</td><td>表格行和普通列表不用阴影堆叠。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>样式与交互问题复盘</h2>
+          <p>这轮修复不是单点改像素，而是把反复出现的问题沉淀为页面级验收规则：先判断模块关系和业务优先级，再决定容器、间距、按钮和状态表达。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>问题类型</th><th>根因判断</th><th>统一解决方案</th><th>已落地规则</th></tr></thead>
+              <tbody>
+                <tr><td>描边太多</td><td>把所有信息块都当卡片，导致页面全是边框和浅蓝底。</td><td>只有主容器、表格、输入和高风险状态保留明确边界；辅助说明改为轻背景或行内文本。</td><td><code>card</code> 保持白底；过程、步骤、上下文使用 <code>hr-ai-c-step-strip</code> / 轻量条。</td></tr>
+                <tr><td>模块贴在一起</td><td>不同业务模块没有明确父子关系，视觉上像两个容器粘连。</td><td>同一任务内用一个容器承载；不同任务之间必须有 20-24px 间距或清晰标题分隔。</td><td>产品页使用 <code>ai-workflow-page</code> gap；结果区动作使用 <code>result-bottom-bar</code>。</td></tr>
+                <tr><td>模块内间距混乱</td><td>标题、说明、字段、操作按钮使用同一间距尺度。</td><td>标题到说明 4-6px，说明到内容 12-16px，字段到动作 16-20px，模块之间 24px。</td><td>统一 <code>action-row</code>、<code>toolbar.right</code>、<code>field-legend</code> 间距。</td></tr>
+                <tr><td>容器太死板</td><td>用等宽三栏或统一卡片高度承载不同长度内容。</td><td>输入型页面让输入区优先；表格/记录占宽；AI 过程默认收起；右侧只放辅助详情。</td><td>智能入职、特单、政策库、加急、助手、后台按 6 种布局模式分别处理。</td></tr>
+                <tr><td>按钮过多</td><td>把上传、展开、查看、轻筛选都做成文字按钮，抢主操作权重。</td><td>主流程保留主按钮；上传、附件、展开使用图标或轻链接；批量/次要操作进入更多或弱按钮。</td><td><code>icon-btn</code> 固定 36px；<code>link-btn</code> 用于行内轻动作。</td></tr>
+                <tr><td>AI 输入优先级错误</td><td>输入被说明、模式卡、记录区挤到下方，用户不知道先做什么。</td><td>只有输入是主任务的页面才前置大输入；流程嵌入和运营后台不强行放大对话入口。</td><td>政策库保留主问答输入；加急和后台以业务上下文和表格为主。</td></tr>
+                <tr><td>标签/按钮文字不居中</td><td>标签被父级 grid/flex 拉伸，或 line-height 与高度不一致。</td><td>所有标签、按钮、筛选 chip 使用 inline-flex 居中，状态标签不被拉满。</td><td><code>.tag</code>、<code>.btn</code>、<code>.filter-pill</code> 统一 line-height 与对齐。</td></tr>
+                <tr><td>记录区难读</td><td>单条记录把状态、摘要、时间、操作分散，留白多且主次不明。</td><td>记录行先展示状态和业务结果，再展示时间与下一步；“查看全部”和“查看详情”文案区分层级。</td><td>入职/特单记录使用紧凑列表或业务表格，不再小卡片堆叠。</td></tr>
+                <tr><td>步骤条不统一</td><td>不同页面分别写步骤条，出现双分割线、贴边和高度不一致。</td><td>统一为轻量横向步骤条，只表达当前流程位置，不承担模块容器功能。</td><td><code>hr-ai-c-step-strip</code> 统一步骤圆点、线段、移动端横向滚动。</td></tr>
+                <tr><td>交互含义不清</td><td>多个“查看/查看全部/查看全部 3 条”同时出现，动作对象不明确。</td><td>动作文案必须带对象：查看详情、查看全部记录、展开该任务、继续处理、导出失败员工。</td><td>产品样板中的主动作改为业务动词；轻动作靠近对应对象。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>Class 命名分层</h2>
+          <p>class 先表达层级，再表达业务对象，避免把样式写成某一页的一次性结构。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>层级</th><th>命名</th><th>示例</th><th>使用规则</th></tr></thead>
+              <tbody>
+                <tr><td>101HR 基础</td><td><code>hr-base-*</code></td><td><code>hr-base-button</code>, <code>hr-base-table</code></td><td>对应原系统基础组件；AI 页面只调用，不改语义。</td></tr>
+                <tr><td>AI 通用组合</td><td><code>hr-ai-c-*</code></td><td><code>hr-ai-c-process</code>, <code>hr-ai-c-source</code></td><td>跨智能入职、特单、政策库复用。</td></tr>
+                <tr><td>业务组件</td><td><code>hr-ai-b-*</code></td><td><code>hr-ai-b-employee-draft</code>, <code>hr-ai-b-ticket-form</code></td><td>绑定 101HR 业务对象，允许包含业务字段。</td></tr>
+                <tr><td>场景模块</td><td><code>hr-ai-m-*</code></td><td><code>hr-ai-m-onboarding-workbench</code></td><td>页面大区块，复用时要同时复用交互状态。</td></tr>
+                <tr><td>上下文容器</td><td><code>hr-ai-b-context-*</code></td><td><code>hr-ai-b-context-bar</code></td><td>客户/租户、业务模式、资料来源等影响 AI 判断的内容必须前置，不写进输入工具栏。</td></tr>
+                <tr><td>主任务输入</td><td><code>hr-ai-c-primary-input</code></td><td><code>hr-ai-c-primary-input</code></td><td>只用于输入是首要任务的页面；必须包含主动作、示例和边界提示。</td></tr>
+                <tr><td>状态修饰</td><td><code>is-*</code>, <code>has-*</code></td><td><code>is-processing</code>, <code>has-blocking</code></td><td>表达状态，不表达颜色。</td></tr>
+                <tr><td>产品页作用域</td><td><code>page-*</code></td><td><code>page-onboarding</code>, <code>page-policy</code></td><td>只做布局作用域，不能承载通用组件样式。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>组件对齐落地规则</h2>
+          <p>产品样板里的 class 必须先判定归属，再进入代码。能跨两个以上产品复用的沉淀进组件库；只服务页面比例和局部密度的保留为页面私有。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>归属</th><th>当前稳定组件</th><th>使用位置</th><th>研发处理方式</th></tr></thead>
+              <tbody>
+                <tr><td>101HR 基础组件</td><td><code>btn</code>, <code>tag</code>, <code>card</code>, <code>table-wrap</code>, <code>form-field</code>, <code>drawer</code>, <code>modal</code></td><td>所有 AI 产品样板</td><td>进入基础 UI 层；AI 页面只传状态、文案和事件。</td></tr>
+                <tr><td>AI 通用组合</td><td><code>hr-ai-c-primary-task-input</code>, <code>hr-ai-c-primary-input</code>, <code>hr-ai-c-process-detail</code>, <code>hr-ai-c-policy-primary-input</code>, <code>hr-ai-c-trust-boundary</code>, <code>hr-ai-c-step-strip</code></td><td>智能入职、智能特单、政策库、小鲲、智能助手</td><td>进入 AI shared；必须保留 loading、disabled、empty、error、success 状态。</td></tr>
+                <tr><td>101HR 业务组件</td><td><code>hr-ai-b-context-strip</code>, <code>hr-ai-b-ticket-records</code>, <code>hr-ai-b-employee-review-board</code>, <code>hr-ai-b-field-atom</code>, <code>hr-ai-b-source-card</code>, <code>hr-ai-b-history-record-list</code></td><td>入职、特单、政策、服务单、运营后台</td><td>按业务域维护；字段、状态和动作必须有业务语义。</td></tr>
+                <tr><td>场景级模块</td><td><code>hr-ai-m-policy-scenario-card</code>, <code>hr-ai-m-policy-workbench</code>, <code>hr-ai-m-action-conversation</code>, <code>hr-ai-m-expedite-workflow</code>, <code>hr-ai-m-ops-layout</code></td><td>完整产品页的大区域</td><td>按页面模块实现；可复用结构，不强行抽成基础控件。</td></tr>
+                <tr><td>样板外壳</td><td><code>focused-product-page</code>, <code>onboarding-tool-page</code>, <code>policy-assistant-page</code>, <code>ai-workflow-page</code></td><td>6 个独立产品样板</td><td>统一隐藏全局黑色导航、返回工具集、最大宽度和移动端外层规则；属于页面骨架，不进入基础组件。</td></tr>
+                <tr><td>页面私有样式</td><td><code>onboarding-product-shell</code>, <code>policy-product-shell</code>, <code>onboarding-product-main</code>, <code>policy-conversation</code>, <code>ops-release-grid</code></td><td>单个样板的导航、比例、密度和首屏布局</td><td>只能留在页面作用域；不能进入组件库命名空间。</td></tr>
+                <tr><td>应废弃合并</td><td>独立上下文大卡片、同质场景按钮墙、回答模式大卡片、只有装饰色条的状态卡</td><td>旧样板残留或早期试错结构</td><td>合并到 79 业务上下文条、80 主任务输入卡、83 政策主输入、84 场景模板组。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>真实样板 Class 对账</h2>
+          <p>产品样板已经同时保留页面私有布局 class 和组件层 class：页面私有 class 负责比例、密度和首屏结构；<code>hr-ai-*</code> class 负责说明它归属组件库哪一层。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>样板页</th><th>场景模块</th><th>AI 通用组合</th><th>业务组件</th></tr></thead>
+              <tbody>
+                <tr><td>智能入职</td><td><code>hr-ai-m-onboarding-review</code></td><td><code>hr-ai-c-primary-task-input</code>, <code>hr-ai-c-primary-input</code>, <code>hr-ai-c-process-detail</code></td><td><code>hr-ai-b-employee-review-board</code>, <code>hr-ai-b-field-map</code>, <code>hr-ai-b-history-record-list</code></td></tr>
+                <tr><td>智能特单办理</td><td><code>hr-ai-m-ticket-request</code>, <code>hr-ai-m-ticket-editor</code></td><td><code>hr-ai-c-step-strip</code>, <code>hr-ai-c-intent-summary</code>, <code>hr-ai-c-field-legend</code></td><td><code>hr-ai-b-ticket-draft</code>, <code>hr-ai-b-field-atom</code>, <code>hr-ai-b-ticket-records</code></td></tr>
+                <tr><td>AI 政策库</td><td><code>hr-ai-m-policy-scenario-card</code>, <code>hr-ai-m-policy-workbench</code></td><td><code>hr-ai-c-policy-primary-input</code>, <code>hr-ai-c-trust-summary</code>, <code>hr-ai-c-feedback-item</code></td><td><code>hr-ai-b-policy-answer-section</code>, <code>hr-ai-b-source-card</code></td></tr>
+                <tr><td>服务单加急</td><td><code>hr-ai-m-expedite-workflow</code></td><td><code>hr-ai-c-rule-check-list</code></td><td><code>hr-ai-b-ticket-context</code>, <code>hr-ai-b-sla-assist</code>, <code>hr-ai-b-audit-summary</code></td></tr>
+                <tr><td>智能助手</td><td><code>hr-ai-m-action-conversation</code></td><td><code>hr-ai-c-chat-workspace</code>, <code>hr-ai-c-task-split</code>, <code>hr-ai-c-trust-boundary</code></td><td><code>hr-ai-b-action-panel</code>, <code>hr-ai-b-ticket-draft</code></td></tr>
+                <tr><td>智能咨询后台</td><td><code>hr-ai-m-ops-layout</code>, <code>hr-ai-m-release-workflow</code></td><td>复用基础表格、统计和状态反馈</td><td><code>hr-ai-b-metrics-strip</code>, <code>hr-ai-b-agent-list</code>, <code>hr-ai-b-agent-detail</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>数据模型分型</h2>
+          <p>不要强行把所有 AI 场景塞进一个通用模型。每类产品只共享必要的基础状态，业务字段按场景分型。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>模型</th><th>核心字段</th><th>适用场景</th><th>不可复用到</th></tr></thead>
+              <tbody>
+                <tr><td>字段抽取</td><td><code>fieldName, fieldValue, sourceText, confidence, status, blocking</code></td><td>智能入职、特单预填</td><td>政策可信、加急规则</td></tr>
+                <tr><td>字段映射</td><td><code>sourceField, targetField, exampleValue, mappingStatus</code></td><td>客户 Excel 到 101HR 标准字段</td><td>普通展示字段</td></tr>
+                <tr><td>政策答案</td><td><code>answer, citations, lastUpdated, effectiveRange, sourceStatus</code></td><td>政策库、小鲲</td><td>员工资料 OCR</td></tr>
+                <tr><td>服务单草稿</td><td><code>ticketType, employees, requiredFields, missingFields, submitStatus</code></td><td>智能特单办理</td><td>纯咨询答案</td></tr>
+                <tr><td>规则判断</td><td><code>ruleName, matched, evidence, impact, permissionStatus</code></td><td>服务单加急、下一步推荐</td><td>字段置信度展示</td></tr>
+                <tr><td>工具调用</td><td><code>toolName, toolStatus, inputSummary, outputSummary, errorReason</code></td><td>智能助手、Agent 调试</td><td>政策来源卡</td></tr>
+                <tr><td>运营配置</td><td><code>agentName, routeStatus, hitRate, failureRate, pendingSamples</code></td><td>智能咨询后台</td><td>客户侧业务办理页</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2 section">
+          <div class="card">
+            <h2>容器尺寸规则</h2>
+            <p>容器大小由任务复杂度、内容长度和操作频率决定，不按三栏等宽或统一卡片高度机械套用。</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>内容类型</th><th>推荐尺寸</th><th>判断依据</th><th>避免</th></tr></thead>
+                <tbody>
+                  <tr><td>主输入区</td><td>占主工作区 60%-100%</td><td>用户需要先完成输入或上传，且内容可能较长。</td><td>被示例、说明、模式卡挤到次要位置。</td></tr>
+                  <tr><td>确认表单</td><td>宽内容区 + 分组表单</td><td>字段多、需要修改，优先保证横向阅读和校验可见。</td><td>放进窄侧栏导致字段换行和标签拥挤。</td></tr>
+                  <tr><td>结果摘要</td><td>短横条或 4-6 个统计块</td><td>只承担定位和决策提示，不替代表格或详情。</td><td>做成大卡片抢走主表格空间。</td></tr>
+                  <tr><td>历史记录</td><td>整行列表或表格</td><td>用户需要扫状态、摘要、时间和下一步动作。</td><td>小卡片堆叠导致留白多、操作分散。</td></tr>
+                  <tr><td>AI 过程</td><td>默认折叠，摘要一行</td><td>过程是解释性信息，结果和异常处理优先。</td><td>把步骤流长期展开占据首屏。</td></tr>
+                  <tr><td>右侧辅助</td><td>320-380px 或抽屉</td><td>只放来源、建议、详情，不承载主任务。</td><td>与主任务等宽，造成优先级错误。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <h2>控件选型规则</h2>
+            <p>按钮只用于明确命令；上传、语音、附件、展开、复制等高频辅助动作优先使用图标、轻链接或行内操作。</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>动作</th><th>推荐组件</th><th>文案/图标规则</th><th>原因</th></tr></thead>
+                <tbody>
+                  <tr><td>上传附件</td><td>图标按钮 + Tooltip</td><td>回形针 / 上传图标；悬浮说明支持格式。</td><td>避免输入区出现过多文字按钮。</td></tr>
+                  <tr><td>发送 / 生成草稿 / 提交</td><td>主按钮</td><td>一句明确动词，不写泛化“解析”。</td><td>这是流程推进动作，需要最高可见性。</td></tr>
+                  <tr><td>查看详情 / 展开来源</td><td>链接按钮 / 折叠触发器</td><td>靠近对应内容，不进入全局操作区。</td><td>降低按钮密度，保持信息关系清楚。</td></tr>
+                  <tr><td>批量导出 / 更多操作</td><td>更多菜单</td><td>非主任务动作收起。</td><td>避免表格右侧堆多个同权按钮。</td></tr>
+                  <tr><td>状态确认</td><td>Inline tag + 小型操作</td><td>待补充、需确认、冲突直接贴字段旁。</td><td>用户能在问题发生处处理。</td></tr>
+                  <tr><td>危险执行</td><td>二次确认 Modal</td><td>明确影响对象、不可承诺内容和留痕。</td><td>保证高风险动作可追溯。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid-2 section">
+          <div class="card">
+            <h2>响应式规则</h2>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>组件</th><th>桌面</th><th>中屏</th><th>窄屏</th></tr></thead>
+                <tbody>
+                  <tr><td>AI 输入卡</td><td>主输入占满，工具收进图标/轻 chip</td><td>输入与示例上下排列</td><td>只保留主输入和主按钮</td></tr>
+                  <tr><td>业务上下文条</td><td>横向展示客户、模式、来源和策略</td><td>关键字段保留，次要配置折叠</td><td>横向轻导航或单列表单，不进入输入框</td></tr>
+                  <tr><td>主任务输入卡</td><td>输入、附件、示例和主动作在同一卡片内</td><td>示例下移，附件转轻入口</td><td>主按钮满宽，示例收进选择器</td></tr>
+                  <tr><td>结果表格</td><td>固定关键列和操作列</td><td>次要列折叠</td><td>卡片化或横向滚动</td></tr>
+                  <tr><td>右侧详情</td><td>抽屉或 320-380px 侧栏</td><td>下移为详情区</td><td>整页详情或底部抽屉</td></tr>
+                  <tr><td>操作按钮</td><td>主次分组</td><td>次动作进更多</td><td>保留一个主按钮</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <h2>复用边界</h2>
+            <div class="closure-list">
+              <div><strong>101HR 基础组件</strong><p>表单控件、表格、按钮、Tabs、Drawer、Modal、Empty、Tooltip、Upload、Progress。</p></div>
+              <div><strong>AI 扩展组件</strong><p>AI 边界提示、AI 处理过程、来源可信、字段状态、结果应用、工具调用、人工接管。</p></div>
+              <div><strong>业务组件</strong><p>员工草稿、服务单草稿、政策答案、加急决策、Agent 配置、失败样本。</p></div>
+              <div><strong>上下文优先规则</strong><p>客户/租户、商户、国家地区、创建方式、字段映射策略等会改变 AI 判断的配置，必须进入上下文条或业务表单，不能作为输入框内按钮。</p></div>
+              <div><strong>页面私有样式</strong><p>只允许处理该页面的布局比例、首屏优先级和局部密度，不复制通用组件样式。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>状态枚举落地</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>级别</th><th>枚举</th><th>前端显示</th><th>备注</th></tr></thead>
+              <tbody>
+                <tr><td>任务级</td><td><code>idle / processing / draft / pending_confirm / partial_success / completed / failed</code></td><td>顶部进度、记录行标签</td><td>区分“解析成功”和“提交成功”。</td></tr>
+                <tr><td>字段级</td><td><code>identified / inferred / missing / conflict / invalid / unrecognized</code></td><td>字段旁标签或 inline notice</td><td>只在字段抽取和表单预填使用。</td></tr>
+                <tr><td>来源级</td><td><code>official / internal / case / expired / conflict / not_quoteable</code></td><td>政策来源卡</td><td>政策可信不使用置信度百分比。</td></tr>
+                <tr><td>权限级</td><td><code>available / no_permission / apply_pending / approved / denied</code></td><td>动作区和权限提示</td><td>无权限必须给替代动作。</td></tr>
+                <tr><td>运营级</td><td><code>running / config_missing / api_failed / sample_pending / publishing</code></td><td>Agent 表格和详情</td><td>客户侧页面不展示运营内部状态。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

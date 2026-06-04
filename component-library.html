@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件库 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>组件库</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item active" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+        </nav>
+      </aside>
+
+      <main class="page">
+        <header class="page-head">
+          <div>
+            <h1>101HR AI 源组件库</h1>
+            <p>以真实产品样板反推组件源：基础组件、数据组件、导航组件、反馈组件、交互模式、AI 组件、业务组件和后台模板。下方编号样例仅作为状态与边界归档。</p>
+          </div>
+          <span class="tag purple">Step 5</span>
+        </header>
+
+        <section class="layer-grid">
+          <div class="layer-card basic">
+            <span class="tag">基础组件</span>
+            <h2>最小 UI 单元和状态控件</h2>
+            <p>按钮、标签、提示、输入、上传、表格行状态、加载、空错、权限、弹窗、抽屉等。它们不包含 AI 业务判断，只保证视觉、状态和交互一致。</p>
+          </div>
+          <div class="layer-card composite">
+            <span class="tag cyan">AI 通用组合</span>
+            <h2>跨业务复用的 AI 交互单元</h2>
+            <p>意图识别、字段抽取、来源引用、工具调用、结果应用、置信/边界表达、人工接管等。它们有 AI 语义，但不绑定某一个产品。</p>
+          </div>
+          <div class="layer-card business">
+            <span class="tag success">101HR 业务组件</span>
+            <h2>绑定人事、用工、政策、服务单流程</h2>
+            <p>员工草稿、服务单草稿、政策答案、加急决策、材料清单、人员消歧、客户回复编辑等。它们直接服务 101HR 真实业务对象。</p>
+          </div>
+          <div class="layer-card scenario">
+            <span class="tag purple">场景级模块</span>
+            <h2>可直接放进页面的业务区域</h2>
+            <p>智能入职工作台、特单分流工作台、政策问答工作台、加急侧栏、对话动作面板、Agent 配置详情等。它们接近页面区块，不应再被当成基础组件。</p>
+          </div>
+        </section>
+
+        <section class="layer-rules">
+          <div class="rule-tile"><strong>选型顺序</strong>先判断产品场景和布局模式，再选场景级模块，最后拆到业务组件、AI 通用组合和基础组件。</div>
+          <div class="rule-tile"><strong>设计边界</strong>基础组件不能承载业务判断；AI 通用组合不能写死 HR 字段；业务组件必须绑定清晰业务对象。</div>
+          <div class="rule-tile"><strong>前端落地</strong>基础组件进全局组件库，AI 通用组合进 AI shared，101HR 业务组件按产品域维护，场景级模块按页面实现。</div>
+        </section>
+
+        <section class="card section source-library-section">
+          <div class="source-library-head">
+            <div>
+              <h2>源组件库目录</h2>
+              <p>这是当前组件库的权威入口。产品样板中的组件必须能在这里找到定义、状态和适用边界；编号样例只用于查看具体视觉状态。</p>
+            </div>
+            <span class="tag success">Source of Truth</span>
+          </div>
+          <div class="source-library-grid">
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag">Basic Components</span><strong>基础组件</strong></div>
+              <p>不包含业务判断，只负责输入、动作、展示、状态和基础反馈。</p>
+              <div class="source-component-list">
+                <span>Button / IconButton</span><span>Input / Textarea / Select</span><span>Checkbox / Radio / Switch</span><span>Tag / Badge / Tooltip</span><span>Upload / Tabs / Segmented</span><span>SearchInput / Empty / Loading</span>
+              </div>
+              <div class="source-state-row"><strong>状态</strong><span>default, hover, focus, active, selected, disabled, loading, error, success</span></div>
+            </article>
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag cyan">Data Components</span><strong>数据组件</strong></div>
+              <p>负责高密度业务数据的扫描、筛选、展开和批量处理。</p>
+              <div class="source-component-list">
+                <span>Table</span><span>FilterBar</span><span>RecordList</span><span>DescriptionList</span><span>Statistic</span><span>Timeline</span><span>SourceCard</span><span>ResultSummary</span>
+              </div>
+              <div class="source-state-row"><strong>状态</strong><span>normal, filtered, selected, expanded, sticky-action, loading, empty, error</span></div>
+            </article>
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag purple">Navigation Components</span><strong>导航组件</strong></div>
+              <p>负责页面位置、任务阶段和跨样板返回，不承载具体业务结果。</p>
+              <div class="source-component-list">
+                <span>AppSidebar</span><span>ProductSidebar</span><span>Topbar</span><span>BackLink</span><span>Breadcrumb</span><span>StepStrip</span><span>Tabs</span><span>SubMenu</span>
+              </div>
+              <div class="source-state-row"><strong>状态</strong><span>default, current, completed, disabled, collapsed, overflow</span></div>
+            </article>
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag">Interaction Patterns</span><strong>交互模式</strong></div>
+              <p>负责决定页面、抽屉、弹窗、行内展开、布局比例和编辑方式，不直接画业务内容。</p>
+              <div class="source-component-list">
+                <span>PageMode</span><span>ContainerMode</span><span>LayoutMode</span><span>EditMode</span><span>ConfirmPoint</span><span>RecordBehavior</span>
+              </div>
+              <div class="source-state-row"><strong>适用</strong><span>任务处理型、意图分流型、可信问答型、流程嵌入型、对话动作型、运营配置型</span></div>
+            </article>
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag warn">Feedback Components</span><strong>反馈组件</strong></div>
+              <p>负责风险、边界、确认、错误、兜底和异步处理反馈。</p>
+              <div class="source-component-list">
+                <span>AIBoundaryAlert</span><span>Alert</span><span>Toast</span><span>Modal</span><span>Drawer</span><span>Popover</span><span>ConfirmBar</span><span>InlineError</span>
+              </div>
+              <div class="source-state-row"><strong>状态</strong><span>info, warning, danger, success, pending, blocking, dismissed</span></div>
+            </article>
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag cyan">AI Components</span><strong>AI 通用组件</strong></div>
+              <p>负责 AI 输入、识别、来源、置信、处理过程和结果应用，不绑定具体业务对象。</p>
+              <div class="source-component-list">
+                <span>AIPrimaryInput</span><span>AIProcessDetail</span><span>IntentSummary</span><span>FieldStatusTag</span><span>TrustSummary</span><span>SourceTrace</span><span>FollowUpQuestions</span><span>ActionPanel</span>
+              </div>
+              <div class="source-state-row"><strong>状态</strong><span>idle, parsing, mapped, needs-confirm, blocked, applied, handoff</span></div>
+            </article>
+            <article class="source-component-card">
+              <div class="source-card-title"><span class="tag success">Business Components</span><strong>101HR 业务组件</strong></div>
+              <p>绑定员工、服务单、政策来源、加急、Agent 等 101HR 业务对象。</p>
+              <div class="source-component-list">
+                <span>EmployeeReviewTable</span><span>FieldMappingConfirm</span><span>ServiceTicketDraft</span><span>PolicyAnswerPackage</span><span>ExpediteDecision</span><span>AssistantActionQueue</span><span>AgentDependencyTable</span><span>FailureSampleTable</span>
+              </div>
+              <div class="source-state-row"><strong>状态</strong><span>draft, review, missing, conflict, duplicate, submitted, failed, completed</span></div>
+            </article>
+            <article class="source-component-card wide">
+              <div class="source-card-title"><span class="tag purple">Admin Templates</span><strong>后台模板</strong></div>
+              <p>页面模板只组合源组件和布局规则，不再临时发明按钮、标签、步骤条、记录行。</p>
+              <div class="source-component-list template-list">
+                <span>SmartOnboarding</span><span>SmartTicket</span><span>PolicyAssistant</span><span>ServiceExpedite</span><span>SmartAssistant</span><span>AIOpsDashboard</span>
+              </div>
+              <div class="source-state-row"><strong>验收</strong><span>每个模板必须能追溯到上方组件类型，并通过模块间距、按钮尺寸、标签对齐、步骤条统一、记录可读性检查。</span></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="card section source-mapping-section">
+          <h2>产品样板与源组件映射</h2>
+          <p>样板页不是单独造 UI。每个页面主模块都必须能映射到源组件库，缺失时先补源组件，再改页面。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>产品样板</th><th>页面模式</th><th>必须使用的源组件</th><th>关键状态</th><th>组件库位置</th></tr></thead>
+              <tbody>
+                <tr><td>智能入职</td><td>任务处理型</td><td>AIPrimaryInput, AIProcessDetail, FieldMappingConfirm, EmployeeReviewTable, RecordList</td><td>idle, parsing, mapped, missing, conflict, duplicate, submitted</td><td>AI 组件 / 业务组件 / 数据组件</td></tr>
+                <tr><td>智能特单办理</td><td>意图分流型</td><td>AIPrimaryInput, IntentSummary, ServiceTicketDraft, FieldStatusTag, TicketRecordList, ConfirmBar</td><td>recognized, needs-confirm, missing, draft, submitted, failed</td><td>AI 组件 / 业务组件 / 反馈组件</td></tr>
+                <tr><td>AI 政策库 / 小鲲</td><td>可信问答型</td><td>AIPrimaryInput, TrustSummary, PolicyAnswerPackage, SourceCard, FollowUpQuestions, FeedbackItem</td><td>home, streaming, sourced, outdated, conflict, exported, subscribed</td><td>AI 组件 / 业务组件 / 数据组件</td></tr>
+                <tr><td>服务单加急</td><td>流程嵌入型</td><td>StepStrip, Timeline, Statistic, ExpediteDecision, ConfirmBar, RecordList</td><td>before-decision, rule-hit, permission-blocked, confirmed, tracked</td><td>导航组件 / 数据组件 / 业务组件</td></tr>
+                <tr><td>智能助手</td><td>对话动作型</td><td>AIPrimaryInput, ActionPanel, IntentSummary, ToolCallRecord, HandoffPanel, RecordList</td><td>pending, recognized, action-ready, transferred, handoff</td><td>AI 组件 / 反馈组件 / 数据组件</td></tr>
+                <tr><td>运营后台</td><td>运营配置型</td><td>Statistic, AgentDependencyTable, AgentDetailPanel, FailureSampleTable, ReleasePanel</td><td>running, config-missing, api-failed, assigned, rollback, released</td><td>数据组件 / 业务组件 / 后台模板</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>产品样板反推组件表</h2>
+          <p>组件库的稳定性来自真实页面复用。下表用于检查每个产品样板是否能反推出明确组件，而不是为单页临时造样式。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>产品样板</th><th>场景模块</th><th>101HR 业务组件</th><th>AI 通用组合</th><th>基础组件</th><th>页面入口</th></tr></thead>
+              <tbody>
+                <tr><td>智能入职</td><td>智能入职工作台</td><td>业务上下文、员工草稿行、字段映射确认、入职记录、失败员工导出</td><td>主任务输入卡、处理过程、字段状态、结果摘要</td><td>Textarea、Upload、Table、Tag、Drawer、Modal</td><td><a href="./smart-onboarding-tool.html">查看样板</a></td></tr>
+                <tr><td>智能特单办理</td><td>特单表单确认工作区</td><td>服务单草稿表单、员工信息表、邮寄设置、服务单记录</td><td>意图摘要、AI 生成表单确认、字段状态图例、提交阻断</td><td>Textarea、Button、Input、Switch、Table、Toast</td><td><a href="./smart-ticket-tool.html">查看样板</a></td></tr>
+                <tr><td>AI 政策库 / 小鲲</td><td>政策答案工作区</td><td>政策答案包、来源依据、推荐追问、政策订阅、多城市对比</td><td>可信摘要、引用编号、逐条反馈、底部输入 Dock</td><td>Textarea、Tabs、Button、Modal、Drawer、Table</td><td><a href="./smart-policy-assistant.html">查看样板</a></td></tr>
+                <tr><td>服务单加急</td><td>服务单内嵌加急侧栏</td><td>SLA 指标、规则判断、权限申请、高风险确认、加急记录</td><td>AI 处理摘要、风险边界、执行留痕</td><td>Statistic、Timeline、Tag、Button、Table</td><td><a href="./service-expedite-tool.html">查看样板</a></td></tr>
+                <tr><td>智能助手</td><td>对话动作面板</td><td>服务单动作草稿、政策动作、进度查询、人工接管</td><td>对话流、工具调用、意图拆分、结果应用</td><td>Input、Button、Panel、Tag、List</td><td><a href="./smart-assistant-tool.html">查看样板</a></td></tr>
+                <tr><td>智能咨询后台</td><td>Agent 运营配置台</td><td>Agent 状态表、API 依赖、失败样本、发布回滚、配置详情</td><td>运营指标、异常归因、样本回流</td><td>Table、Statistic、Tabs、Drawer、Tag、Button</td><td><a href="./ai-ops-dashboard.html">查看样板</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>组件对齐体检</h2>
+          <p>下面按产品样板实际使用情况对照组件库编号。判断标准不是“有没有相似样式”，而是该组件是否在最合适的位置承担了清晰任务。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>产品样板</th><th>已复用组件库编号</th><th>组件库缺失，已补齐</th><th>样板私有</th><th>应废弃合并</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>智能入职</td>
+                  <td>69 处理过程、75 历史记录、78 业务记录行、79 业务上下文条、80 主任务输入卡</td>
+                  <td>81 当前任务状态条、82 员工确认工作区</td>
+                  <td><code>focused-product-page</code> 统一独立样板外壳；<code>onboarding-product-shell</code>、<code>onboarding-product-main</code> 只负责入职页比例和左侧产品导航。</td>
+                  <td>独立“处理上下文大卡片”合并为 79；入职记录小卡片合并为 78/75。</td>
+                </tr>
+                <tr>
+                  <td>智能特单办理</td>
+                  <td>05 意图识别、67 输入工具栏、69 处理过程、70 生成表单确认、71 字段状态、78 业务记录行、80 主任务输入卡</td>
+                  <td>81 当前任务状态条用于提交前“草稿已生成/待补充”的状态压缩。</td>
+                  <td><code>focused-product-page</code> 统一独立样板外壳；<code>material-layout</code>、<code>ticket-form-grid</code> 属于服务单表单场景布局。</td>
+                  <td>场景标签不做大按钮组，收敛到 67 输入工具栏或 80 输入卡内部。</td>
+                </tr>
+                <tr>
+                  <td>AI 政策库 / 小鲲</td>
+                  <td>72 政策答案与引用来源、73 推荐问题模板、74 底部输入 Dock、77 能力边界条</td>
+                  <td>83 政策主问答输入、84 场景模板组</td>
+                  <td><code>focused-product-page</code> 统一独立样板外壳；<code>policy-product-shell</code>、<code>policy-conversation</code> 是政策库页面布局和会话容器。</td>
+                  <td>回答模式不再做独立大卡片，合并进 83；场景入口不使用同质卡片墙，合并为 84。</td>
+                </tr>
+                <tr>
+                  <td>服务单加急</td>
+                  <td>10 规则判断、11 高风险确认、23 时间线、37 SLA 加急建议、51 加急决策侧栏</td>
+                  <td>无新增。当前组件已覆盖主流程。</td>
+                  <td><code>focused-product-page</code> 统一独立样板外壳；<code>workflow-split</code>、<code>workflow-main</code>、<code>workflow-side</code> 是流程嵌入型页面比例。</td>
+                  <td>普通指标卡不进入 AI 组件库，复用基础 Statistic/Card。</td>
+                </tr>
+                <tr>
+                  <td>智能助手</td>
+                  <td>12 工具调用、13 转人工、18 对话助手、31 结果应用、32 多意图任务、52 对话动作面板</td>
+                  <td>无新增。后续只需统一消息行和动作面板状态。</td>
+                  <td><code>focused-product-page</code> 统一独立样板外壳；<code>assistant-layout</code>、<code>assistant-chat</code> 是对话动作型页面容器。</td>
+                  <td>对话气泡中的普通解释文本不沉淀为组件。</td>
+                </tr>
+                <tr>
+                  <td>智能咨询后台</td>
+                  <td>17 Agent 配置、26 运营指标、40 失败样本、53 Agent 配置详情、63 API 状态、65 发布回滚</td>
+                  <td>无新增。后台以表格、指标和配置详情为主。</td>
+                  <td><code>focused-product-page</code> 统一独立样板外壳；<code>ops-layout</code>、<code>ops-release-grid</code> 是运营后台页面布局。</td>
+                  <td>运营指标卡只复用基础指标，不做 AI 装饰卡。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>真实样板 Class 对账</h2>
+          <p>样板页现在不是只“视觉上参考组件库”，而是在 HTML 中加了组件层 class。页面私有 class 继续处理具体布局，<code>hr-ai-*</code> class 用于沉淀和复用。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>层级</th><th>样板真实 class</th><th>对应组件库条目</th><th>使用边界</th></tr></thead>
+              <tbody>
+                <tr><td>AI 通用组合</td><td><code>hr-ai-c-primary-task-input</code>, <code>hr-ai-c-primary-input</code>, <code>hr-ai-c-process-detail</code>, <code>hr-ai-c-step-strip</code></td><td>69 处理过程、80 主任务输入卡、81 当前任务状态条</td><td>跨智能入职、智能特单和智能助手复用。</td></tr>
+                <tr><td>政策通用组合</td><td><code>hr-ai-c-policy-primary-input</code>, <code>hr-ai-c-trust-summary</code>, <code>hr-ai-c-feedback-item</code>, <code>hr-ai-c-follow-up</code></td><td>72 政策答案、73 推荐问题、83 政策主输入</td><td>只用于政策库/小鲲等可信问答场景。</td></tr>
+                <tr><td>101HR 业务组件</td><td><code>hr-ai-b-employee-review-board</code>, <code>hr-ai-b-ticket-draft</code>, <code>hr-ai-b-field-atom</code>, <code>hr-ai-b-source-card</code>, <code>hr-ai-b-history-record-list</code></td><td>70 生成表单确认、71 字段状态、72 来源引用、78 业务记录行、82 员工确认工作区</td><td>绑定员工、服务单、政策来源等业务对象。</td></tr>
+                <tr><td>场景级模块</td><td><code>hr-ai-m-onboarding-review</code>, <code>hr-ai-m-ticket-editor</code>, <code>hr-ai-m-policy-workbench</code>, <code>hr-ai-m-expedite-workflow</code>, <code>hr-ai-m-action-conversation</code>, <code>hr-ai-m-ops-layout</code></td><td>6 个产品样板的完整业务区域</td><td>只作为页面大区块复用，不下沉为基础组件。</td></tr>
+                <tr><td>页面私有外壳</td><td><code>focused-product-page</code>, <code>onboarding-product-shell</code>, <code>policy-product-shell</code>, <code>workflow-split</code></td><td>布局模式与产品归类</td><td>控制页面宽度、左右栏比例和返回工具集，不代表可复用业务组件。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>色条使用收敛规则</h2>
+          <p>色条只表达关键状态，不作为“AI 感”装饰。普通信息项以背景、标签、文案和操作优先，避免页面同时出现过多彩色侧边。</p>
+          <div class="grid-3" style="margin-top:16px">
+            <div class="rule-tile"><strong>保留强色条</strong>导航选中、主流程、阻断风险、政策可信答案、服务单草稿、当前执行步骤。</div>
+            <div class="rule-tile"><strong>弱化为轻状态</strong>字段卡、任务卡、模板卡、拆分任务、普通结果项、运营指标。</div>
+            <div class="rule-tile"><strong>删除装饰色条</strong>没有状态含义、只是为了让模块看起来“更 AI”的色条一律不使用。</div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>组件缺口体检</h2>
+          <p>从产品经理原型反推出的基础交互零件已经补入组件库。这里保留体检清单作为“为什么需要这些组件”的依据，后续新增组件应继续按基础组件、AI 通用组合、业务组件和场景模块归类。</p>
+          <div class="grid-2" style="margin-top:16px">
+            <div class="gap-list">
+              <div class="catalog-head basic"><span>基础组件补齐项</span><span>优先级</span></div>
+              <div class="gap-item"><strong>字段输入原子</strong><p>输入框、选择器、日期/城市/人员选择、必填、禁用、校验、来源提示。</p><span>P0：表单和预填基础</span></div>
+              <div class="gap-item"><strong>数据列表原子</strong><p>行状态、批量勾选、固定操作列、展开行、分页、空结果、横向滚动。</p><span>P0：入职、后台</span></div>
+              <div class="gap-item"><strong>反馈与浮层原子</strong><p>Toast、Inline notice、Tooltip、Popover、气泡说明、局部确认。</p><span>P0：所有页面</span></div>
+              <div class="gap-item"><strong>容器与操作区</strong><p>右侧抽屉、底部操作条、弹窗、可折叠区、详情侧栏、页面级主操作条。</p><span>P0：确认/执行</span></div>
+              <div class="gap-item"><strong>状态原子</strong><p>Skeleton、局部 loading、空/错/无权限、重试、执行中、成功回执。</p><span>P0：AI 反馈</span></div>
+              <div class="gap-item"><strong>密度与响应规则</strong><p>紧凑/标准/宽松三种密度，表格卡片化、侧栏下移、按钮折叠规则。</p><span>P1：跨端复用</span></div>
+            </div>
+            <div class="gap-list">
+              <div class="catalog-head business"><span>AI 通用与业务补齐项</span><span>优先级</span></div>
+              <div class="gap-item"><strong>意图结果卡</strong><p>主意图、并行意图、待确认项、置信来源、路由动作和兜底入口。</p><span>P0：特单/助手</span></div>
+              <div class="gap-item"><strong>来源证据列表</strong><p>官方来源、内部口径、更新时间、适用范围、冲突/过期/不可引用状态。</p><span>P0：政策/小鲲</span></div>
+              <div class="gap-item"><strong>结果应用条</strong><p>复制、编辑、应用、撤销、转服务单、写入备注、发送前确认。</p><span>P0：所有生成结果</span></div>
+              <div class="gap-item"><strong>员工草稿行</strong><p>员工身份、来源材料、处理状态、阻断项、选中态和右侧详情联动。</p><span>P0：智能入职</span></div>
+              <div class="gap-item"><strong>服务单动作组</strong><p>服务单草稿、SLA 判断、权限申请、加急确认、执行留痕。</p><span>P0：特单/加急</span></div>
+              <div class="gap-item"><strong>运营配置详情</strong><p>Agent 路由、API 依赖、知识库版本、失败样本、发布/回滚状态。</p><span>P1：后台</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section pm-audit-section">
+          <h2>PM 原型逐一体检与补齐方向</h2>
+          <p>这次补充不是继续泛化组件，而是从智能入职、智能特单办理、AI 政策库三个原型中抽取真实复用单元。</p>
+          <div class="pm-audit-grid">
+            <div class="pm-audit-card">
+              <div class="pm-audit-head"><span class="tag">智能入职</span><strong>资料识别与入职记录</strong></div>
+              <p>原型重点是“输入资料 → AI 处理过程 → 入职记录”，不是完整表单页。组件库缺少输入工具栏、租户选择入口、可折叠处理过程和历史任务行。</p>
+              <ul>
+                <li>补齐：智能输入工具栏、AI 过程明细、记录列表行。</li>
+                <li>注意：入职记录是业务结果，不是普通操作日志。</li>
+              </ul>
+            </div>
+            <div class="pm-audit-card">
+              <div class="pm-audit-head"><span class="tag warn">特单</span><strong>需求识别与表单确认</strong></div>
+              <p>原型重点是“自然语言生成业务表单”。组件库缺少业务提醒、需求标签、AI 完成摘要、生成表单确认、字段状态图例和邮寄/员工子表。</p>
+              <ul>
+                <li>补齐：业务提醒横幅、生成表单确认、字段状态图例。</li>
+                <li>注意：表单字段状态要比 AI 过程更突出。</li>
+              </ul>
+            </div>
+            <div class="pm-audit-card">
+              <div class="pm-audit-head"><span class="tag success">政策库</span><strong>可信答案与来源引用</strong></div>
+              <p>原型重点是“政策答案 + 引用来源 + 推荐追问 + 底部输入”。组件库缺少欢迎态、推荐问题卡、引用编号、红头文件来源卡和底部输入 Dock。</p>
+              <ul>
+                <li>补齐：政策答案卡、来源卡、推荐问题卡、底部输入 Dock。</li>
+                <li>注意：政策库允许对话形态，但答案必须结构化。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>自适应交互要求</h2>
+          <p>组件不能只是一张静态卡片。每个可复用组件都要定义尺寸自适应、状态自适应和操作自适应，确保放到不同产品页面时不会失控。</p>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>类型</th><th>桌面端</th><th>中屏端</th><th>移动/窄屏</th><th>交互状态</th></tr></thead>
+              <tbody>
+                <tr><td>入口卡</td><td>3-4 列展示，主入口可加主按钮</td><td>2 列展示</td><td>单列，按钮撑满</td><td>可用、内测、无权限、维护中</td></tr>
+                <tr><td>字段/表单</td><td>2-4 列表单，支持行内编辑</td><td>2 列或单列</td><td>单列，错误跟随字段</td><td>已填、待核对、缺失、冲突、系统数据</td></tr>
+                <tr><td>结果表</td><td>表格为主，固定操作列</td><td>关键列优先，次要列可折叠</td><td>横向滚动或卡片化</td><td>可提交、需复核、阻断、已提交</td></tr>
+                <tr><td>侧栏/抽屉</td><td>右侧固定 320-380px</td><td>下移为详情区</td><td>底部抽屉或整页详情</td><td>打开、确认、执行中、失败、完成</td></tr>
+                <tr><td>政策答案</td><td>答案主区 + 来源侧栏</td><td>来源跟随答案下方</td><td>来源折叠，风险默认展开</td><td>可引用、需复核、来源冲突、过期</td></tr>
+                <tr><td>动作按钮</td><td>主次按钮明确分组</td><td>保留主动作，次动作收进更多</td><td>主按钮撑满，危险动作二次确认</td><td>默认、hover、loading、disabled、success</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card component-catalog">
+          <h2>组件分类索引</h2>
+          <p>下方 84 个样例仍按业务链路展示；索引改为四层，方便判断“该沉淀为通用组件，还是只作为某个页面模块使用”。</p>
+          <div class="catalog-columns four" style="margin-top:16px">
+            <div class="catalog-column">
+              <div class="catalog-head basic"><span>基础组件</span><span>约 22 个</span></div>
+              <div class="catalog-list">
+                <div class="catalog-item"><span class="catalog-num">01</span><span><strong>AI 入口组件</strong>触发入口、能力入口、权限入口</span></div>
+                <div class="catalog-item"><span class="catalog-num">02</span><span><strong>AI 处理进度</strong>识别、检索、生成、调用、执行反馈</span></div>
+                <div class="catalog-item"><span class="catalog-num">03</span><span><strong>AI 按钮、标签与提示条</strong>动作、状态、轻提示</span></div>
+                <div class="catalog-item"><span class="catalog-num">04</span><span><strong>智能输入与附件上传</strong>自然语言、附件、业务对象输入</span></div>
+                <div class="catalog-item"><span class="catalog-num">14</span><span><strong>空状态、错误与无权限</strong>失败后的可继续路径</span></div>
+                <div class="catalog-item"><span class="catalog-num">15</span><span><strong>抽屉、弹窗与承载容器</strong>AI 详情、来源、确认和辅助面板</span></div>
+                <div class="catalog-item"><span class="catalog-num">16</span><span><strong>操作日志与执行留痕</strong>代理执行后的追溯记录</span></div>
+                <div class="catalog-item"><span class="catalog-num">24</span><span><strong>敏感信息与权限控制</strong>身份证、银行卡、手机号等保护</span></div>
+                <div class="catalog-item"><span class="catalog-num">25</span><span><strong>反馈、重试与质检</strong>质量反馈和重试入口</span></div>
+                <div class="catalog-item"><span class="catalog-num">38</span><span><strong>消息通知与渠道同步</strong>IM、群、小程序、服务单备注</span></div>
+                <div class="catalog-item"><span class="catalog-num">39</span><span><strong>权限申请与审批</strong>无权限时的申请和替代动作</span></div>
+                <div class="catalog-item"><span class="catalog-num">41</span><span><strong>异常恢复与降级路径</strong>接口、知识库、附件失败兜底</span></div>
+                <div class="catalog-item"><span class="catalog-num">42</span><span><strong>表单控件组</strong>预填、校验、选择器、必填提示</span></div>
+                <div class="catalog-item"><span class="catalog-num">43</span><span><strong>表格控件组</strong>批量选择、行状态、展开详情</span></div>
+                <div class="catalog-item"><span class="catalog-num">44</span><span><strong>筛选搜索组</strong>地区、业务线、来源、更新时间筛选</span></div>
+                <div class="catalog-item"><span class="catalog-num">45</span><span><strong>反馈控件组</strong>Toast、Popover、Inline notice</span></div>
+                <div class="catalog-item"><span class="catalog-num">46</span><span><strong>容器控件组</strong>抽屉、弹窗、底部操作条</span></div>
+                <div class="catalog-item"><span class="catalog-num">47</span><span><strong>状态控件组</strong>Skeleton、局部加载、重试、无权限</span></div>
+                <div class="catalog-item"><span class="catalog-num">67</span><span><strong>智能输入工具栏</strong>上传、示例、语音、提交入口</span></div>
+                <div class="catalog-item"><span class="catalog-num">68</span><span><strong>业务提醒横幅</strong>业务边界、风险说明和下一步</span></div>
+                <div class="catalog-item"><span class="catalog-num">74</span><span><strong>底部输入 Dock</strong>固定输入、轻量工具和推荐 chip</span></div>
+                <div class="catalog-item"><span class="catalog-num">76</span><span><strong>操作指南入口</strong>Drawer、辅助气泡、上线提示</span></div>
+              </div>
+            </div>
+            <div class="catalog-column">
+              <div class="catalog-head composite"><span>AI 通用组合</span><span>约 15 个</span></div>
+              <div class="catalog-list">
+                <div class="catalog-item"><span class="catalog-num">05</span><span><strong>意图识别与分流</strong>判断要办什么事、走哪条流程</span></div>
+                <div class="catalog-item"><span class="catalog-num">06</span><span><strong>字段抽取与预填</strong>字段值、来源、状态、可编辑动作</span></div>
+                <div class="catalog-item"><span class="catalog-num">08</span><span><strong>政策来源与适用范围</strong>来源、更新时间、适用边界</span></div>
+                <div class="catalog-item"><span class="catalog-num">09</span><span><strong>生成结果、推荐与摘要</strong>编辑、复制、应用、忽略</span></div>
+                <div class="catalog-item"><span class="catalog-num">10</span><span><strong>规则判断与推荐依据</strong>规则命中、推荐原因、下一步</span></div>
+                <div class="catalog-item"><span class="catalog-num">11</span><span><strong>高风险动作确认</strong>提交、发送、修改、打标前确认</span></div>
+                <div class="catalog-item"><span class="catalog-num">12</span><span><strong>工具调用记录</strong>工具调用过程与失败原因</span></div>
+                <div class="catalog-item"><span class="catalog-num">13</span><span><strong>转人工与兜底</strong>保留上下文、失败原因和交接对象</span></div>
+                <div class="catalog-item"><span class="catalog-num">31</span><span><strong>结果应用、撤销与差异对比</strong>应用前看差异，可撤销</span></div>
+                <div class="catalog-item"><span class="catalog-num">32</span><span><strong>多意图拆分任务队列</strong>咨询、查询、执行分开处理</span></div>
+                <div class="catalog-item"><span class="catalog-num">35</span><span><strong>政策冲突与过期处理</strong>来源冲突、过期、范围缺失复核</span></div>
+                <div class="catalog-item"><span class="catalog-num">36</span><span><strong>流程自动化执行计划</strong>跨系统调用顺序、权限、兜底</span></div>
+                <div class="catalog-item"><span class="catalog-num">77</span><span><strong>能力边界条</strong>默认输出、来源要求、风险处理、后续动作</span></div>
+                <div class="catalog-item"><span class="catalog-num">80</span><span><strong>主任务输入卡</strong>输入、附件、示例、边界和主动作</span></div>
+                <div class="catalog-item"><span class="catalog-num">81</span><span><strong>当前任务状态条</strong>步骤、上下文摘要、修改入口和当前状态</span></div>
+                <div class="catalog-item"><span class="catalog-num">83</span><span><strong>政策主问答输入</strong>模式、问题、工具和发送动作一体化</span></div>
+              </div>
+            </div>
+            <div class="catalog-column">
+              <div class="catalog-head business"><span>101HR 业务组件</span><span>约 22 个</span></div>
+              <div class="catalog-list">
+                <div class="catalog-item"><span class="catalog-num">07</span><span><strong>原文对照与异常队列</strong>材料解析和阻断项处理</span></div>
+                <div class="catalog-item"><span class="catalog-num">19</span><span><strong>政策答案包</strong>结论、适用范围、来源、边界</span></div>
+                <div class="catalog-item"><span class="catalog-num">20</span><span><strong>服务单草稿与预填</strong>特单、参保证明、进度查询转服务单</span></div>
+                <div class="catalog-item"><span class="catalog-num">21</span><span><strong>批量处理结果表</strong>智能入职、批量材料处理结果</span></div>
+                <div class="catalog-item"><span class="catalog-num">22</span><span><strong>人工复核队列</strong>缺资料、模板待确认、人员不唯一</span></div>
+                <div class="catalog-item"><span class="catalog-num">23</span><span><strong>进度查询与节点时间线</strong>服务单和入职节点事实</span></div>
+                <div class="catalog-item"><span class="catalog-num">28</span><span><strong>业务对象选择与人员消歧</strong>员工、客户、服务单候选选择</span></div>
+                <div class="catalog-item"><span class="catalog-num">29</span><span><strong>材料清单与缺件补充</strong>材料完成、复核、阻断任务</span></div>
+                <div class="catalog-item"><span class="catalog-num">30</span><span><strong>模板选择与字段映射</strong>入职、证明、回复模板映射</span></div>
+                <div class="catalog-item"><span class="catalog-num">33</span><span><strong>客户回复编辑器</strong>客服回复草稿、引用依据、发送确认</span></div>
+                <div class="catalog-item"><span class="catalog-num">34</span><span><strong>知识检索与筛选</strong>地区、业务线、时间、来源筛选</span></div>
+                <div class="catalog-item"><span class="catalog-num">37</span><span><strong>SLA 与加急建议</strong>节点停留、阈值、加急确认</span></div>
+                <div class="catalog-item"><span class="catalog-num">40</span><span><strong>质检标注与失败样本回流</strong>错误归因、样本沉淀、运营复盘</span></div>
+                <div class="catalog-item"><span class="catalog-num">48</span><span><strong>入职字段复核面板</strong>字段、原文、附件、阻断原因</span></div>
+                <div class="catalog-item"><span class="catalog-num">49</span><span><strong>服务单草稿编辑器</strong>服务类型、人员、用途、关联单</span></div>
+                <div class="catalog-item"><span class="catalog-num">69</span><span><strong>AI 处理过程明细</strong>步骤、状态、耗时、默认收起</span></div>
+                <div class="catalog-item"><span class="catalog-num">70</span><span><strong>AI 生成表单确认</strong>表单草稿、字段状态、提交动作</span></div>
+                <div class="catalog-item"><span class="catalog-num">71</span><span><strong>字段状态图例</strong>AI 已填、待补充、冲突、需确认</span></div>
+                <div class="catalog-item"><span class="catalog-num">75</span><span><strong>历史任务记录</strong>业务结果、后续动作和展开详情</span></div>
+                <div class="catalog-item"><span class="catalog-num">78</span><span><strong>业务记录行</strong>状态、对象、结果、时间、下一步</span></div>
+                <div class="catalog-item"><span class="catalog-num">79</span><span><strong>业务上下文条</strong>客户、模式、来源、策略前置</span></div>
+                <div class="catalog-item"><span class="catalog-num">82</span><span><strong>员工确认工作区</strong>异常优先、筛选搜索、横向表格和提交规则</span></div>
+              </div>
+            </div>
+            <div class="catalog-column">
+              <div class="catalog-head scenario"><span>场景级模块</span><span>约 10 个</span></div>
+              <div class="catalog-list">
+                <div class="catalog-item"><span class="catalog-num">17</span><span><strong>Agent 运营配置</strong>Agent、路由、API、知识库配置</span></div>
+                <div class="catalog-item"><span class="catalog-num">18</span><span><strong>客服对话与智能助手</strong>多轮澄清、工具调用、可执行动作</span></div>
+                <div class="catalog-item"><span class="catalog-num">26</span><span><strong>AI 运营指标</strong>命中率、转人工率、失败样本</span></div>
+                <div class="catalog-item"><span class="catalog-num">27</span><span><strong>场景任务启动器</strong>工具集、工作台、首页弹窗入口</span></div>
+                <div class="catalog-item"><span class="catalog-num">50</span><span><strong>政策答案工作台</strong>答案、来源、范围、引用和冲突处理</span></div>
+                <div class="catalog-item"><span class="catalog-num">51</span><span><strong>加急决策侧栏</strong>SLA、规则、权限、确认、留痕</span></div>
+                <div class="catalog-item"><span class="catalog-num">52</span><span><strong>对话动作面板</strong>候选动作、转服务单、转人工</span></div>
+                <div class="catalog-item"><span class="catalog-num">53</span><span><strong>Agent 配置详情</strong>路由、API、知识库、样本、发布</span></div>
+                <div class="catalog-item"><span class="catalog-num">66</span><span><strong>AI 页面欢迎态</strong>产品定位、主输入、核心入口</span></div>
+                <div class="catalog-item"><span class="catalog-num">72</span><span><strong>政策答案与引用来源</strong>答案主卡、来源证据、引用编号</span></div>
+                <div class="catalog-item"><span class="catalog-num">73</span><span><strong>推荐问题模板卡</strong>场景化 prompt 和任务入口</span></div>
+                <div class="catalog-item"><span class="catalog-num">84</span><span><strong>场景模板组</strong>按业务类型组织 prompt，不做同质卡片墙</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="component-section-title">
+          <div>
+            <h2>编号样例归档</h2>
+            <p>以下样例用于查看具体视觉状态、边界和前端 class。组件选型、命名和复用以上方“源组件库目录”和“产品样板映射”为准。</p>
+          </div>
+          <span class="tag">84 个组件</span>
+        </div>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>01. AI 入口组件</h2><p>用于工具集、工作台、服务单详情、政策库等入口。入口必须说明能力和适用对象。</p></div>
+            <span class="tag">hr-ai-entry</span>
+          </div>
+          <div class="component-body">
+            <div class="grid-3">
+              <div class="ai-entry active"><div class="ai-entry-icon">AI</div><div class="ai-entry-body"><div class="ai-entry-title">智能入职解析 <span class="tag success">可用</span></div><div class="ai-entry-desc">上传入职表和附件，生成员工入职草稿。</div></div><button class="btn primary">进入</button></div>
+              <div class="ai-entry"><div class="ai-entry-icon">AI</div><div class="ai-entry-body"><div class="ai-entry-title">智能特单办理 <span class="tag warn">内测</span></div><div class="ai-entry-desc">识别客户诉求，预填服务单并生成回复。</div></div><button class="btn soft">申请</button></div>
+              <div class="ai-entry disabled"><div class="ai-entry-icon">AI</div><div class="ai-entry-body"><div class="ai-entry-title">加急助手 <span class="tag">无权限</span></div><div class="ai-entry-desc">需要服务单操作权限后可使用。</div></div><button class="btn">查看</button></div>
+            </div>
+            <div class="component-meta">
+              <div class="meta-card"><strong>适用</strong>工具集入口、工作台快捷入口、服务单详情中的 AI 能力触发。</div>
+              <div class="meta-card"><strong>不适用</strong>不要把入口直接做成万能聊天首页；入口应指向具体任务。</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>02. AI 处理进度</h2><p>明确 AI 正在识别、检索、生成、调用工具还是执行，避免空泛“思考中”。</p></div>
+            <span class="tag">hr-ai-progress</span>
+          </div>
+          <div class="component-body">
+            <div class="step-list">
+              <div class="step"><div class="step-index">1</div><div><strong>识别业务意图</strong><br />命中参保证明申请 + 历史进度查询。</div><span class="tag success">完成</span></div>
+              <div class="step"><div class="step-index">2</div><div><strong>查询员工和服务单</strong><br />正在调用员工档案、服务单接口。</div><span class="tag">进行中</span></div>
+              <div class="step"><div class="step-index">3</div><div><strong>生成回复草稿</strong><br />等待用户确认后应用到会话。</div><span class="tag warn">待确认</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>03. AI 按钮、标签与提示条</h2><p>用于动作、状态和轻量提示。按钮要写具体动作，提示条要给下一步。</p></div>
+            <span class="tag">hr-ai-btn / hr-ai-tag / hr-ai-banner</span>
+          </div>
+          <div class="component-body stack">
+            <div class="toolbar">
+              <button class="btn primary">开始解析</button>
+              <button class="btn soft">生成回复</button>
+              <button class="btn">保存草稿</button>
+              <span class="tag success">可引用</span>
+              <span class="tag warn">需复核</span>
+              <span class="tag danger">阻断</span>
+              <span class="tag purple">AI 生成</span>
+            </div>
+            <div class="grid-3">
+              <div class="banner success"><strong>完成</strong><span>已生成服务单草稿，发送前可继续编辑。</span></div>
+              <div class="banner warn"><strong>需复核</strong><span>证明用途来自客户原话，建议确认模板。</span></div>
+              <div class="banner danger"><strong>不可执行</strong><span>当前账号无加急权限，仅可保存建议。</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>04. 智能输入与附件上传</h2><p>用于自然语言、附件、业务对象并列输入。它不是默认聊天框。</p></div>
+            <span class="tag">hr-ai-input / hr-ai-upload</span>
+          </div>
+          <div class="component-body">
+            <div class="smart-input">
+              <div class="smart-textarea">帮这 3 个人办理 6 月入职，北京，参保方案按默认。资料在表格和附件里。</div>
+              <div class="upload-grid">
+                <div class="upload-box active">上传入职表<br />.xlsx / .csv</div>
+                <div class="upload-box">上传证件附件<br />身份证、银行卡</div>
+                <div class="upload-box error">附件识别失败<br />重新上传</div>
+              </div>
+              <div class="toolbar" style="margin-top:12px"><span class="tag">批量入职</span><span class="tag cyan">资料识别</span><button class="btn primary">开始解析</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>05. 意图识别与分流</h2><p>用于特单、Chat、智能助手。先判断用户要办什么事，再把任务路由到对应流程。</p></div>
+            <span class="tag cyan">hr-ai-intent-router</span>
+          </div>
+          <div class="component-body">
+            <div class="intent-router">
+              <div class="intent-source">
+                <span class="tag">用户原始诉求</span>
+                <strong>“帮张萌开北京参保证明，顺便看下之前那单进度。”</strong>
+                <p>意图识别不处理字段细节，重点是拆出任务、确定主流程、给出分流动作。</p>
+              </div>
+              <div class="intent-flow">
+                <div class="intent-decision">
+                  <span class="tag cyan">路由判断</span>
+                  <h3>识别出 2 个业务任务 + 1 个待确认点</h3>
+                  <p>主任务进入服务单预填；并行任务进入进度查询；证明用途需要确认模板。</p>
+                </div>
+                <div class="intent-arrow">→</div>
+                <div class="intent-queue">
+                  <div class="intent-route primary"><span class="tag">主流程</span><div><strong>创建参保证明服务单</strong><p>进入服务单草稿，不直接提交。</p></div><button class="btn primary">进入</button></div>
+                  <div class="intent-route parallel"><span class="tag cyan">并行</span><div><strong>查询历史进度</strong><p>找到 1 条候选服务单，可同步生成回复。</p></div><button class="btn">查询</button></div>
+                  <div class="intent-route review"><span class="tag warn">待确认</span><div><strong>证明用途模板</strong><p>签证用途可能需要中英文模板。</p></div><button class="btn">确认</button></div>
+                  <div class="intent-route fallback"><span class="tag danger">兜底</span><div><strong>人员或字段无法确定</strong><p>保留上下文后转人工处理。</p></div><button class="btn">转人工</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>06. 字段抽取与预填</h2><p>只用于 OCR、附件解析、表单预填、客户原话抽字段。核心是字段值、来源、状态和可编辑动作。</p></div>
+            <span class="tag warn">hr-ai-field</span>
+          </div>
+          <div class="component-body">
+            <div class="prefill-panel">
+              <div class="prefill-toolbar">
+                <div><strong>参保证明服务单字段预填</strong><br /><span style="color:var(--hr-ai-sub)">字段抽取在路由之后发生，服务于具体表单。</span></div>
+                <div class="toolbar"><button class="btn">查看原文</button><button class="btn primary">确认字段</button></div>
+              </div>
+              <div class="prefill-form">
+                <div class="prefill-field">
+                  <div class="prefill-field-head"><span>参保城市</span><span class="tag">AI 已填</span></div>
+                  <div class="prefill-field-value">北京 <button class="btn">编辑</button></div>
+                  <div class="prefill-field-source">来源：客户原话 + 参保记录</div>
+                </div>
+                <div class="prefill-field review">
+                  <div class="prefill-field-head"><span>证明用途</span><span class="tag warn">待核对</span></div>
+                  <div class="prefill-field-value">签证用途 <button class="btn">选择模板</button></div>
+                  <div class="prefill-field-source">来源：客户原话，需确认中英文模板</div>
+                </div>
+                <div class="prefill-field missing">
+                  <div class="prefill-field-head"><span>银行卡号</span><span class="tag danger">缺失</span></div>
+                  <div class="prefill-field-value">未识别 <button class="btn">补充材料</button></div>
+                  <div class="prefill-field-source">来源：附件未识别，阻断提交</div>
+                </div>
+                <div class="prefill-field system">
+                  <div class="prefill-field-head"><span>员工 ID</span><span class="tag cyan">系统数据</span></div>
+                  <div class="prefill-field-value">265520 <button class="btn">查看员工</button></div>
+                  <div class="prefill-field-source">来源：员工档案，不展示置信度</div>
+                </div>
+              </div>
+              <div class="prefill-actions">
+                <span class="tag">已填 2</span>
+                <span class="tag warn">待核对 1</span>
+                <span class="tag danger">阻断 1</span>
+                <button class="btn">重新识别附件</button>
+                <button class="btn primary">应用到表单</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>07. 原文对照与异常队列</h2><p>用于智能入职、附件解析、表单预填。让用户知道 AI 结果从哪里来、哪里被阻断。</p></div>
+            <span class="tag warn">hr-ai-source-compare / hr-ai-exception-list</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="compare">
+              <div class="compare-box"><strong>原文</strong><br />Excel 第 3 行：李四，身份证有效期图片模糊，银行卡未提供。</div>
+              <div class="compare-arrow">→</div>
+              <div class="compare-box"><strong>系统字段</strong><br />证件有效期：待核对；银行卡号：缺失，阻断提交。</div>
+            </div>
+            <div class="exception-list">
+              <div class="exception">李四证件有效期低清，需要核对原图。</div>
+              <div class="exception blocking">王五银行卡缺失，阻断提交。</div>
+              <div class="exception resolved">张三手机号已由员工档案补全。</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>08. 政策来源与适用范围</h2><p>用于政策库、小鲲、社保/合规问答。政策可信不主打百分比，而看来源状态。</p></div>
+            <span class="tag success">hr-ai-citation</span>
+          </div>
+          <div class="component-body">
+            <div class="grid-3">
+              <div class="citation official"><span class="tag danger">官方来源</span><strong>北京市人社局通知</strong><p>更新于 2026-05-10，适用北京社保申报，可引用。</p></div>
+              <div class="citation internal"><span class="tag">内部口径</span><strong>101HR 政策运营</strong><p>更新于 2026-05-15，适用岗位外包客户。</p></div>
+              <div class="citation conflict"><span class="tag danger">来源冲突</span><strong>上下限口径不一致</strong><p>不直接生成确定答案，建议人工复核。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>09. 生成结果、推荐与摘要</h2><p>用于客户回复、服务单说明、处理建议、会话摘要。结果必须可编辑、复制、应用。</p></div>
+            <span class="tag purple">hr-ai-result / hr-ai-recommend / hr-ai-summary</span>
+          </div>
+          <div class="component-body grid-3">
+            <div class="result-card"><span class="tag purple">AI 生成结果</span><h3>客户回复草稿</h3><p>已为张萌生成北京参保证明申请，历史服务单仍在处理中，预计今日反馈。</p><div class="result-actions"><button class="btn">编辑</button><button class="btn">复制</button><button class="btn primary">应用</button></div></div>
+            <div class="recommend-card"><span class="tag warn">AI 推荐</span><h3>建议先创建服务单</h3><p>原因：客户同时提出证明申请和进度查询，直接回复会遗漏执行诉求。</p><div class="result-actions"><button class="btn">忽略</button><button class="btn primary">采纳</button></div></div>
+            <div class="card"><span class="tag">AI 总结</span><ul class="summary-list" style="margin-top:12px"><li>客户诉求包含参保证明和进度查询。</li><li>人员已匹配张萌，城市北京。</li><li>证明用途为签证，发送前建议确认模板。</li></ul></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>10. 规则判断与推荐依据</h2><p>用于服务单加急、流程分流、下一步推荐。表达规则是否满足和为什么推荐。</p></div>
+            <span class="tag cyan">hr-ai-rule-check</span>
+          </div>
+          <div class="component-body">
+            <div class="rule-check">
+              <div class="rule-row"><div class="step-index">1</div><div><strong>节点停留超过关注阈值</strong><br />供应商处理中 32 小时，超过内部关注标准。</div><span class="tag success">满足</span></div>
+              <div class="rule-row partial"><div class="step-index">2</div><div><strong>客户紧急原因成立</strong><br />员工需办理新单位入职，但不能承诺今日完成。</div><span class="tag warn">部分满足</span></div>
+              <div class="rule-row blocked"><div class="step-index">3</div><div><strong>权限校验</strong><br />当前账号无加急标记权限，只能保存建议。</div><span class="tag danger">阻断</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>11. 高风险动作确认</h2><p>只用于提交、创建、发送、打标、修改关键数据。普通复制、查看建议不需要强确认。</p></div>
+            <span class="tag danger">hr-ai-confirm</span>
+          </div>
+          <div class="component-body">
+            <div class="confirm-box">
+              <div class="confirm-row"><span>将执行</span><strong>为 SO20260519032 添加加急标记</strong></div>
+              <div class="confirm-row"><span>影响对象</span><strong>张三 / 社保减员 / 供应商处理队列</strong></div>
+              <div class="confirm-row"><span>不可承诺</span><strong>不可承诺今日完成</strong></div>
+              <div class="confirm-row"><span>留痕内容</span><strong>AI 判断、确认人、时间、执行结果</strong></div>
+              <div class="toolbar" style="margin-top:12px"><button class="btn">取消</button><button class="btn primary">确认执行</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>12. 工具调用记录</h2><p>用于 Chat、智能助手、Agent 调试。让用户知道 AI 调用了什么工具、结果是什么。</p></div>
+            <span class="tag purple">hr-ai-tool-call</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="tool-call"><div class="tool-call-head">员工档案查询 <span class="tag success">成功</span></div><div class="tool-call-body">输入：张萌 / 天津稻荷餐饮。输出：匹配员工 ID 265520，北京参保记录存在。</div></div>
+            <div class="tool-call error"><div class="tool-call-head">服务单写入 <span class="tag danger">失败</span></div><div class="tool-call-body">接口超时，服务单草稿已保存。建议稍后重试或转人工。</div></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>13. 转人工与兜底</h2><p>AI 无法继续时必须保留上下文、失败原因和推荐交接对象。</p></div>
+            <span class="tag warn">hr-ai-handoff</span>
+          </div>
+          <div class="component-body">
+            <div class="handoff">
+              <div><strong>需要人工接管</strong><p>人员候选不唯一，且客户要求立即反馈。已保留客户原话、AI 判断和候选服务单。</p></div>
+              <button class="btn primary">转人工处理</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>14. 空状态、错误与无权限</h2><p>失败后保留输入、草稿和下一步，不要只显示“出错了”。</p></div>
+            <span class="tag">hr-ai-state</span>
+          </div>
+          <div class="component-body grid-3">
+            <div class="state-card empty"><div><div class="state-icon">0</div><strong>未找到服务单</strong><p>请补充员工姓名、服务单号或提交时间。</p><button class="btn" style="margin-top:10px">重新查询</button></div></div>
+            <div class="state-card"><div><div class="state-icon">?</div><strong>意图不明确</strong><p>AI 无法确认是开证明还是查进度，请选择意图。</p><button class="btn primary" style="margin-top:10px">选择意图</button></div></div>
+            <div class="state-card error"><div><div class="state-icon">!</div><strong>执行失败</strong><p>接口返回超时，服务单草稿已保存。</p><button class="btn" style="margin-top:10px">稍后重试</button></div></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>15. 抽屉、弹窗与承载容器</h2><p>用于承载 AI 详情、来源、确认和辅助面板。容器本身不代表 AI 类型。</p></div>
+            <span class="tag cyan">hr-ai-drawer / hr-ai-modal</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="drawer-demo"><div class="drawer-main"><h3>服务单详情</h3><p>AI 加急助手可以作为右侧抽屉，不打断服务单主流程。</p></div><aside class="drawer-side"><span class="tag warn">AI 建议</span><h3>可申请加急</h3><p>满足节点停留时长，但不能承诺今日完成。</p><button class="btn primary">确认加急</button></aside></div>
+            <div class="modal-demo"><div class="modal-box"><div class="modal-head">确认创建参保证明服务单</div><div class="modal-body"><div class="banner warn">证明用途来自客户原话，建议确认格式后再提交。</div></div><div class="modal-foot"><button class="btn">返回修改</button><button class="btn primary">确认创建</button></div></div></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>16. 操作日志与执行留痕</h2><p>用于代理执行后的追溯，尤其是入职提交、服务单创建、加急打标、客户消息发送。</p></div>
+            <span class="tag danger">hr-ai-audit-log</span>
+          </div>
+          <div class="component-body">
+            <div class="audit-log">
+              <div class="log-item"><strong>2026-05-27 14:20</strong><span>AI 建议为 SO20260519032 添加加急标记，确认人：王敏。</span></div>
+              <div class="log-item"><strong>2026-05-27 14:21</strong><span>服务单已写入加急标记，通知供应商失败，保留重试任务。</span></div>
+              <div class="log-item"><strong>2026-05-27 14:22</strong><span>客户回复草稿已复制，未自动发送。</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>17. Agent 运营配置</h2><p>用于 AI 智能咨询项目和后台运营，不用于普通业务处理页。</p></div>
+            <span class="tag cyan">hr-ai-agent-list</span>
+          </div>
+          <div class="component-body stack">
+            <div class="agent-row"><div><strong>入职解析 Agent</strong><span>依赖 OCR、员工 API、入职模板</span></div><span class="tag success">运行中</span><button class="btn">查看日志</button></div>
+            <div class="agent-row"><div><strong>特单 Agent</strong><span>缺少“用途模板”字段映射</span></div><span class="tag warn">配置缺失</span><button class="btn soft">补配置</button></div>
+            <div class="agent-row"><div><strong>流程代理 Agent</strong><span>消息 API 权限失败，无法自动通知供应商</span></div><span class="tag danger">API 失败</span><button class="btn">修复</button></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>18. 客服对话与智能助手</h2><p>用于特单 Chat、小鲲客服、101HR 智能助手。对话只是承载形式，必须暴露意图、工具和可执行动作。</p></div>
+            <span class="tag purple">hr-ai-chat</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="chat-frame">
+              <div class="chat-head"><span>小鲲客服</span><span class="tag success">已连接政策库</span></div>
+              <div class="chat-stream">
+                <div class="chat-msg user">北京员工离职后，本月社保还能补缴吗？</div>
+                <div class="chat-msg ai"><div class="msg-title"><span class="tag">政策解读</span>北京离职补缴口径</div>可以补缴，但需要区分离职月份、申报节点和客户账户状态。以下答案仅适用于北京社保。</div>
+                <div class="tool-call"><div class="tool-call-head">政策库检索 <span class="tag success">成功</span></div><div class="tool-call-body">命中北京市社保补缴规则、101HR 内部操作口径。</div></div>
+              </div>
+              <div class="chat-composer"><div class="chat-input">继续追问或补充员工信息</div><button class="btn primary">发送</button></div>
+            </div>
+            <div class="component-meta" style="margin-top:0">
+              <div class="meta-card"><strong>适用</strong>用户目标不确定、需要多轮澄清、需要展示工具调用过程。</div>
+              <div class="meta-card"><strong>不适用</strong>明确表单任务、批量处理任务、需要强流程控制的提交页面。</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>19. 政策答案包</h2><p>用于 101HR AI 政策库、小鲲客服。答案要同时包含结论、适用范围、来源、更新时间和不可直接处理的边界。</p></div>
+            <span class="tag success">hr-ai-policy-answer</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="policy-answer">
+              <div class="policy-answer-main">
+                <span class="tag success">可引用答案</span>
+                <h3>北京参保证明可线上申请，预计 1-2 个工作日返回</h3>
+                <p>该结论适用于北京、当前账户状态正常、客户已完成实名认证的参保证明申请。若用途为签证，需确认模板格式。</p>
+              </div>
+              <div class="policy-scope">
+                <div class="scope-item"><strong>地区</strong>北京</div>
+                <div class="scope-item"><strong>更新时间</strong>2026-05-15</div>
+                <div class="scope-item"><strong>答案边界</strong>不承诺当日出具</div>
+              </div>
+            </div>
+            <div class="city-compare">
+              <div class="city-card"><strong>北京</strong><ul><li>线上申请</li><li>需用途模板</li><li>1-2 个工作日</li></ul></div>
+              <div class="city-card"><strong>上海</strong><ul><li>部分材料线下</li><li>需员工授权</li><li>时间按区县不同</li></ul></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>20. 服务单草稿与预填</h2><p>用于智能特单办理、参保证明、进度查询。AI 先生成草稿，用户确认后才创建或更新服务单。</p></div>
+            <span class="tag">hr-ai-ticket-draft</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="ticket-draft">
+              <div class="ticket-draft-head"><strong>参保证明服务单草稿</strong><span class="tag warn">待确认</span></div>
+              <div class="ticket-fields">
+                <div class="ticket-field">服务类型<strong>参保证明开具</strong></div>
+                <div class="ticket-field">员工<strong>张萌 / 北京</strong></div>
+                <div class="ticket-field">证明用途<strong>签证，需确认模板</strong></div>
+                <div class="ticket-field">关联进度<strong>SO20260519032</strong></div>
+              </div>
+              <div class="ticket-footer"><button class="btn">保存草稿</button><button class="btn primary">确认创建</button></div>
+            </div>
+            <div class="rule-check">
+              <div class="rule-row"><div class="step-index">1</div><div><strong>识别执行诉求</strong><br />客户不是只咨询政策，而是要开具证明。</div><span class="tag success">命中</span></div>
+              <div class="rule-row partial"><div class="step-index">2</div><div><strong>证明用途待确认</strong><br />签证用途可能需要特定模板。</div><span class="tag warn">需复核</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>21. 批量处理结果表</h2><p>用于智能入职、批量材料解析。结果表要区分可提交、需复核、阻断，不把所有状态都塞进字段卡。</p></div>
+            <span class="tag cyan">hr-ai-batch-result</span>
+          </div>
+          <div class="component-body">
+            <div class="table-wrap"><table><thead><tr><th>员工</th><th>AI 处理结果</th><th>阻断项</th><th>下一步</th></tr></thead><tbody>
+              <tr><td>张三</td><td><span class="tag success">可提交</span></td><td>无</td><td><button class="btn primary">提交入职</button></td></tr>
+              <tr><td>李四</td><td><span class="tag warn">需复核</span></td><td>证件有效期模糊</td><td><button class="btn">核对原图</button></td></tr>
+              <tr><td>王五</td><td><span class="tag danger">阻断</span></td><td>银行卡缺失</td><td><button class="btn">补充材料</button></td></tr>
+            </tbody></table></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>22. 人工复核队列</h2><p>用于 AI 无法确定但业务仍需推进的场景。复核队列比低置信度标签更适合 B 端执行任务。</p></div>
+            <span class="tag warn">hr-ai-review-queue</span>
+          </div>
+          <div class="component-body">
+            <div class="review-queue">
+              <div class="review-item warn"><div class="review-mark">!</div><div><strong>证明用途模板待确认</strong><p>来自客户原话“签证”，需要选择香港/申根/其他模板。</p></div><button class="btn primary">去确认</button></div>
+              <div class="review-item blocking"><div class="review-mark">×</div><div><strong>银行卡附件缺失</strong><p>阻断入职提交，需客户补充材料。</p></div><button class="btn">发起补充</button></div>
+              <div class="review-item"><div class="review-mark">?</div><div><strong>人员候选不唯一</strong><p>同名员工 2 人，需要人工选择客户联系人。</p></div><button class="btn">选择人员</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>23. 进度查询与节点时间线</h2><p>用于特单进度查询、入职处理进度、服务单加急判断。时间线是业务事实，不需要包装成 AI 置信度。</p></div>
+            <span class="tag">hr-ai-progress-timeline</span>
+          </div>
+          <div class="component-body">
+            <div class="timeline">
+              <div class="timeline-item"><div class="timeline-dot">1</div><div class="timeline-card"><strong>客户提交</strong><p>2026-05-26 09:30，提交参保证明申请。</p></div><span class="tag success">完成</span></div>
+              <div class="timeline-item"><div class="timeline-dot">2</div><div class="timeline-card"><strong>供应商处理中</strong><p>当前节点停留 32 小时，超过内部关注阈值。</p></div><span class="tag warn">关注</span></div>
+              <div class="timeline-item"><div class="timeline-dot">3</div><div class="timeline-card"><strong>AI 推荐下一步</strong><p>可保存加急建议，但需人工确认后执行。</p></div><span class="tag">建议</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>24. 敏感信息与权限控制</h2><p>用于员工身份证、银行卡、手机号、客户账户等敏感数据。AI 可辅助，但不能绕过权限。</p></div>
+            <span class="tag danger">hr-ai-permission-mask</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="sensitive-panel">
+              <div class="mask-row"><strong>身份证号</strong><span class="mask-value">110101********1234</span><button class="btn">申请查看</button></div>
+              <div class="mask-row"><strong>银行卡号</strong><span class="mask-value">**** **** **** 8821</span><button class="btn">复制后四位</button></div>
+              <div class="mask-row"><strong>操作权限</strong><span class="tag danger">无加急权限</span><button class="btn soft">申请权限</button></div>
+            </div>
+            <div class="banner danger"><strong>规则</strong><span>AI 不得自动展示、复制、发送敏感完整信息；涉及关键数据写入必须留痕。</span></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>25. 反馈、重试与质检</h2><p>用于客服答案、政策答案、生成回复、Agent 执行结果的质量闭环。反馈要能回流到样本库。</p></div>
+            <span class="tag purple">hr-ai-feedback</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="feedback-bar"><span>这条 AI 结果是否可用？</span><button class="btn">有帮助</button><button class="btn">不准确</button><button class="btn">来源过期</button><button class="btn primary">重新生成</button></div>
+            <div class="quality-card"><strong>质检归因</strong><ul class="quality-list"><li><span>来源缺失</span><span class="tag warn">需补</span></li><li><span>工具调用失败</span><span class="tag danger">1 次</span></li><li><span>已加入失败样本</span><span class="tag success">是</span></li></ul></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>26. AI 运营指标</h2><p>用于智能咨询项目后台，帮助产品判断哪些能力有效、哪些需要补知识、补接口或补规则。</p></div>
+            <span class="tag cyan">hr-ai-metrics</span>
+          </div>
+          <div class="component-body">
+            <div class="metric-strip">
+              <div class="metric-mini"><span>意图命中率</span><strong>86%</strong></div>
+              <div class="metric-mini"><span>可执行诉求占比</span><strong>60%</strong></div>
+              <div class="metric-mini"><span>转人工率</span><strong>18%</strong></div>
+              <div class="metric-mini"><span>接口失败样本</span><strong>23</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>27. 场景任务启动器</h2><p>用于 51 社保工具集、101HR 首页、工作台弹窗。先让用户选“要办什么事”，再进入对应 AI 流程。</p></div>
+            <span class="tag">hr-ai-task-launcher</span>
+          </div>
+          <div class="component-body">
+            <div class="task-launcher">
+              <div class="task-card primary"><span class="tag">推荐</span><strong>智能入职</strong><p>上传表格和附件，批量生成入职草稿。</p></div>
+              <div class="task-card"><span class="tag cyan">特单</span><strong>参保证明</strong><p>识别客户诉求，预填服务单。</p></div>
+              <div class="task-card"><span class="tag success">政策</span><strong>社保政策解读</strong><p>按城市、时间、客户类型给出答案。</p></div>
+              <div class="task-card"><span class="tag warn">流程</span><strong>服务单加急</strong><p>根据节点和规则给出处理建议。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>28. 业务对象选择与人员消歧</h2><p>用于同名员工、多个客户账户、多个服务单候选。AI 不能替用户猜关键对象，必须给可选项。</p></div>
+            <span class="tag warn">hr-ai-entity-picker</span>
+          </div>
+          <div class="component-body">
+            <div class="entity-list">
+              <div class="entity-item selected"><div><strong>张萌 / 265520</strong><p>天津稻荷餐饮管理有限公司，北京参保，HR 管理员账号。</p></div><button class="btn primary">使用此人</button></div>
+              <div class="entity-item"><div><strong>张萌 / 265781</strong><p>历史离职员工，上海参保，最近服务单为 2025 年。</p></div><button class="btn">查看</button></div>
+              <div class="entity-item"><div><strong>未匹配</strong><p>客户只提供手机号后四位，需补充姓名或完整手机号。</p></div><span class="tag danger">阻断</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>29. 材料清单与缺件补充</h2><p>用于智能入职、参保证明、服务单创建。把“能提交 / 需补件 / 阻断”转成清晰任务。</p></div>
+            <span class="tag cyan">hr-ai-material-checklist</span>
+          </div>
+          <div class="component-body">
+            <div class="checklist">
+              <div class="check-row done"><div class="check-icon">✓</div><div><strong>入职表</strong><br />已识别 3 人，字段完整。</div><span class="tag success">完成</span></div>
+              <div class="check-row done"><div class="check-icon">✓</div><div><strong>身份证附件</strong><br />张三、王五清晰，李四有效期需核对。</div><span class="tag warn">部分复核</span></div>
+              <div class="check-row missing"><div class="check-icon">!</div><div><strong>银行卡附件</strong><br />王五缺失，不能提交入职。</div><button class="btn">生成补件消息</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>30. 模板选择与字段映射</h2><p>用于证明用途、客户回复、入职模板、服务单类型。模板决定后续字段，不应藏在 AI 黑箱里。</p></div>
+            <span class="tag purple">hr-ai-template-map</span>
+          </div>
+          <div class="component-body">
+            <div class="mapping-grid">
+              <div class="mapping-card"><span class="tag">默认入职模板</span><strong>岗位外包 / 北京</strong><div class="map-line"><span>员工姓名</span><span>Excel A 列</span></div><div class="map-line"><span>参保城市</span><span>客户原话</span></div></div>
+              <div class="mapping-card"><span class="tag warn">待选模板</span><strong>签证参保证明</strong><div class="map-line"><span>用途</span><span>签证</span></div><div class="map-line"><span>语言</span><span>中文 / 英文待选</span></div></div>
+              <div class="mapping-card"><span class="tag cyan">回复模板</span><strong>服务单进度反馈</strong><div class="map-line"><span>服务单号</span><span>接口查询</span></div><div class="map-line"><span>预计时间</span><span>不可承诺</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>31. 结果应用、撤销与差异对比</h2><p>AI 结果进入业务系统前，应让用户看到改了什么，并支持撤销或回到草稿。</p></div>
+            <span class="tag success">hr-ai-apply-diff</span>
+          </div>
+          <div class="component-body">
+            <div class="diff-panel">
+              <div class="diff-row"><div class="diff-before"><strong>原字段</strong><br />证明用途：空</div><div class="diff-after"><strong>AI 建议</strong><br />证明用途：签证</div><button class="btn primary">应用</button></div>
+              <div class="diff-row"><div class="diff-before"><strong>原状态</strong><br />普通服务单</div><div class="diff-after"><strong>AI 建议</strong><br />添加加急建议，不自动打标</div><button class="btn">保留草稿</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>32. 多意图拆分任务队列</h2><p>客户常把咨询、查进度、让办事混在一句话里。拆分后分别走政策、查询、服务单流程。</p></div>
+            <span class="tag">hr-ai-task-split</span>
+          </div>
+          <div class="component-body">
+            <div class="split-board">
+              <div class="split-card"><span class="tag success">政策类</span><strong>解释北京参保证明时效</strong><p>输出政策答案包，不创建服务单。</p></div>
+              <div class="split-card"><span class="tag cyan">查询类</span><strong>查询历史服务单进度</strong><p>调用服务单接口，返回节点时间线。</p></div>
+              <div class="split-card"><span class="tag warn">执行类</span><strong>创建参保证明服务单</strong><p>预填草稿，等待用户确认提交。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>33. 客户回复编辑器</h2><p>用于特单 Chat、客服 IM、小鲲。AI 可生成草稿，但用户必须能编辑、引用依据、选择是否发送。</p></div>
+            <span class="tag purple">hr-ai-reply-editor</span>
+          </div>
+          <div class="component-body">
+            <div class="reply-editor">
+              <div class="reply-toolbar"><span class="tag">AI 草稿</span><button class="btn">插入政策依据</button><button class="btn">改短一点</button><button class="btn">更正式</button></div>
+              <div class="reply-body">您好，已为张萌发起北京参保证明申请。当前关联服务单仍在供应商处理中，我们会继续跟进。签证用途可能需要指定模板，请您确认是否需要中英文版本。</div>
+              <div class="reply-foot"><span class="tag warn">未自动发送</span><div class="toolbar"><button class="btn">复制</button><button class="btn">保存到服务单</button><button class="btn primary">发送给客户</button></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>34. 知识检索与筛选</h2><p>用于政策库、运营后台和答案调试。先筛地区、业务线、更新时间，再引用答案。</p></div>
+            <span class="tag success">hr-ai-knowledge-search</span>
+          </div>
+          <div class="component-body">
+            <div class="search-panel">
+              <div class="search-box">搜索：北京 参保证明 签证 用途模板</div>
+              <div class="filter-row"><span class="tag">北京</span><span class="tag">社保</span><span class="tag warn">近 90 天</span><span class="tag success">官方 + 内部口径</span></div>
+              <div class="result-list">
+                <div class="result-item"><strong>北京市参保证明线上申请操作口径</strong><p>来源：101HR 政策运营，更新于 2026-05-15，可引用。</p></div>
+                <div class="result-item"><strong>签证用途证明模板要求</strong><p>来源：内部案例库，更新于 2026-04-22，需人工确认。</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>35. 政策冲突与过期处理</h2><p>当来源冲突、政策过期或缺少适用范围时，AI 应停止确定回答，转为风险提示和复核任务。</p></div>
+            <span class="tag danger">hr-ai-policy-conflict</span>
+          </div>
+          <div class="component-body">
+            <div class="conflict-panel">
+              <div class="conflict-row"><div><strong>官方来源与内部口径不一致</strong><p>官方通知更新时间为 2026-05-10，内部口径为 2026-03-28。</p></div><button class="btn primary">发起复核</button></div>
+              <div class="conflict-row"><div><strong>缺少客户适用范围</strong><p>未确认该客户是否为岗位外包，不能直接套用内部案例。</p></div><button class="btn">补充客户类型</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>36. 流程自动化执行计划</h2><p>用于代理型 AI。把将要调用的系统、顺序、权限、失败兜底展示出来，确认后才执行。</p></div>
+            <span class="tag cyan">hr-ai-execution-plan</span>
+          </div>
+          <div class="component-body">
+            <div class="execution-plan">
+              <div class="exec-step"><div class="step-index">1</div><div><strong>读取员工档案</strong><br />确认张萌身份、参保城市、客户账户。</div><span class="tag success">可执行</span></div>
+              <div class="exec-step"><div class="step-index">2</div><div><strong>创建参保证明服务单草稿</strong><br />不自动提交，等待用户确认。</div><span class="tag warn">需确认</span></div>
+              <div class="exec-step pending"><div class="step-index">3</div><div><strong>通知客户</strong><br />发送前需人工检查回复内容。</div><span class="tag">待执行</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>37. SLA 与加急建议</h2><p>用于服务单加急思路。AI 负责解释为什么建议加急、不能承诺什么、由谁确认。</p></div>
+            <span class="tag warn">hr-ai-sla-assist</span>
+          </div>
+          <div class="component-body">
+            <div class="sla-card">
+              <span class="tag warn">建议关注</span>
+              <h3>服务单已在供应商节点停留 32 小时</h3>
+              <p>达到内部关注阈值，可以保存加急建议；但不满足“承诺今日完成”的条件，不能自动对客户承诺完成时间。</p>
+              <div class="sla-metrics"><div class="sla-metric"><strong>32h</strong>当前停留</div><div class="sla-metric"><strong>24h</strong>关注阈值</div><div class="sla-metric"><strong>无</strong>当前加急权限</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>38. 消息通知与渠道同步</h2><p>用于 IM、微信群助手、小程序、服务单消息。不同渠道有不同发送风险和权限。</p></div>
+            <span class="tag">hr-ai-channel-sync</span>
+          </div>
+          <div class="component-body">
+            <div class="notify-list">
+              <div class="notify-item"><div class="notify-icon">IM</div><div><strong>客服 IM</strong><br />可发送客户回复草稿，发送前人工确认。</div><button class="btn primary">发送</button></div>
+              <div class="notify-item"><div class="notify-icon">群</div><div><strong>微信群助手</strong><br />仅推送状态摘要，不包含身份证、银行卡。</div><button class="btn">预览</button></div>
+              <div class="notify-item"><div class="notify-icon">单</div><div><strong>服务单备注</strong><br />记录 AI 判断、确认人和执行结果。</div><span class="tag success">自动留痕</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>39. 权限申请与审批</h2><p>当 AI 建议的动作超出当前角色权限时，不应只报错，而应提供申请路径和替代动作。</p></div>
+            <span class="tag danger">hr-ai-approval</span>
+          </div>
+          <div class="component-body grid-2">
+            <div class="approval-card"><span class="tag danger">权限不足</span><h3>无法直接添加加急标记</h3><p>当前账号可保存建议，但不能修改服务单优先级。</p><div class="approval-flow"><span class="approval-node">发起申请</span><span class="approval-node">主管审批</span><span class="approval-node">执行加急</span></div></div>
+            <div class="error-recovery"><div class="recovery-card warn"><strong>替代动作</strong><br />保存加急建议，并生成给主管的说明。</div><div class="recovery-card"><strong>保留上下文</strong><br />服务单号、规则判断、客户紧急原因会一起带入审批。</div></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>40. 质检标注与失败样本回流</h2><p>用于智能咨询项目后台。把错误答案、接口失败、来源过期沉淀成可训练、可配置、可复盘的样本。</p></div>
+            <span class="tag purple">hr-ai-qa-annotation</span>
+          </div>
+          <div class="component-body">
+            <div class="annotation">
+              <div class="annotation-text">AI 回答：“北京参保证明今日可出具。” <span class="annotation-mark">错误：过度承诺</span>。正确口径应为预计 1-2 个工作日，且签证用途需确认模板。</div>
+              <div class="annotation-side"><div class="label-chip">错误类型：过度承诺</div><div class="label-chip">归因：政策边界缺失</div><div class="label-chip">处理：加入失败样本库</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>41. 异常恢复与降级路径</h2><p>用于接口失败、政策库不可用、附件识别失败。每个失败都要给可继续推进的业务路径。</p></div>
+            <span class="tag danger">hr-ai-recovery</span>
+          </div>
+          <div class="component-body">
+            <div class="error-recovery">
+              <div class="recovery-card danger"><strong>服务单接口失败</strong><br />保留草稿，允许稍后重试，并可转人工创建。</div>
+              <div class="recovery-card warn"><strong>政策库不可用</strong><br />暂停确定回答，提示用户改查内部知识库或转人工。</div>
+              <div class="recovery-card"><strong>附件识别失败</strong><br />保留已识别字段，标记失败附件，支持重新上传单个文件。</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>42. 表单控件组</h2><p>用于 AI 预填、人工修正、必填校验和来源提示。表单控件必须可编辑，不把 AI 结果锁死。</p></div>
+            <span class="tag">hr-ai-form-controls</span>
+          </div>
+          <div class="component-body">
+            <div class="ai-form-grid">
+              <div class="form-field"><label>参保城市</label><div class="form-control prefilled"><strong>北京</strong><span class="tag">AI 已填</span></div></div>
+              <div class="form-field"><label>证明用途</label><div class="form-control"><strong>签证</strong><span class="tag warn">待确认</span></div></div>
+              <div class="form-field"><label>银行卡号</label><div class="form-control error"><strong>未识别</strong><span class="tag danger">阻断</span></div><span class="inline-error">需补充银行卡附件后才能提交。</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>43. 表格控件组</h2><p>用于批量结果、运营列表和服务单候选。表格要支持行状态、批量操作、展开详情和固定操作列。</p></div>
+            <span class="tag">hr-ai-table-controls</span>
+          </div>
+          <div class="component-body">
+            <div class="table-action-bar"><div class="toolbar"><span class="tag">已选 2</span><span class="tag warn">1 项需复核</span></div><div class="toolbar"><button class="btn">批量忽略</button><button class="btn primary">提交可执行项</button></div></div>
+            <div class="table-wrap"><table><thead><tr><th>员工</th><th>状态</th><th>阻断项</th><th>操作</th></tr></thead><tbody><tr><td>张三</td><td><span class="tag success">可提交</span></td><td>无</td><td><button class="btn">查看</button></td></tr><tr><td>李四</td><td><span class="tag warn">需复核</span></td><td>证件有效期模糊</td><td><button class="btn">展开</button></td></tr><tr><td colspan="4"><div class="row-expand">展开详情：原文图片低清，建议核对有效期后继续提交。</div></td></tr></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>44. 筛选搜索组</h2><p>用于政策库、运营后台、服务单候选和失败样本。筛选条件要显示已选状态，便于复核来源。</p></div>
+            <span class="tag">hr-ai-filter-search</span>
+          </div>
+          <div class="component-body">
+            <div class="filter-bar">
+              <div class="filter-control">搜索：北京 参保证明</div>
+              <div class="filter-control">城市：北京</div>
+              <div class="filter-control">业务线：社保</div>
+              <div class="filter-control">来源：官方 + 内部</div>
+              <div class="filter-control">更新时间：近 90 天</div>
+              <button class="btn primary">检索</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>45. 反馈控件组</h2><p>用于操作完成、局部说明、悬浮解释和风险提示。反馈要告诉用户下一步，而不是只说成功或失败。</p></div>
+            <span class="tag">hr-ai-feedback-controls</span>
+          </div>
+          <div class="component-body">
+            <div class="feedback-stack">
+              <div class="toast-demo"><strong>草稿已保存</strong><br />可继续编辑，确认后再创建服务单。</div>
+              <div class="popover-demo"><strong>为什么需要复核？</strong><br />签证用途可能需要中英文模板，建议确认后发送。</div>
+              <div class="inline-notice"><strong>局部提示</strong> 当前答案可引用，但不能承诺当日出具。</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>46. 容器控件组</h2><p>用于承载 AI 侧栏、确认弹窗和底部操作条。容器决定信息层级，不决定 AI 类型。</p></div>
+            <span class="tag">hr-ai-container-controls</span>
+          </div>
+          <div class="component-body">
+            <div class="container-demo">
+              <div class="container-main"><h3>服务单详情</h3><p>主流程仍然是业务内容，AI 只作为辅助区域嵌入。</p><div class="bottom-bar"><button class="btn">取消</button><button class="btn primary">保存草稿</button></div></div>
+              <aside class="container-side"><span class="tag warn">AI 侧栏</span><h3>加急建议</h3><p>满足节点停留阈值，但不能承诺今日完成。</p><button class="btn primary">确认处理</button></aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>47. 状态控件组</h2><p>用于 Skeleton、局部加载、重试和无权限。状态要保留用户输入与草稿，避免失败后从头开始。</p></div>
+            <span class="tag">hr-ai-state-controls</span>
+          </div>
+          <div class="component-body">
+            <div class="grid-3">
+              <div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line" style="width:78%"></div><div class="skeleton-line" style="width:52%"></div></div>
+              <div class="state-card error"><div class="state-icon">!</div><strong>接口失败</strong><p>草稿已保存，可稍后重试。</p><button class="btn">重试</button></div>
+              <div class="state-card empty"><div class="state-icon">0</div><strong>无匹配人员</strong><p>请补充姓名或完整手机号。</p><button class="btn">补充信息</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>48. 入职字段复核面板</h2><p>用于智能入职详情。把附件原文、AI 字段、人工修正和阻断原因放在一个复核闭环里。</p></div>
+            <span class="tag warn">hr-ai-onboarding-review</span>
+          </div>
+          <div class="component-body">
+            <div class="review-panel">
+              <div class="doc-thumb">证件附件预览</div>
+              <div class="field-review-list">
+                <div class="field-review-row"><strong>姓名</strong><span>李四</span><span class="tag success">完整</span></div>
+                <div class="field-review-row"><strong>证件有效期</strong><span>图片模糊，需核对</span><span class="tag warn">待核对</span></div>
+                <div class="field-review-row"><strong>银行卡</strong><span>未上传</span><span class="tag danger">阻断</span></div>
+              </div>
+              <div class="error-recovery"><div class="recovery-card warn"><strong>处理建议</strong><br />先核对证件有效期，再生成补件消息。</div><button class="btn primary">保存复核结果</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>49. 服务单草稿编辑器</h2><p>用于特单从意图识别进入服务单。用户必须能编辑字段、查看差异、确认后创建。</p></div>
+            <span class="tag cyan">hr-ai-ticket-editor</span>
+          </div>
+          <div class="component-body">
+            <div class="draft-editor-grid">
+              <div class="draft-form">
+                <div class="form-field"><label>服务类型</label><div class="form-control prefilled">参保证明开具</div></div>
+                <div class="form-field"><label>员工</label><div class="form-control prefilled">张萌 / 北京</div></div>
+                <div class="form-field"><label>证明用途</label><div class="form-control">签证 <span class="tag warn">待确认</span></div></div>
+                <div class="form-field"><label>关联单</label><div class="form-control">SO20260519032</div></div>
+              </div>
+              <aside class="draft-side"><div class="inline-notice"><strong>提交前差异</strong><br />新增证明用途、关联历史进度，不自动发送客户。</div><button class="btn">保存草稿</button><button class="btn primary">确认创建</button></aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>50. 政策答案工作台</h2><p>用于政策库和小鲲。主区回答问题，侧区固定展示来源、范围、冲突和引用动作。</p></div>
+            <span class="tag success">hr-ai-policy-workbench</span>
+          </div>
+          <div class="component-body">
+            <div class="policy-workbench">
+              <div class="policy-answer-box"><span class="tag success">可引用</span><h3>北京参保证明预计 1-2 个工作日返回</h3><p>适用于北京、账户状态正常、已完成实名认证的参保证明申请。</p><div class="toolbar"><button class="btn">复制</button><button class="btn primary">生成客户回复</button></div></div>
+              <aside class="demo-card-list"><div class="citation official"><strong>官方来源</strong><p>北京市人社局通知，更新于 2026-05-10。</p></div><div class="banner warn"><strong>边界</strong><span>签证用途需确认模板，不承诺当日出具。</span></div></aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>51. 加急决策侧栏</h2><p>用于服务单详情页右侧。必须展示 SLA、规则、权限、不可承诺边界、确认和留痕。</p></div>
+            <span class="tag danger">hr-ai-urgent-sidebar</span>
+          </div>
+          <div class="component-body">
+            <div class="urgent-sidebar-preview">
+              <span class="tag warn">建议关注</span>
+              <h3>供应商节点停留 32 小时</h3>
+              <div class="rule-check"><div class="rule-row"><div class="step-index">1</div><div><strong>超过关注阈值</strong><br />内部关注线为 24 小时。</div><span class="tag success">满足</span></div><div class="rule-row partial"><div class="step-index">2</div><div><strong>客户紧急原因成立</strong><br />但不能承诺今日完成。</div><span class="tag warn">部分</span></div></div>
+              <button class="btn primary">确认打加急标</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>52. 对话动作面板</h2><p>用于智能助手和客服 Chat。对话负责澄清，动作面板负责把结果落到服务单、政策或人工。</p></div>
+            <span class="tag purple">hr-ai-action-panel</span>
+          </div>
+          <div class="component-body">
+            <div class="action-panel">
+              <div class="action-item"><div class="action-icon">单</div><div><strong>转服务单草稿</strong><br />带入人员、城市、用途和来源。</div><button class="btn primary">生成</button></div>
+              <div class="action-item"><div class="action-icon">查</div><div><strong>查询历史进度</strong><br />返回节点时间线，可插入回复。</div><button class="btn">查询</button></div>
+              <div class="action-item"><div class="action-icon">人</div><div><strong>转人工</strong><br />保留会话、工具调用和候选动作。</div><button class="btn">接管</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>53. Agent 配置详情</h2><p>用于智能咨询后台。展示路由条件、依赖 API、知识库版本、失败样本和发布状态。</p></div>
+            <span class="tag">hr-ai-agent-detail</span>
+          </div>
+          <div class="component-body">
+            <div class="agent-detail">
+              <div class="agent-config-list">
+                <div class="config-row"><strong>路由条件</strong><span>参保证明 + 进度查询</span></div>
+                <div class="config-row"><strong>依赖 API</strong><span>员工档案、服务单、消息通知</span></div>
+                <div class="config-row"><strong>知识库版本</strong><span>政策库 2026-05-15</span></div>
+                <div class="config-row"><strong>发布状态</strong><span class="tag warn">待补字段映射</span></div>
+              </div>
+              <aside class="quality-card"><strong>失败样本</strong><ul class="quality-list"><li><span>来源缺失</span><span>12</span></li><li><span>接口超时</span><span>7</span></li><li><span>过度承诺</span><span>3</span></li></ul><button class="btn primary">进入配置</button></aside>
+            </div>
+          </div>
+        </section>
+
+        <div class="component-section-title">
+          <div>
+            <h2>补齐组件</h2>
+            <p>以下 12 个组件用于补齐基础原子、AI 通用组合和 101HR 业务组件之间的断层，优先沉淀为长期复用资产。</p>
+          </div>
+          <span class="tag cyan">54-65</span>
+        </div>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>54. 字段输入原子</h2><p>用于所有 AI 预填表单。字段必须同时表达值、来源、校验状态和人工可编辑性。</p></div>
+            <span class="tag">hr-ai-field-input</span>
+          </div>
+          <div class="component-body">
+            <div class="field-atom-grid">
+              <label class="field-atom"><span>参保城市 <em>AI 已填</em></span><input value="北京" /><small>来源：客户原话 + 员工档案</small></label>
+              <label class="field-atom warn"><span>证明用途 <em>待核对</em></span><input value="签证" /><small>需选择中英文模板</small></label>
+              <label class="field-atom danger"><span>银行卡号 <em>阻断</em></span><input placeholder="待补充" /><small>附件未识别，提交前必须补齐</small></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>55. 数据列表行原子</h2><p>用于员工草稿、服务单候选和后台列表。行本身要承载状态、摘要、主动作和选中态。</p></div>
+            <span class="tag">hr-ai-list-row</span>
+          </div>
+          <div class="component-body">
+            <div class="row-atom-list">
+              <button class="row-atom selected"><strong>张三</strong><span>北京 / 默认参保方案</span><em class="tag success">可提交</em><b>查看</b></button>
+              <button class="row-atom"><strong>李四</strong><span>证件有效期图片模糊</span><em class="tag warn">需复核</em><b>核对</b></button>
+              <button class="row-atom"><strong>王五</strong><span>银行卡附件缺失</span><em class="tag danger">阻断</em><b>补件</b></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>56. 来源证据列表</h2><p>用于政策答案、客户回复和特单依据。证据区是辅助信息，不能和主答案同权重。</p></div>
+            <span class="tag cyan">hr-ai-evidence-list</span>
+          </div>
+          <div class="component-body">
+            <div class="evidence-list">
+              <div class="evidence-item official"><span></span><div><strong>北京市人社局通知</strong><p>官方来源 · 更新于 2026-05-10 · 适用北京社保申报</p></div></div>
+              <div class="evidence-item internal"><span></span><div><strong>101HR 政策运营口径</strong><p>内部口径 · 更新于 2026-05-15 · 适用岗位外包客户</p></div></div>
+              <div class="evidence-boundary"><strong>答案边界</strong><p>不能替客户承诺最终申报结果，需结合客户服务方案。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>57. 结果应用条</h2><p>用于生成结果进入业务流程前。明确可复制、可编辑、可应用、可撤销和高风险动作。</p></div>
+            <span class="tag cyan">hr-ai-apply-bar</span>
+          </div>
+          <div class="component-body">
+            <div class="apply-bar">
+              <div><strong>客户回复草稿已生成</strong><span>未发送，应用前可编辑并查看引用依据。</span></div>
+              <div class="toolbar"><button class="btn">复制</button><button class="btn">编辑</button><button class="btn">查看依据</button><button class="btn primary">应用到会话</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>58. 批量选择与操作条</h2><p>用于批量入职、批量补件、失败样本处理。批量动作必须显示影响范围。</p></div>
+            <span class="tag">hr-ai-bulk-action</span>
+          </div>
+          <div class="component-body">
+            <div class="bulk-action-bar">
+              <label><input type="checkbox" checked /> 已选 2 项</label>
+              <span>将提交：张三、李四；排除：王五缺银行卡</span>
+              <div class="toolbar"><button class="btn">取消选择</button><button class="btn primary">提交已选</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>59. 员工草稿行</h2><p>用于智能入职主结果区。比表格更适合承载长材料来源、异常原因和右侧详情联动。</p></div>
+            <span class="tag success">hr-ai-employee-draft-row</span>
+          </div>
+          <div class="component-body">
+            <div class="employee-draft-list">
+              <button class="employee-draft selected success"><div class="employee-main"><strong>张三</strong><span>北京 / 默认参保方案</span></div><div class="employee-evidence">Excel 第 2 行 + 身份证附件</div><div class="employee-status"><span class="tag success">可提交</span><small>字段完整</small></div><div class="employee-action">查看</div></button>
+              <button class="employee-draft warn"><div class="employee-main"><strong>李四</strong><span>北京 / 默认参保方案</span></div><div class="employee-evidence">证件有效期图片模糊</div><div class="employee-status"><span class="tag warn">需复核</span><small>不阻断草稿</small></div><div class="employee-action">核对</div></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>60. 服务单动作组</h2><p>用于特单、进度查询和加急。把保存草稿、创建服务单、发送客户、留痕分开。</p></div>
+            <span class="tag success">hr-ai-ticket-actions</span>
+          </div>
+          <div class="component-body">
+            <div class="ticket-action-group">
+              <button class="ticket-action"><strong>保存草稿</strong><span>不写入客户会话</span></button>
+              <button class="ticket-action primary"><strong>创建服务单</strong><span>生成 SO 编号并留痕</span></button>
+              <button class="ticket-action danger"><strong>发送客户</strong><span>需二次确认</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>61. 模板字段映射行</h2><p>用于入职模板、证明模板和回复模板。必须展示系统字段、来源字段、状态和编辑入口。</p></div>
+            <span class="tag success">hr-ai-template-map-row</span>
+          </div>
+          <div class="component-body">
+            <div class="map-row-list">
+              <div class="map-row"><strong>员工姓名</strong><span>Excel A 列</span><em class="tag success">已映射</em><button class="btn">修改</button></div>
+              <div class="map-row"><strong>证明用途</strong><span>客户原话“签证”</span><em class="tag warn">需选模板</em><button class="btn primary">选择</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>62. 工具权限状态</h2><p>用于工具集入口和动作面板。不要只显示“不可用”，要给申请、替代动作和权限原因。</p></div>
+            <span class="tag">hr-ai-permission-state</span>
+          </div>
+          <div class="component-body">
+            <div class="permission-state-grid">
+              <div class="permission-card"><span class="tag success">可用</span><strong>智能入职</strong><p>可创建入职草稿并提交。</p></div>
+              <div class="permission-card warn"><span class="tag warn">需申请</span><strong>加急打标</strong><p>当前可保存建议，不能修改优先级。</p><button class="btn">申请权限</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>63. API 调用状态</h2><p>用于 Agent 配置和工具调用。展示依赖系统、成功/失败、耗时和重试入口。</p></div>
+            <span class="tag">hr-ai-api-status</span>
+          </div>
+          <div class="component-body">
+            <div class="api-status-list">
+              <div class="api-status success"><strong>员工档案 API</strong><span>成功 · 320ms</span><button class="btn">查看日志</button></div>
+              <div class="api-status danger"><strong>消息通知 API</strong><span>失败 · 504 超时</span><button class="btn primary">重试</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>64. 失败样本卡</h2><p>用于运营后台和质检回流。错误归因要可标注、可分派、可进入样本库。</p></div>
+            <span class="tag purple">hr-ai-failure-sample</span>
+          </div>
+          <div class="component-body">
+            <div class="failure-sample">
+              <div><span class="tag danger">过度承诺</span><h3>AI 回复“今日可出具参保证明”</h3><p>正确口径应为预计 1-2 个工作日，签证用途需确认模板。</p></div>
+              <aside><strong>归因</strong><span>政策边界缺失</span><button class="btn primary">加入样本库</button></aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>65. 发布与回滚状态</h2><p>用于 Agent、知识库和规则发布。展示当前版本、灰度范围、失败影响和回滚入口。</p></div>
+            <span class="tag purple">hr-ai-release-state</span>
+          </div>
+          <div class="component-body">
+            <div class="release-state">
+              <div><strong>政策库规则 v2026.05.15</strong><span class="tag success">已发布</span><p>灰度范围：客服 IM、小鲲客服、政策库。</p></div>
+              <div class="toolbar"><button class="btn">查看变更</button><button class="btn danger">回滚</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>66. AI 页面欢迎态</h2><p>用于政策库首页、工具初始页。明确这个 AI 工具能解决什么问题，并把核心输入前置。</p></div>
+            <span class="tag">hr-ai-page-welcome</span>
+          </div>
+          <div class="component-body">
+            <div class="ai-welcome-sample">
+              <div class="ai-welcome-icon">AI</div>
+              <div>
+                <span class="tag success">AI 政策助手</span>
+                <h3>把政策查询变成可验证的办理方案</h3>
+                <p>输入业务问题后，AI 会输出结论、政策依据、办理清单、风险提示和原文引用。</p>
+              </div>
+              <div class="ai-welcome-actions"><button class="btn primary">开始提问</button><button class="btn">查看历史</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>67. 智能输入工具栏</h2><p>用于智能入职、特单、政策库。上传、示例、语音等能力应作为工具图标和轻量入口，不堆成一排大按钮；租户/客户这类业务上下文必须前置到上下文条，不放进输入框。</p></div>
+            <span class="tag">hr-ai-input-toolbar</span>
+          </div>
+          <div class="component-body">
+            <div class="ai-input-sample">
+              <textarea placeholder="请粘贴客户提供的员工入职信息，或描述要办理的业务需求"></textarea>
+              <div class="ai-input-toolbar">
+                <button class="tool-icon" title="上传附件">↥</button>
+                <button class="tool-icon" title="示例指令">?</button>
+                <button class="tool-icon" title="语音输入">◉</button>
+                <span class="input-hint">AI 只生成草稿，确认后才提交</span>
+                <button class="btn primary">生成草稿</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>68. 业务提醒横幅</h2><p>用于特单、入职和政策库的业务边界提示。提醒必须说明影响和下一步，不只写“温馨提示”。</p></div>
+            <span class="tag warn">hr-business-alert</span>
+          </div>
+          <div class="component-body">
+            <div class="business-alert warn"><strong>温馨提示</strong><p>当前业务涉及服务单提交，AI 识别结果不会自动生效。请确认表单字段后再提交。</p><button class="link-btn">关闭</button></div>
+            <div class="business-alert info"><strong>AI 边界</strong><p>AI 可辅助生成草稿和建议，但不会绕过权限、不会直接修改正式数据。</p><button class="link-btn">查看规则</button></div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>69. 可折叠 AI 处理过程</h2><p>用于入职解析、特单识别、政策检索。默认展示摘要，展开后看步骤、状态和耗时。</p></div>
+            <span class="tag success">hr-ai-process-detail</span>
+          </div>
+          <div class="component-body">
+            <div class="process-panel">
+              <div class="process-summary"><span class="process-dot done">✓</span><div><strong>AI 智能处理完成</strong><p>已完成 5/5 步，仍有 2 个字段待补充。</p></div><button class="btn">查看详情</button></div>
+              <div class="process-steps">
+                <div class="process-step done"><strong>需求解析</strong><span>已完成 · 1s</span><p>识别用户要开具社保参保证明。</p></div>
+                <div class="process-step done"><strong>信息提取</strong><span>已完成 · 1s</span><p>提取员工、时间范围、开具方和用途。</p></div>
+                <div class="process-step active"><strong>智能预填</strong><span>需复核</span><p>用途和邮寄地址需要人工补充。</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>70. AI 生成表单确认</h2><p>用于特单服务单草稿。强调“表单已生成，但需要确认”，字段可编辑，缺失项清楚定位。</p></div>
+            <span class="tag success">hr-ai-generated-form</span>
+          </div>
+          <div class="component-body">
+            <div class="generated-form">
+              <div class="generated-form-head"><div><strong>业务表单确认：社保参保证明开具</strong><p>蓝色为 AI 已填，黄色为建议核对，红色为待补充。</p></div><span class="tag warn">2 项待补充</span></div>
+              <div class="form-grid-demo">
+                <label><span>问题类型</span><input value="社保公积金相关业务 / 社保参保证明开具" /></label>
+                <label class="field-ai"><span>开具时间范围</span><input value="2024年01月 至 2026年04月" /></label>
+                <label class="field-review"><span>参保地城市</span><input value="上海市" /></label>
+                <label class="field-missing"><span>具体用途</span><input placeholder="请输入具体用途" /></label>
+              </div>
+              <div class="toolbar right"><button class="btn">保存草稿</button><button class="btn primary">确认并提交申请</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>71. 字段状态图例与智能字段</h2><p>用于入职、特单表单。状态必须直接贴近字段，不靠大面积色块表达。</p></div>
+            <span class="tag">hr-ai-field-legend</span>
+          </div>
+          <div class="component-body">
+            <div class="field-legend"><span><i class="legend-dot ai"></i>AI 已填</span><span><i class="legend-dot review"></i>建议核对</span><span><i class="legend-dot missing"></i>待补充</span><span><i class="legend-dot conflict"></i>存在冲突</span></div>
+            <div class="smart-field-row">
+              <div><strong>员工姓名</strong><span>张三</span><em class="mini-state ai">AI 已填</em></div>
+              <div><strong>参保库名称</strong><span>未识别</span><em class="mini-state missing">待补充</em></div>
+              <div><strong>参保地城市</strong><span>上海市</span><em class="mini-state review">建议核对</em></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>72. 政策答案与引用来源卡</h2><p>用于 AI 政策库。答案和来源不能样式重复：答案是主内容，来源是证据列表。</p></div>
+            <span class="tag success">hr-ai-cited-answer</span>
+          </div>
+          <div class="component-body">
+            <div class="cited-answer-layout">
+              <div class="answer-main-card">
+                <span class="tag success">可引用答案</span>
+                <h3>北京 2025 年社保缴费基数上下限</h3>
+                <p>上限为 35,283 元/月，下限为 6,821 元/月。养老保险单位 16%，个人 8%。<sup>[1]</sup></p>
+                <div class="toolbar"><button class="btn">复制</button><button class="btn">导出</button></div>
+              </div>
+              <div class="source-stack">
+                <div class="source-lite official"><strong>[1] 原文政策</strong><span>京人社发〔2025〕11号 · 2025-01-15</span></div>
+                <div class="source-lite case"><strong>[2] 案例</strong><span>社保基数争议仲裁案 · 2024</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>73. 推荐问题 / 任务模板卡</h2><p>用于政策库欢迎页和工具集入口。卡片要说明会生成什么问题或启动什么任务，而不是只有关键词。</p></div>
+            <span class="tag">hr-ai-prompt-card</span>
+          </div>
+          <div class="component-body">
+            <div class="prompt-card-grid">
+              <button class="prompt-card"><span class="prompt-icon">社</span><strong>社保缴纳标准</strong><p>生成基数上下限、缴纳比例、适用险种和政策来源问题。</p></button>
+              <button class="prompt-card"><span class="prompt-icon green">入</span><strong>新员工入职</strong><p>生成办理时限、材料清单、流程和风险提示问题。</p></button>
+              <button class="prompt-card"><span class="prompt-icon orange">算</span><strong>多城市成本对比</strong><p>打开城市、主题和输出形式配置。</p></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>74. 底部输入 Dock</h2><p>用于政策库和智能助手。输入是核心时应固定在主路径附近，常用工具放为轻量 chip。</p></div>
+            <span class="tag">hr-ai-input-dock</span>
+          </div>
+          <div class="component-body">
+            <div class="input-dock-sample">
+              <textarea placeholder="请输入你的政策问题，例如：北京新员工入职社保公积金如何办理？"></textarea>
+              <div class="dock-action-row"><button class="tool-icon">↥</button><button class="tool-icon">◉</button><button class="btn primary">发送</button></div>
+              <div class="dock-chip-row"><button>社保缴纳标准</button><button>劳动合同签订</button><button>多城市对比</button><button>常用工具</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>75. 历史任务 / 记录列表</h2><p>用于智能入职、特单和政策库历史。记录要展示业务结果和可继续动作，而不只是时间日志。</p></div>
+            <span class="tag">hr-ai-history-record</span>
+          </div>
+          <div class="component-body">
+            <div class="history-record-list">
+              <div class="history-record"><span class="tag success">已完成</span><div><strong>批量入职 · 客户 Excel 入职资料解析</strong><p>识别 20 人，成功入职 20 人</p></div><span>张三 · 2026/5/28 16:01</span><div class="toolbar"><button class="btn">查看详情</button><button class="btn">导出结果</button></div></div>
+              <div class="history-record"><span class="tag warn">部分成功</span><div><strong>社保参保证明开具</strong><p>张三，仍有 2 个字段待补充</p></div><span>李四 · 2026/5/27 17:01</span><div class="toolbar"><button class="btn primary">继续处理</button></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>76. 操作指南与辅助浮层入口</h2><p>用于新工具上线、复杂表单、AI 边界说明。帮助入口应轻量，不遮挡主流程。</p></div>
+            <span class="tag">hr-ai-help-affordance</span>
+          </div>
+          <div class="component-body">
+            <div class="help-affordance-row">
+              <button class="btn">操作指南</button>
+              <div class="assistant-bubble"><span>?</span><p>遇到无法识别的资料，可查看示例或联系人工接管。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>77. 能力边界条</h2><p>用于政策库、智能助手和高风险 AI 页面。它不是说明文档，而是把默认输出、来源要求、风险处理和后续动作压成可扫的产品约束。</p></div>
+            <span class="tag cyan">hr-ai-capability-bar</span>
+          </div>
+          <div class="component-body">
+            <div class="policy-assurance-bar">
+              <div><span>默认输出</span><strong>政策方案</strong><em>先给结论，再给依据和办理建议</em></div>
+              <div><span>来源要求</span><strong>可追溯</strong><em>关键结论绑定原文政策或案例编号</em></div>
+              <div><span>风险处理</span><strong>需复核</strong><em>过期、冲突、范围不明会提示人工确认</em></div>
+              <div><span>后续动作</span><strong>可导出</strong><em>支持收藏、导出、订阅和继续追问</em></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>78. 业务记录行</h2><p>用于入职记录、服务单记录和任务历史。单行必须展示业务对象、处理结果、时间和下一步，而不是只展示操作日志。</p></div>
+            <span class="tag success">hr-business-record-row</span>
+          </div>
+          <div class="component-body">
+            <div class="record-list">
+              <article class="ticket-record-row">
+                <div class="ticket-record-status"><span class="tag warn">草稿</span><strong>社保参保证明开具</strong></div>
+                <div class="ticket-record-main">
+                  <h3>张三 · 2024年01月-2026年04月</h3>
+                  <p>用于公积金贷款，需补具体用途和邮寄地址。</p>
+                  <div class="ticket-record-facts"><span>编号：-</span><span>创建：2026/04/02 15:13</span></div>
+                </div>
+                <div class="ticket-record-result"><span>处理结果</span><strong>2 项待补充</strong></div>
+                <div class="ticket-record-actions"><button class="link-btn primary-link">继续处理</button><button class="record-expand">展开</button></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>79. 业务上下文条</h2><p>用于智能入职、特单和其他代操作场景。把客户/租户、业务模式、资料来源、字段策略等影响 AI 判断的上下文前置，避免用户在输入框里寻找关键选择。</p></div>
+            <span class="tag success">hr-business-context-bar</span>
+          </div>
+          <div class="component-body">
+            <div class="context-strip">
+              <div class="context-summary">
+                <div><span>当前处理上下文</span><strong>岗位外包测试商户 · 批量入职 · 客户 Excel/邮件/聊天记录</strong></div>
+                <span class="tag success">字段映射已开启</span>
+              </div>
+              <div class="context-panel">
+                <div class="onboarding-form-grid context-grid">
+                  <label class="form-field"><span>客户/租户</span><select><option>岗位外包测试商户</option></select></label>
+                  <label class="form-field"><span>处理模式</span><select><option>批量入职</option><option>单个入职</option></select></label>
+                  <label class="form-field"><span>创建方式</span><select><option>仅生成草稿</option><option>进入确认流程</option></select></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>80. 主任务输入卡</h2><p>用于“输入资料/描述需求”是首要任务的页面。它把标题、边界、输入、附件、示例和主动作组织成一个清晰任务区，不再把页面拆成多个同权重小卡片。</p></div>
+            <span class="tag cyan">hr-ai-primary-task-input</span>
+          </div>
+          <div class="component-body">
+            <section class="card onboarding-card primary-task-card">
+              <div class="task-command-head">
+                <div><h3>输入客户资料或业务需求</h3><p>AI 会生成草稿和字段建议，提交前需要人工确认。</p></div>
+                <span class="safe-badge">主任务</span>
+              </div>
+              <div class="onboarding-composer">
+                <textarea placeholder="请粘贴客户资料、邮件、聊天记录，或描述要办理的业务需求"></textarea>
+                <div class="composer-toolbar">
+                  <label class="composer-example"><span>示例</span><select><option>选择示例</option></select></label>
+                  <span class="icon-link" title="上传附件">↥</span>
+                  <div class="file-list composer-files"><div class="empty-mini">暂无附件</div></div>
+                  <span class="inline-help">先选择上下文，再生成草稿。</span>
+                  <div class="composer-submit"><button class="btn primary">生成草稿</button></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>81. 当前任务状态条</h2><p>用于主输入完成后压缩“当前上下文、步骤位置、状态和修改入口”。它解决两个容器贴在一起、用户分不清流程关系的问题。</p></div>
+            <span class="tag cyan">hr-ai-current-task-strip</span>
+          </div>
+          <div class="component-body">
+            <div class="task-assurance-row" style="display:grid">
+              <div class="task-mini-steps" aria-label="任务步骤">
+                <span class="active">输入资料</span><i></i><span class="active">AI 识别</span><i></i><span>字段检查</span><i></i><span>人工确认</span><i></i><span>提交结果</span>
+              </div>
+            </div>
+            <div class="generated-input-summary">
+              <div><strong>客户资料已生成入职草稿</strong><span>岗位外包测试商户 · 客户 Excel/邮件/聊天记录 · 20 人已识别</span></div>
+              <button class="btn">修改输入</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>82. 员工确认工作区</h2><p>用于智能入职结果确认。主任务是处理异常员工，所以表格按异常优先，筛选、搜索和提交规则都贴近结果表。</p></div>
+            <span class="tag success">hr-business-employee-review</span>
+          </div>
+          <div class="component-body">
+            <section class="card onboarding-card result-workspace">
+              <div class="card-title-row">
+                <div><h3>员工信息确认</h3><p>共识别 20 人，可提交 15 人，待补充 3 人，字段冲突 1 人，疑似重复 1 人。</p></div>
+                <span class="text-action">字段映射</span>
+              </div>
+              <div class="employee-review-board">
+                <div class="employee-review-tools">
+                  <div><strong>异常优先处理</strong><span>按解析失败、字段冲突、待补充、需确认、疑似重复、可入职排序。</span></div>
+                  <div class="employee-review-controls">
+                    <select class="record-status-select"><option>全部状态</option><option>字段冲突</option><option>待补充</option></select>
+                    <input class="record-search employee-search" placeholder="搜索员工姓名、手机号、证件号码" />
+                  </div>
+                </div>
+                <div class="employee-review-table-wrap">
+                  <table class="employee-review-table">
+                    <thead><tr><th>员工</th><th>识别状态</th><th>关键字段</th><th>缺失/异常</th><th>AI 来源</th><th>下一步</th></tr></thead>
+                    <tbody>
+                      <tr><td><strong>王五</strong><span>产品经理</span></td><td><span class="tag danger">解析失败</span></td><td><strong>手机 13900000000</strong><span>入职 无法识别</span></td><td><strong>入职日期无法识别，合同主体缺失</strong></td><td><span>客户 Excel + 附件</span></td><td><em>补充信息</em></td></tr>
+                      <tr><td><strong>钱七</strong><span>客服专员</span></td><td><span class="tag warn">字段冲突</span></td><td><strong>手机 13600000000</strong><span>入职 2026/06/08</span></td><td><strong>手机号与登记表不一致</strong></td><td><span>Excel + 聊天记录</span></td><td><em>查看详情</em></td></tr>
+                      <tr><td><strong>张三</strong><span>UI 设计师</span></td><td><span class="tag success">可入职</span></td><td><strong>手机 13800000000</strong><span>入职 2026/06/01</span></td><td><span>无</span></td><td><span>客户 Excel</span></td><td><em>确认无误</em></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>83. 政策主问答输入</h2><p>用于政策库和小鲲这类“问题本身是主任务”的页面。回答模式、输入、上传/语音、红头文件优先、多城市对比必须在一个输入区域内完成。</p></div>
+            <span class="tag cyan">hr-ai-policy-primary-composer</span>
+          </div>
+          <div class="component-body">
+            <section class="policy-input-dock policy-primary-composer" style="position:static">
+              <div class="policy-composer-head">
+                <div>
+                  <span class="tag success">AI 政策助手</span>
+                  <strong>输入政策问题，生成可溯源办理方案</strong>
+                  <span>优先写清城市、业务场景、时间范围和想要的输出形式。</span>
+                </div>
+              </div>
+              <div class="mode-tabs policy-mode-tabs">
+                <button class="active">综合回答</button><button>仅搜索原文政策</button><button>案例辅助分析</button><button>多城市对比</button>
+              </div>
+              <div class="dock-input-row">
+                <textarea placeholder="请输入你的政策问题，例如：北京新员工入职社保公积金如何办理？"></textarea>
+                <button class="btn primary">发送</button>
+              </div>
+              <div class="dock-tools">
+                <span>结合政策、案例和经办规则输出完整方案。</span>
+                <button class="btn icon-btn" title="附件上传" data-icon="upload" aria-label="附件上传"></button>
+                <button class="btn icon-btn" title="语音输入" data-icon="voice" aria-label="语音输入"></button>
+                <button class="btn">红头文件优先</button>
+                <button class="btn">多城市对比</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="component-block">
+          <div class="component-head">
+            <div><h2>84. 场景模板组</h2><p>用于政策库、工具集和智能助手首页。它按业务类型组织可执行 prompt，不能退化成同质按钮墙；点击后应生成专业问题或启动任务。</p></div>
+            <span class="tag purple">hr-ai-scenario-template-group</span>
+          </div>
+          <div class="component-body">
+            <section class="policy-scenario-card compact-scenario-card">
+              <div class="card-title-row">
+                <div><h3>常用任务模板</h3><p>模板用于快速生成专业问题，是输入区的辅助，不抢主路径。</p></div>
+                <button class="btn">多城市对比</button>
+              </div>
+              <div class="scenario-groups">
+                <section>
+                  <h3>高频查询</h3>
+                  <div class="policy-chip-grid">
+                    <button><strong>社保缴纳标准</strong><span>基数上下限、单位/个人比例、来源时间</span></button>
+                    <button><strong>公积金缴存规则</strong><span>缴存基数、比例、调整周期和依据</span></button>
+                  </div>
+                </section>
+                <section>
+                  <h3>经办场景</h3>
+                  <div class="policy-chip-grid">
+                    <button><strong>新员工入职</strong><span>办理时限、材料、流程和风险</span></button>
+                    <button><strong>离职社保停缴</strong><span>停缴节点、材料要求和风险</span></button>
+                  </div>
+                </section>
+                <section>
+                  <h3>工具计算</h3>
+                  <div class="policy-chip-grid">
+                    <button><strong>薪酬个税计算</strong><span>个税口径、专项扣除和社保影响</span></button>
+                    <button><strong>多城市成本对比</strong><span>城市差异、成本测算和风险提示</span></button>
+                  </div>
+                </section>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h3>组件边界总表</h3>
+          <div class="table-wrap"><table><thead><tr><th>组件</th><th>适用</th><th>不适用</th></tr></thead><tbody>
+            <tr><td>hr-ai-field</td><td>智能入职字段、特单预填字段</td><td>政策可信、加急规则、后台指标</td></tr>
+            <tr><td>hr-ai-citation</td><td>政策问答、客户回复引用依据</td><td>字段抽取、服务单加急条件</td></tr>
+            <tr><td>hr-ai-confirm</td><td>提交入职、创建服务单、打加急标、发送客户消息</td><td>复制草稿、查看建议、查看指标</td></tr>
+            <tr><td>hr-ai-tool-call</td><td>Chat、智能助手、Agent 调试</td><td>普通表格展示、政策来源展示</td></tr>
+            <tr><td>hr-ai-ticket-draft</td><td>特单预填、参保证明、进度查询转服务单</td><td>政策答案、纯运营指标页</td></tr>
+            <tr><td>hr-ai-policy-answer</td><td>政策库、小鲲、社保合规问答</td><td>入职 OCR、批量导入结果</td></tr>
+            <tr><td>hr-ai-review-queue</td><td>入职缺资料、特单字段待确认、人员不唯一</td><td>无需人工参与的纯浏览信息</td></tr>
+            <tr><td>hr-ai-permission-mask</td><td>身份证、银行卡、手机号、客户账户和关键写入权限</td><td>普通说明文案和非敏感指标</td></tr>
+            <tr><td>hr-ai-task-launcher</td><td>工具集、工作台、首页弹窗中的任务启动</td><td>具体业务处理页内部重复入口</td></tr>
+            <tr><td>hr-ai-entity-picker</td><td>同名员工、多个客户账户、多个服务单候选</td><td>对象已经唯一的普通流程</td></tr>
+            <tr><td>hr-ai-template-map</td><td>入职模板、证明模板、回复模板和字段映射</td><td>无模板差异的简单展示</td></tr>
+            <tr><td>hr-ai-execution-plan</td><td>代理执行、跨系统调用、批量提交前确认</td><td>单纯政策问答</td></tr>
+            <tr><td>hr-ai-qa-annotation</td><td>运营后台、失败样本、质检复盘</td><td>客户侧业务页面</td></tr>
+            <tr><td>hr-ai-input-toolbar</td><td>入职资料输入、特单需求描述、政策问题输入</td><td>复杂筛选表单和结果表内部操作</td></tr>
+            <tr><td>hr-ai-process-detail</td><td>解析、识别、映射、检索这类可解释 AI 过程</td><td>普通业务进度和审批流节点</td></tr>
+            <tr><td>hr-ai-generated-form</td><td>特单草稿、入职草稿、AI 预填后人工确认</td><td>纯展示答案和无编辑需求的摘要</td></tr>
+            <tr><td>hr-ai-cited-answer</td><td>政策库、小鲲、合规问答中需要来源编号的答案</td><td>字段抽取、表单校验、服务单记录</td></tr>
+            <tr><td>hr-ai-input-dock</td><td>政策助手、对话动作型页面的持续输入</td><td>任务处理型页面的主表单输入</td></tr>
+            <tr><td>hr-ai-history-record</td><td>入职记录、服务单记录、政策会话历史</td><td>单纯系统操作日志</td></tr>
+            <tr><td>hr-ai-capability-bar</td><td>政策库、智能助手、高风险 AI 页面首屏边界</td><td>普通功能卖点和营销说明</td></tr>
+            <tr><td>hr-business-record-row</td><td>服务单记录、入职记录、失败样本、运营任务</td><td>纯时间线日志和无法继续操作的信息流</td></tr>
+            <tr><td>hr-business-context-bar</td><td>客户/租户、业务模式、资料来源会影响 AI 判断的页面</td><td>普通说明文案、轻量筛选和结果表内部过滤</td></tr>
+            <tr><td>hr-ai-primary-task-input</td><td>智能入职、智能特单、政策提问等输入为主任务的页面</td><td>运营后台、服务单详情内的辅助建议区</td></tr>
+            <tr><td>hr-ai-current-task-strip</td><td>主输入完成后展示当前步骤、上下文和修改入口</td><td>初始空状态和普通页面标题区</td></tr>
+            <tr><td>hr-business-employee-review</td><td>智能入职批量员工确认、异常优先处理、提交前检查</td><td>服务单记录、政策答案、纯运营列表</td></tr>
+            <tr><td>hr-ai-policy-primary-composer</td><td>政策库、小鲲等政策问题为主任务的页面</td><td>入职/特单这类需要先处理业务上下文的页面</td></tr>
+            <tr><td>hr-ai-scenario-template-group</td><td>政策库首页、工具集首页、智能助手首页的专业任务入口</td><td>具体业务处理页内部重复入口</td></tr>
+          </tbody></table></div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

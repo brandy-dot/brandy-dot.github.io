@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>101HR AI 产品设计体系 v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>Design System v2.0</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item active" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./delivery-matrix.html">目标闭环</a>
+        </nav>
+      </aside>
+      <main class="page">
+        <header class="page-head">
+          <div><h1>101HR AI 产品设计体系 v2.0</h1><p>从业务差异出发，统一可信表达、状态、组件和前端落地，而不是把所有 AI 功能套成同一种页面。</p></div>
+          <div class="toolbar"><span class="tag">业务优先</span><span class="tag purple">收窄泛化规则</span></div>
+        </header>
+
+        <section class="hero">
+          <div class="card">
+            <span class="tag warn">v2.0 修正方向</span>
+            <h1>统一的是 AI 设计语言，不是统一页面形状。</h1>
+            <p>智能入职需要字段抽取和异常队列；特单需要轻量分流；政策库需要来源可信；加急需要规则依据和高风险确认；Chat 需要工具调用和人工接管；后台需要配置与失败样本管理。</p>
+            <div class="toolbar" style="margin-top:18px">
+              <a class="btn primary" href="./delivery-matrix.html">查看目标闭环</a>
+              <a class="btn soft" href="./requirement-analysis.html">从业务差异开始</a>
+            </div>
+          </div>
+          <div class="card stack">
+            <div class="callout"><strong>产品内容区</strong><br />保留 101HR 明亮蓝导航 `#196BFA` / `#006EFB`。</div>
+            <div class="callout"><strong>规范外层</strong><br />使用黑白中性导航，避免和产品样板混淆。</div>
+            <div class="callout"><strong>AI 识别度</strong><br />来自标签、状态、局部提示、可信表达，不靠炫光和大面积渐变。</div>
+          </div>
+        </section>
+
+        <section class="grid-6 section">
+          <a class="card" href="./requirement-analysis.html"><span class="tag">01</span><h3>业务差异</h3><p>先判断每个产品真实任务和 AI 角色。</p></a>
+          <a class="card" href="./trust-patterns.html"><span class="tag cyan">02</span><h3>可信表达</h3><p>字段、来源、规则、工具、操作分场景表达。</p></a>
+          <a class="card" href="./state-matrix.html"><span class="tag warn">03</span><h3>状态矩阵</h3><p>通用基础状态 + 场景专属状态。</p></a>
+          <a class="card" href="./layout-patterns.html"><span class="tag success">04</span><h3>布局模式</h3><p>先按产品需求定布局，再反推组件。</p></a>
+          <a class="card" href="./interaction-guidelines.html"><span class="tag">05</span><h3>交互指导</h3><p>容器、布局、编辑、确认和记录的决策规则。</p></a>
+          <a class="card" href="./component-library.html"><span class="tag purple">06</span><h3>收窄组件库</h3><p>每个组件写清适用与不适用。</p></a>
+        </section>
+
+        <section class="card section">
+          <div class="page-head" style="margin-bottom:14px">
+            <div>
+              <h3>可交互产品样板</h3>
+              <p>以下是当前最终版的业务样板页，支持点击入口、填写、生成草稿、展开记录、查看指南等基础交互。</p>
+            </div>
+            <a class="btn soft" href="./product-samples.html">查看样板总览</a>
+          </div>
+          <div class="grid-3">
+            <a class="card" href="./smart-onboarding-tool.html"><span class="tag">任务处理型</span><h3>智能入职</h3><p>客户入职资料识别、字段映射、异常优先处理和入职记录追踪。</p></a>
+            <a class="card" href="./smart-ticket-tool.html"><span class="tag cyan">意图分流型</span><h3>智能特单办理</h3><p>自然语言识别业务诉求，生成可确认、可提交的服务单草稿。</p></a>
+            <a class="card" href="./smart-policy-assistant.html"><span class="tag success">可信问答型</span><h3>101HR AI 政策库</h3><p>政策问题输入、可信依据、结构化答案、追问和导出动作。</p></a>
+            <a class="card" href="./service-expedite-tool.html"><span class="tag warn">流程嵌入型</span><h3>服务单加急助手</h3><p>嵌入服务单详情，基于 SLA、权限和历史节点给出加急建议。</p></a>
+            <a class="card" href="./smart-assistant-tool.html"><span class="tag purple">对话动作型</span><h3>101HR 智能助手</h3><p>对话识别多任务，右侧沉淀可执行动作和兜底接管路径。</p></a>
+            <a class="card" href="./ai-ops-dashboard.html"><span class="tag">运营配置型</span><h3>AI 智能咨询运营后台</h3><p>Agent、依赖、失败样本、配置发布和异常处理的运营页面。</p></a>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h3>当前交付状态</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>维度</th><th>已完成</th><th>同步状态</th><th>验证入口</th></tr></thead>
+              <tbody>
+                <tr><td>产品样板</td><td>智能入职、智能特单、AI 政策库、加急、智能助手、运营后台已有独立页面</td><td>六个样板已按业务主任务、AI 边界、结果确认和记录追踪完成闭环</td><td><a href="./delivery-matrix.html">目标闭环</a></td></tr>
+                <tr><td>组件库</td><td>已从大块业务组件补到 84 个组件与模块</td><td>已按基础组件、AI 通用组合、101HR 业务组件、场景级模块完成四层索引，并加入产品样板组件对齐体检</td><td><a href="./component-library.html">组件库</a></td></tr>
+                <tr><td>规范闭环</td><td>已有业务差异、可信表达、状态矩阵、布局模式和目标闭环</td><td>已把每个产品的布局模式、主任务优先级、AI 角色和关键组件映射到交付矩阵</td><td><a href="./delivery-matrix.html">目标闭环</a></td></tr>
+                <tr><td>交互指导</td><td>已补充页面模式、容器、布局、编辑、AI 草稿到正式数据的决策规则</td><td>用于 PM 写需求、UI 选布局、前端落交互状态，避免样板继续靠口头判断</td><td><a href="./interaction-guidelines.html">交互指导</a></td></tr>
+                <tr><td>前端落地</td><td>已有 token、class 命名、响应式、状态枚举和复用边界</td><td>已区分 101HR 基础组件、AI 扩展组件、业务组件和页面私有样式</td><td><a href="./frontend-tokens.html">前端落地</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h3>v2.0 的工作顺序</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>顺序</th><th>内容</th><th>目的</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>业务差异</td><td>避免把不同产品硬套成同一种 AI 页面。</td></tr>
+                <tr><td>2</td><td>场景化可信表达</td><td>避免滥用字段置信度、可信度百分比和来源卡。</td></tr>
+                <tr><td>3</td><td>场景化状态矩阵</td><td>避免每个产品都出现同一组状态。</td></tr>
+                <tr><td>4</td><td>布局模式</td><td>先把产品需求归入合适布局，形成完整样板页。</td></tr>
+                <tr><td>5</td><td>交互决策</td><td>明确页面、抽屉、弹窗、两栏/三栏、当页编辑和记录追踪的使用边界。</td></tr>
+                <tr><td>6</td><td>收窄组件库</td><td>从布局样板反推组件边界，而不是先堆组件。</td></tr>
+                <tr><td>7</td><td>产品样板</td><td>逐产品落地，不做静态概念页。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

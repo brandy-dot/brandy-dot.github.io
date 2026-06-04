@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>产品样板入口 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>产品样板</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item active" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./delivery-matrix.html">目标闭环</a>
+        </nav>
+      </aside>
+
+      <main class="page">
+        <header class="page-head">
+          <div>
+            <h1>101HR AI 产品样板入口</h1>
+            <p>旧的单页拼装演示已经收敛为 6 个独立产品样板。每个样板都按真实业务目标设计输入、AI 处理、结果确认、异常处理和记录追踪。</p>
+          </div>
+          <a class="btn primary" href="./delivery-matrix.html">查看目标闭环</a>
+        </header>
+
+        <section class="card section">
+          <h2>为什么改成独立样板</h2>
+          <p>这些页面不再是组件拼贴或静态 Demo，而是用于判断布局、组件和交互是否能承载真实业务。入口页只负责分流；具体信息层级、主任务优先级和操作闭环在各产品页面内完成。</p>
+          <div class="closure-strip">
+            <div><strong>6</strong><span>独立产品页</span></div>
+            <div><strong>4</strong><span>组件层级</span></div>
+            <div><strong>84</strong><span>组件与模块</span></div>
+            <div><strong>1</strong><span>闭环矩阵</span></div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>产品样板</h2>
+          <div class="table-wrap delivery-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>产品</th>
+                  <th>布局模式</th>
+                  <th>主任务</th>
+                  <th>AI 介入点</th>
+                  <th>入口</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>智能入职</strong><span>驻场客成代客户办理入职</span></td>
+                  <td>任务处理型</td>
+                  <td>客户资料识别、字段映射、回填检查、人工确认后提交</td>
+                  <td>识别、合并、映射、补齐、异常检测</td>
+                  <td><a class="btn primary" href="./smart-onboarding-tool.html">打开样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>智能特单办理</strong><span>一句话生成服务单草稿</span></td>
+                  <td>意图分流型</td>
+                  <td>识别业务类型并生成可确认的服务单表单</td>
+                  <td>意图识别、员工提取、表单预填、缺失检查</td>
+                  <td><a class="btn primary" href="./smart-ticket-tool.html">打开样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>AI 政策库 / 小鲲</strong><span>可信政策问答与办理方案</span></td>
+                  <td>可信问答型</td>
+                  <td>输出可溯源、可反馈、可导出的政策方案</td>
+                  <td>来源检索、结构化答案、引用、追问、订阅</td>
+                  <td><a class="btn primary" href="./smart-policy-assistant.html">打开样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>服务单加急</strong><span>嵌入服务单详情的决策辅助</span></td>
+                  <td>流程嵌入型</td>
+                  <td>在原服务单上下文中判断是否可加急并留痕</td>
+                  <td>SLA 判断、权限校验、审批申请、高风险确认</td>
+                  <td><a class="btn primary" href="./service-expedite-tool.html">打开样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>智能助手</strong><span>对话澄清后转动作</span></td>
+                  <td>对话动作型</td>
+                  <td>把多轮对话转成政策、服务单、时间线或人工接管</td>
+                  <td>工具调用、动作推荐、草稿生成、发送确认</td>
+                  <td><a class="btn primary" href="./smart-assistant-tool.html">打开样板</a></td>
+                </tr>
+                <tr>
+                  <td><strong>智能咨询后台</strong><span>Agent 与知识运营配置</span></td>
+                  <td>运营配置型</td>
+                  <td>监控能力、处理失败样本、发布配置并支持回滚</td>
+                  <td>诊断、归因、样本回流、发布校验</td>
+                  <td><a class="btn primary" href="./ai-ops-dashboard.html">打开样板</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2 section">
+          <div class="card">
+            <h2>设计验收口径</h2>
+            <div class="closure-list">
+              <div><strong>业务优先</strong><p>先判断用户要完成的业务，再决定是否前置输入、是否保留对话、是否嵌入原流程。</p></div>
+              <div><strong>AI 有边界</strong><p>AI 生成草稿、建议、答案和校验结果；正式写入、提交、发送和打标必须人工确认。</p></div>
+              <div><strong>结果可继续处理</strong><p>每个结果区都要能补充、确认、导出、重试、转人工或追踪记录。</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>规范入口</h2>
+            <div class="closure-list">
+              <div><span class="tag">组件分层</span><p><a href="./component-library.html">组件库</a> 已按基础组件、AI 通用组合、业务组件和场景模块沉淀。</p></div>
+              <div><span class="tag cyan">状态口径</span><p><a href="./state-matrix.html">状态矩阵</a> 覆盖任务级、员工级、字段级、来源级、权限级和运营级状态。</p></div>
+              <div><span class="tag success">前端落地</span><p><a href="./frontend-tokens.html">前端落地</a> 补齐 class 命名、token、响应式和复用边界。</p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

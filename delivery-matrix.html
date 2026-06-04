@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>目标闭环 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>目标闭环</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item active" href="./delivery-matrix.html">目标闭环</a>
+        </nav>
+      </aside>
+
+      <main class="page">
+        <header class="page-head">
+          <div>
+            <h1>大目标交付闭环</h1>
+            <p>把产品需求、布局模式、组件分层和前端标准放在同一张表里，避免页面靠试错推进。</p>
+          </div>
+          <div class="toolbar"><span class="tag success">业务优先</span><span class="tag">可追踪</span></div>
+        </header>
+
+        <section class="card">
+          <h2>当前判断</h2>
+          <p>大方向已经从“组件展示页”转向“可交互产品样板 + 反推组件体系”。6 类产品都有独立样板入口，并已补齐关键结果态、来源/记录态和基础交互；当前已完成一轮视觉密度收敛，默认字段、辅助模板和过程组件降噪，只保留异常、主输入和主动作的强视觉权重。组件库同步收口到 84 个组件，并补上“业务上下文条、主任务输入卡、当前任务状态条、员工确认工作区、政策主问答输入、场景模板组”，用于固定页面布局的关键依据。</p>
+          <div class="closure-strip">
+            <div><strong>6</strong><span>产品场景</span></div>
+            <div><strong>4</strong><span>组件层级</span></div>
+            <div><strong>84</strong><span>组件与模块</span></div>
+            <div><strong>1</strong><span>轮视觉减噪</span></div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>产品样板交付矩阵</h2>
+          <p>每个产品页面必须回答：用户要完成什么业务、AI 在哪一步介入、默认重点是什么、结果如何确认、异常如何继续处理。</p>
+          <div class="callout" style="margin:12px 0 14px"><strong>统一样板外壳</strong><br />6 个深度样板统一使用独立产品样板视图：隐藏全局黑色导航，保留蓝色 101HR 产品导航或页面内流程布局，并提供“返回工具集”入口。</div>
+          <div class="table-wrap delivery-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>产品需求</th>
+                  <th>布局模式</th>
+                  <th>主任务优先级</th>
+                  <th>AI 角色</th>
+                  <th>关键组件</th>
+                  <th>当前资产</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>智能入职</strong><span>资料转 101HR 标准入职草稿</span></td>
+                  <td>任务处理型</td>
+                  <td>输入资料与生成草稿前置；记录默认轻量</td>
+                  <td>识别、合并、字段映射、回填检查</td>
+                  <td>AI 输入卡、处理过程、字段映射表、员工确认表、任务记录</td>
+                  <td><a href="./smart-onboarding-tool.html">smart-onboarding-tool</a></td>
+                  <td><span class="tag success">业务闭环</span></td>
+                </tr>
+                <tr>
+                  <td><strong>智能特单办理</strong><span>自然语言生成服务单草稿</span></td>
+                  <td>意图分流型</td>
+                  <td>业务需求输入前置；表单确认是主工作区</td>
+                  <td>意图识别、员工提取、表单预填、缺失检查</td>
+                  <td>需求输入、意图摘要、服务单草稿表单、字段状态、服务单记录</td>
+                  <td><a href="./smart-ticket-tool.html">smart-ticket-tool</a></td>
+                  <td><span class="tag success">业务闭环</span></td>
+                </tr>
+                <tr>
+                  <td><strong>AI 政策库 / 小鲲</strong><span>可信政策答案与办理方案</span></td>
+                  <td>可信问答型</td>
+                  <td>输入与答案结果前置；场景入口只做辅助</td>
+                  <td>检索来源、生成结论、引用依据、推荐追问</td>
+                  <td>政策输入 Dock、可信摘要、结构化答案、来源卡、反馈与导出</td>
+                  <td><a href="./smart-policy-assistant.html">smart-policy-assistant</a></td>
+                  <td><span class="tag success">业务闭环</span></td>
+                </tr>
+                <tr>
+                  <td><strong>服务单加急</strong><span>在服务单内判断是否加急</span></td>
+                  <td>流程嵌入型</td>
+                  <td>原服务单主流程优先；AI 作为右侧决策辅助</td>
+                  <td>SLA 判断、规则解释、权限校验、确认留痕</td>
+                  <td>规则判断、SLA 指标、权限申请、高风险确认、审批申请、执行日志</td>
+                  <td><a href="./service-expedite-tool.html">service-expedite-tool</a></td>
+                  <td><span class="tag success">业务闭环</span></td>
+                </tr>
+                <tr>
+                  <td><strong>智能助手</strong><span>对话澄清并转为可执行动作</span></td>
+                  <td>对话动作型</td>
+                  <td>对话可以前置，但右侧动作结果必须清楚</td>
+                  <td>多轮澄清、工具调用、服务单/政策/人工分流</td>
+                  <td>对话流、工具调用、动作面板、服务单草稿、时间线、回复发送确认、人工接管</td>
+                  <td><a href="./smart-assistant-tool.html">smart-assistant-tool</a></td>
+                  <td><span class="tag success">业务闭环</span></td>
+                </tr>
+                <tr>
+                  <td><strong>智能咨询后台</strong><span>管理 Agent、知识、API 和失败样本</span></td>
+                  <td>运营配置型</td>
+                  <td>指标和配置表优先；AI 只辅助诊断</td>
+                  <td>监控、归因、样本回流、配置发布</td>
+                  <td>指标条、Agent 表、API 状态、失败样本、配置详情、发布校验、回滚</td>
+                  <td><a href="./ai-ops-dashboard.html">ai-ops-dashboard</a></td>
+                  <td><span class="tag success">业务闭环</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2 section">
+          <div class="card">
+            <h2>组件反推标准</h2>
+            <div class="closure-list">
+              <div><span class="tag">基础组件</span><p>只负责 UI 控件和通用状态，不写 AI 语义。例如 Button、Input、Select、Table、Drawer、Modal、Upload、Tabs、Tag。</p></div>
+              <div><span class="tag cyan">AI 通用组合</span><p>跨场景复用 AI 过程与可信表达。例如 AI 输入、处理过程、来源引用、结果应用、字段状态、人工接管。</p></div>
+              <div><span class="tag success">业务组件</span><p>绑定 101HR 业务对象。例如员工草稿、服务单草稿、政策答案、加急决策、Agent 配置。</p></div>
+              <div><span class="tag purple">场景模块</span><p>可直接放进页面的大区块。例如入职工作台、特单表单确认、政策答案工作区、加急侧栏。</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>页面布局决策依据</h2>
+            <div class="closure-list">
+              <div><strong>输入是否是主任务</strong><p>智能入职、特单、政策库需要输入前置；运营后台和服务单加急不需要大输入框抢主流程。</p></div>
+              <div><strong>结果是否需要人工确认</strong><p>入职和特单必须把确认表格/表单做成主工作区；政策库主结果是可信答案，不是确认表。</p></div>
+              <div><strong>是否嵌入既有流程</strong><p>服务单加急应嵌入服务单详情，不能做成独立 AI 首页。</p></div>
+              <div><strong>用户是否需要连续对话</strong><p>智能助手和政策库保留对话输入，但必须把结果结构化成可执行动作或可信方案。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>视觉与响应式验收</h2>
+          <p>这轮验收不只看页面“有没有内容”，而是检查首屏重点、输入优先级、记录可读性和窄屏可操作性。桌面端保持业务主任务优先；窄屏下产品内导航改为横向轻导航，输入动作区改为纵向收纳，避免按钮和筛选挤出屏幕。</p>
+          <div class="table-wrap delivery-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>验收项</th>
+                  <th>判断标准</th>
+                  <th>当前处理</th>
+                  <th>后续边界</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>首屏主任务</td>
+                  <td>输入型页面优先露出输入；流程型页面优先露出判断/确认区</td>
+                  <td>智能入职、特单、政策库保留输入前置；加急/后台不强行放大对话输入</td>
+                  <td>不要把所有 AI 页面都做成同一种聊天入口</td>
+                </tr>
+                <tr>
+                  <td>视觉噪音</td>
+                  <td>默认字段和辅助卡片弱化，异常、阻断、主动作才强化</td>
+                  <td>字段卡、任务卡、普通结果项减少描边；保留风险色和主按钮权重</td>
+                  <td>新增组件必须先说明状态含义，再决定是否使用色条/描边</td>
+                </tr>
+                <tr>
+                  <td>窄屏可操作</td>
+                  <td>导航、筛选、步骤条可横向滚动；主按钮不得溢出屏幕</td>
+                  <td>产品内导航、步骤条、记录筛选和输入工具栏已统一改为移动端收纳</td>
+                  <td>宽表格仍允许在 table-wrap 内横向滚动，不强行压缩字段</td>
+                </tr>
+                <tr>
+                  <td>记录区可读</td>
+                  <td>单条记录先读状态、标题和业务结果，再看时间与操作</td>
+                  <td>入职记录改为紧凑业务记录行，移动端时间下沉，减少无效留白</td>
+                  <td>记录不是日志列表，必须展示业务结果和下一步入口</td>
+                </tr>
+                <tr>
+                  <td>动作闭环</td>
+                  <td>按钮不只展示样式，关键业务动作要能进入下一状态</td>
+                  <td>加急补审批申请，助手补转单/时间线/发送确认，后台补发布校验/发布/回滚</td>
+                  <td>低风险辅助按钮可 Toast，主流程按钮必须改变页面状态</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>最终验收结论</h2>
+          <p>当前阶段已完成“大目标”的基线交付：六个产品需求都有独立可交互样板，组件库已反推成四层结构，状态矩阵和前端落地标准已经能解释页面为什么这样布局。后续迭代应以业务需求变更或真实前端接入反馈为依据，不再通过旧拼装页继续试错。</p>
+          <div class="table-wrap delivery-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>目标项</th>
+                  <th>验收状态</th>
+                  <th>当前证据</th>
+                  <th>维护边界</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>多产品样板同等深度</td>
+                  <td><span class="tag success">通过</span></td>
+                  <td>6 个独立页面覆盖输入、AI 处理、确认、异常、记录和主动作闭环。</td>
+                  <td>新增产品必须先归入布局模式，再进入样板设计。</td>
+                </tr>
+                <tr>
+                  <td>组件库稳定分层</td>
+                  <td><span class="tag success">通过</span></td>
+                  <td>组件库收敛到基础组件、AI 通用组合、101HR 业务组件、场景级模块，共 84 项。</td>
+                  <td>不要把页面专用块直接塞进基础组件层。</td>
+                </tr>
+                <tr>
+                  <td>规范和页面闭环</td>
+                  <td><span class="tag success">通过</span></td>
+                  <td>交付矩阵逐页说明布局模式、主任务优先级、AI 角色和关键组件。</td>
+                  <td>页面调整必须同步回写组件边界或布局依据。</td>
+                </tr>
+                <tr>
+                  <td>前端落地标准</td>
+                  <td><span class="tag success">通过</span></td>
+                  <td>前端落地页补齐 class 命名、token、响应式、状态和复用规则。</td>
+                  <td>真实工程接入时按 class 前缀区分基础、组合、业务和场景模块。</td>
+                </tr>
+                <tr>
+                  <td>旧入口清理</td>
+                  <td><span class="tag success">通过</span></td>
+                  <td>产品样板页已改为独立样板入口，避免继续展示早期拼装 Demo。</td>
+                  <td>入口页只分流，不再承载复杂业务交互。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

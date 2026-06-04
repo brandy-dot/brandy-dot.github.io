@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>可信表达 - 101HR AI v2.0</title><link rel="stylesheet" href="./styles.css" /></head>
+  <body>
+    <div class="shell"><aside class="nav"><div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>可信表达</span></div></div><nav class="nav-list"><a class="nav-item" href="./index.html">总览</a><a class="nav-item" href="./requirement-analysis.html">业务差异</a><a class="nav-item" href="./component-library.html">组件库</a><a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a><a class="nav-item active" href="./trust-patterns.html">可信表达</a><a class="nav-item" href="./state-matrix.html">状态矩阵</a><a class="nav-item" href="./layout-patterns.html">布局模式</a><a class="nav-item" href="./frontend-tokens.html">前端落地</a></nav></aside>
+      <main class="page">
+        <header class="page-head"><div><h1>场景化可信表达</h1><p>可信表达不是一种组件，更不是单一置信度。不同业务要展示不同依据。</p></div><span class="tag cyan">Step 2</span></header>
+        <section class="grid-3">
+          <div class="card"><span class="tag">字段可信</span><h3>入职/预填</h3><p>展示字段来源、原文对照、字段状态、是否阻断。置信度只作为辅助。</p></div>
+          <div class="card"><span class="tag success">来源可信</span><h3>政策库/小鲲</h3><p>展示官方来源、内部口径、更新时间、生效范围、是否冲突、是否可引用。</p></div>
+          <div class="card"><span class="tag warn">规则可信</span><h3>加急/推荐</h3><p>展示规则命中、判断依据、执行影响、权限状态，而不是字段置信度。</p></div>
+          <div class="card"><span class="tag purple">工具可信</span><h3>Chat/助手</h3><p>展示意图识别、工具调用过程、调用结果、失败原因和人工接管。</p></div>
+          <div class="card"><span class="tag danger">操作可信</span><h3>代理执行</h3><p>展示将执行什么、影响谁、是否可撤回、确认人和日志。</p></div>
+          <div class="card"><span class="tag cyan">运营可信</span><h3>后台</h3><p>展示命中率、失败率、配置缺失、样本反馈和发布状态。</p></div>
+        </section>
+
+        <section class="card section">
+          <h3>可信表达选择表</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>场景</th><th>应展示</th><th>不应主打</th><th>典型文案</th></tr></thead>
+              <tbody>
+                <tr><td>字段抽取</td><td>来源、字段状态、原文对照</td><td>政策来源</td><td>“该字段来自附件识别，建议核对原图。”</td></tr>
+                <tr><td>政策问答</td><td>官方来源、更新时间、适用范围</td><td>字段置信度</td><td>“该答案可引用，来源更新于 2026-05-15。”</td></tr>
+                <tr><td>服务单加急</td><td>规则、影响、权限、日志</td><td>可信度百分比</td><td>“满足节点停留时长，但不能承诺今日完成。”</td></tr>
+                <tr><td>Chat 助手</td><td>意图、工具调用、人工接管</td><td>每条消息置信度</td><td>“识别到两个意图，建议转服务单草稿。”</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

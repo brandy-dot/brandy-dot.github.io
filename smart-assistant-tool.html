@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>智能助手 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="focused-product-page assistant-tool-page">
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>智能助手</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./smart-onboarding-tool.html">智能入职</a>
+          <a class="nav-item" href="./smart-ticket-tool.html">智能特单</a>
+          <a class="nav-item" href="./smart-policy-assistant.html">AI 政策库</a>
+          <a class="nav-item" href="./service-expedite-tool.html">服务单加急</a>
+          <a class="nav-item active" href="./smart-assistant-tool.html">智能助手</a>
+          <a class="nav-item" href="./ai-ops-dashboard.html">运营后台</a>
+        </nav>
+      </aside>
+
+      <main class="page ai-workflow-page">
+        <header class="page-head">
+          <div>
+            <a class="back-link" href="./product-samples.html">返回工具集</a>
+            <h1>101HR 智能助手</h1>
+            <p>用于客服和客成的内部辅助。对话负责澄清，右侧动作面板负责把结果落到服务单、政策答案或人工接管。</p>
+          </div>
+          <span class="tag purple">对话动作型</span>
+        </header>
+
+        <section class="assistant-layout hr-ai-m-action-conversation">
+          <article class="card assistant-chat hr-ai-c-chat-workspace">
+            <div class="card-title-row">
+              <div><h2>客户问题</h2><p>当前客户：岗位外包测试商户 · 员工候选：张萌</p></div>
+              <span class="tag">已连接政策库</span>
+            </div>
+            <div id="assistant-thread" class="thread-box">
+              <div class="message-row user">北京证明今天能不能开？上次那个单子也查一下。</div>
+              <div class="message-row ai">识别到“参保证明开具”和“历史进度查询”两个任务，需确认员工和用途。</div>
+            </div>
+            <div class="assistant-composer" role="group" aria-label="智能助手对话输入">
+              <textarea id="assistant-command" rows="2" placeholder="继续追问或补充员工、城市、用途、服务单号">张萌，北京，签证用，需要查 SO20260519032</textarea>
+              <div class="assistant-composer-bar">
+                <div class="assistant-quick-actions" aria-label="快捷动作">
+                  <button type="button" class="btn icon-btn" title="上传附件" aria-label="上传附件" data-icon="upload"></button>
+                  <button type="button" class="assistant-chip">补充员工</button>
+                  <button type="button" class="assistant-chip">查服务单</button>
+                  <button type="button" class="assistant-chip">转人工</button>
+                </div>
+                <button class="assistant-send-button" data-scenario-action="assistant-send" title="发送" aria-label="发送">↑</button>
+              </div>
+            </div>
+          </article>
+
+          <aside class="card assistant-actions hr-ai-b-action-panel">
+            <div class="card-title-row">
+              <div><h2>可执行动作</h2><p>对话结论必须沉淀为明确动作。</p></div>
+              <span class="tag warn">待识别</span>
+            </div>
+            <div id="assistant-action-list" class="action-stack hr-ai-b-action-list">
+              <div><strong>等待补充信息</strong><p>发送后将展示意图、工具调用和服务单草稿。</p></div>
+            </div>
+            <div class="assistant-handoff-mini">
+              <strong>兜底路径</strong>
+              <p>员工不唯一、接口失败或客户要求立即反馈时，保留上下文转人工。</p>
+              <button class="btn" data-scenario-action="assistant-handoff">人工接管</button>
+            </div>
+          </aside>
+        </section>
+
+        <section id="assistant-result" class="card section is-hidden">
+          <div class="card-title-row">
+            <div><h2>动作草稿</h2><p>已拆成政策解释、服务单草稿、进度查询三个可执行任务。</p></div>
+            <span class="tag success">可处理</span>
+          </div>
+          <div class="task-board hr-ai-c-task-split">
+            <div><span class="tag">政策类</span><strong>解释北京参保证明时效</strong><p>输出可信答案，不创建服务单。</p><button class="btn" data-scenario-action="assistant-policy-answer">查看答案</button></div>
+            <div><span class="tag warn">执行类</span><strong>创建参保证明服务单草稿</strong><p>用途为签证，模板需人工确认。</p><button class="btn primary" data-scenario-action="assistant-open-ticket">转服务单草稿</button></div>
+            <div><span class="tag cyan">查询类</span><strong>查询历史服务单进度</strong><p>已命中 SO20260519032，供应商处理中。</p><button class="btn" data-scenario-action="assistant-show-timeline">查看时间线</button></div>
+          </div>
+        </section>
+
+        <section id="assistant-ticket-draft" class="card section is-hidden">
+          <div class="card-title-row">
+            <div><h2>服务单草稿确认</h2><p>AI 已把对话结果转成参保证明服务单草稿，提交前需要客服确认用途模板和员工信息。</p></div>
+            <span class="tag warn">需确认</span>
+          </div>
+          <div class="ticket-summary-grid hr-ai-b-ticket-draft">
+            <div><span>服务类型</span><strong>社保参保证明开具</strong></div>
+            <div><span>员工</span><strong>张萌 / 北京</strong></div>
+            <div><span>用途</span><strong>签证 · 模板需确认</strong></div>
+            <div><span>关联进度</span><strong>SO20260519032</strong></div>
+          </div>
+          <div class="toolbar right"><button class="btn">保存草稿</button><button class="btn primary" data-scenario-action="assistant-submit-ticket">确认创建服务单</button></div>
+        </section>
+
+        <section id="assistant-policy-result" class="card section is-hidden">
+          <div class="card-title-row">
+            <div><h2>政策答案摘要</h2><p>北京参保证明通常预计 1-2 个工作日返回，签证用途需确认模板格式。</p></div>
+            <span class="tag success">可引用</span>
+          </div>
+          <div class="policy-assurance-bar hr-ai-c-trust-boundary">
+            <div><span>适用地区</span><strong>北京</strong><em>参保证明开具</em></div>
+            <div><span>来源</span><strong>2 个</strong><em>政策运营 + 官方口径</em></div>
+            <div><span>边界</span><strong>不承诺当日</strong><em>需确认签证模板</em></div>
+            <div><span>下一步</span><strong>转服务单</strong><em>用户确认后提交</em></div>
+          </div>
+        </section>
+
+        <section id="assistant-timeline-result" class="card section is-hidden">
+          <div class="card-title-row">
+            <div><h2>历史服务单时间线</h2><p>SO20260519032 当前仍在供应商处理中，已停留 32 小时，可同步加急建议。</p></div>
+            <span class="tag warn">供应商处理中</span>
+          </div>
+          <div class="timeline-card compact">
+            <div><strong>2026-05-27 10:20</strong><span>客户提交参保证明申请。</span></div>
+            <div><strong>2026-05-27 14:02</strong><span>进入供应商处理节点。</span></div>
+            <div><strong>2026-05-28 18:30</strong><span>客户追问进度，AI 建议关注但不承诺完成时间。</span></div>
+          </div>
+        </section>
+
+        <section id="assistant-tool-section" class="assistant-ops-grid section is-hidden">
+          <article class="card">
+            <div class="card-title-row">
+              <div><h2>工具调用记录</h2><p>让客服知道 AI 用了哪些系统、拿到了什么结果。</p></div>
+              <span class="tag cyan">2 次调用</span>
+            </div>
+            <div class="tool-call-list">
+              <div><span class="tag success">成功</span><strong>员工档案查询</strong><p>输入：张萌 / 岗位外包测试商户。输出：匹配员工 ID 265520，北京参保记录存在。</p></div>
+              <div><span class="tag success">成功</span><strong>服务单进度查询</strong><p>输入：SO20260519032。输出：供应商处理中，已停留 32 小时。</p></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-title-row">
+              <div><h2>客服回复草稿</h2><p>AI 生成但不自动发送，客服可编辑后再复制或发送。</p></div>
+              <span class="tag warn">未发送</span>
+            </div>
+            <div class="reply-draft-box">
+              您好，已为张萌整理北京参保证明申请信息。当前关联服务单仍在供应商处理中，我们会继续跟进。签证用途可能需要指定模板，请确认是否需要中英文版本。
+            </div>
+            <div class="toolbar right"><button class="btn">复制</button><button class="btn">编辑</button><button class="btn primary" data-scenario-action="assistant-confirm-send">发送前确认</button></div>
+          </article>
+        </section>
+
+        <section class="card section assistant-records">
+          <h2>最近处理</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>状态</th><th>客户问题</th><th>识别任务</th><th>处理结果</th><th>时间</th></tr></thead>
+              <tbody id="assistant-records">
+                <tr><td><span class="tag">待确认</span></td><td>北京证明今天能不能开</td><td>政策 + 服务单 + 查询</td><td>等待客服确认</td><td>刚刚</td></tr>
+                <tr><td><span class="tag success">已转单</span></td><td>上海员工离职停缴</td><td>服务单草稿</td><td>SO20260528018</td><td>2026/5/28 16:10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./scenario-tools.js"></script>
+  </body>
+</html>

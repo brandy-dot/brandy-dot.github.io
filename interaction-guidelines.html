@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>交互指导 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>交互指导</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item active" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./delivery-matrix.html">目标闭环</a>
+        </nav>
+      </aside>
+
+      <main class="page">
+        <header class="page-head">
+          <div>
+            <h1>101HR AI 交互指导与落地方案</h1>
+            <p>把产品经理原型和当前样板中反复出现的问题，沉淀成页面、抽屉、弹窗、两栏/三栏、当页编辑与记录追踪的决策规则。</p>
+          </div>
+          <span class="tag warn">Interaction v2.1</span>
+        </header>
+
+        <section class="card section">
+          <h2>结论：当前交互产出还不够生产化</h2>
+          <p>现有页面已经能表达 AI 产品方向，但还不足以直接指导多角色协作。缺口不在“有没有页面”，而在交互决策没有完全显性化：什么时候用抽屉、什么时候用页面，什么时候当页改表格，什么时候必须二次确认，什么时候 AI 输入应当前置，什么时候业务结果才是主角。</p>
+          <div class="grid-4">
+            <div class="callout"><strong>已具备</strong><br />六类 AI 产品样板、源组件库、状态矩阵、前端 token 和页面 QA。</div>
+            <div class="callout"><strong>仍缺少</strong><br />容器选型、布局选型、编辑方式、提交守卫和记录区的统一交互规则。</div>
+            <div class="callout"><strong>使用对象</strong><br />PM 写 PRD，UI 选布局和组件，前端落状态和交互，QA 按规则验收。</div>
+            <div class="callout"><strong>判断原则</strong><br />AI 不是主角，业务对象、人工确认、异常恢复和追踪记录才是主流程。</div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>页面模式先于组件选择</h2>
+          <p>每个 AI 产品先归入页面模式，再决定输入、结果、确认、异常和记录的位置。不要先拿组件拼页面。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>产品场景</th><th>页面模式</th><th>主表面</th><th>AI 角色</th><th>默认布局</th></tr></thead>
+              <tbody>
+                <tr><td>智能入职</td><td>任务处理型</td><td>员工确认表和异常队列</td><td>识别、合并、映射、检查、生成草稿</td><td>单栏工作台，输入后结果表成为主体</td></tr>
+                <tr><td>智能特单办理</td><td>意图分流型</td><td>服务单表单确认</td><td>识别意图、抽取字段、预填草稿</td><td>单栏流程，表单确认占主导</td></tr>
+                <tr><td>AI 政策库 / 小鲲</td><td>可信问答型</td><td>结构化政策方案</td><td>检索、引用、推理、推荐追问</td><td>对话工作区 + 来源/导出/追问</td></tr>
+                <tr><td>服务单加急</td><td>流程嵌入型</td><td>服务单事实和 SLA</td><td>规则判断、风险解释、动作建议</td><td>两栏：主服务单 + 右侧 AI 决策</td></tr>
+                <tr><td>智能助手</td><td>对话动作型</td><td>对话与可执行动作</td><td>拆任务、调工具、生成动作</td><td>两栏：对话 + 动作面板</td></tr>
+                <tr><td>智能咨询后台</td><td>运营配置型</td><td>Agent 表格、依赖、失败样本</td><td>监控、诊断、路由、恢复</td><td>运营 Dashboard / 列表详情</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>AI 输入什么时候前置</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>判断</th><th>应该前置大输入</th><th>不应前置大输入</th><th>落地规则</th></tr></thead>
+              <tbody>
+                <tr><td>用户是否从非结构化资料开始</td><td>客户 Excel、邮件、聊天记录、自然语言需求</td><td>已有服务单、已有 Agent、已有记录列表</td><td>输入型页面默认首屏输入；处理完成后输入压缩为任务摘要。</td></tr>
+                <tr><td>AI 是否生成业务草稿</td><td>入职草稿、服务单草稿、政策方案</td><td>加急规则判断、运营异常处理</td><td>AI 生成草稿时必须有确认区；AI 只辅助判断时不抢主页面。</td></tr>
+                <tr><td>页面主任务是否是输入</td><td>政策提问、特单需求描述、入职资料导入</td><td>员工确认、服务单详情、后台配置</td><td>输入不是主任务时，用按钮、轻入口或右侧面板承载 AI。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>容器选型：页面、抽屉、弹窗、气泡、行内展开</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>容器</th><th>适用</th><th>不适用</th><th>101HR AI 示例</th></tr></thead>
+              <tbody>
+                <tr><td>完整页面</td><td>有输入、确认、异常、提交、记录的完整流程</td><td>只看详情或修一个字段</td><td>智能入职、智能特单、AI 政策库、运营后台</td></tr>
+                <tr><td>右侧抽屉</td><td>保留当前表格/表单上下文，同时看详情或改少量字段</td><td>复杂长流程或主工作对象</td><td>员工详情、来源原文、字段映射详情、服务单记录详情</td></tr>
+                <tr><td>Modal 弹窗</td><td>高风险、不可逆或正式提交前确认</td><td>长表单、多字段编辑、资料浏览</td><td>仅提交可入职员工、确认提交服务单、加急确认</td></tr>
+                <tr><td>Popover/Tooltip</td><td>短解释、来源片段、置信度说明</td><td>长内容、可编辑内容、多动作内容</td><td>字段来源、引用编号、标签含义</td></tr>
+                <tr><td>行内展开</td><td>记录行、处理过程、失败原因的快速查看</td><td>完整表单或长历史</td><td>入职记录展开、服务单记录展开、AI 处理步骤展开</td></tr>
+                <tr><td>Toast</td><td>复制、导出、保存筛选等低风险反馈</td><td>业务状态正式变更</td><td>复制答案、导出成功、保存草稿成功</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>布局选型：一栏、两栏、三栏</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>布局</th><th>使用条件</th><th>主要风险</th><th>101HR AI 规则</th></tr></thead>
+              <tbody>
+                <tr><td>一栏流程</td><td>流程顺序明确，结果表或表单需要全宽</td><td>页面过长</td><td>AI 过程默认收起，结果表/表单成为主区域。</td></tr>
+                <tr><td>两栏</td><td>一侧主工作，一侧辅助详情或 AI 动作</td><td>等宽导致主次不明</td><td>用 65/35 或 70/30，不用机械等宽。</td></tr>
+                <tr><td>三栏</td><td>三块区域都有稳定职责：导航、主列表/对话、详情/结果</td><td>内容拥挤、信息碎片化</td><td>只在职责稳定时使用，禁止为了“AI 感”做三等分。</td></tr>
+                <tr><td>列表详情</td><td>先选择记录，再查看详情和处理动作</td><td>详情挤压列表</td><td>桌面可右侧详情，窄屏改抽屉或下移。</td></tr>
+                <tr><td>对话 + 动作</td><td>对话澄清和可执行动作必须并存</td><td>动作区像第二个聊天框</td><td>聊天输入保持常规样式，动作面板独立表达业务下一步。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>编辑方式：当页改、抽屉改、弹窗改、新页面改</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>编辑方式</th><th>适用</th><th>约束</th><th>示例</th></tr></thead>
+              <tbody>
+                <tr><td>表格行内编辑</td><td>少量字段、高频、低风险、保留行上下文</td><td>一行最多 1-3 个字段，立刻校验</td><td>手机号、证件号、参保城市补充</td></tr>
+                <tr><td>表单当页编辑</td><td>表单就是主任务</td><td>字段状态修改后仍可见</td><td>服务单草稿确认</td></tr>
+                <tr><td>抽屉编辑</td><td>单个对象详情较多，但不能丢失当前列表/表单</td><td>抽屉内保存/取消，显示变更字段</td><td>员工详情补充、字段映射修改</td></tr>
+                <tr><td>弹窗编辑</td><td>一个小必填值阻断主动作</td><td>不可承载长表单和多步骤</td><td>提交前补一个原因</td></tr>
+                <tr><td>新页面编辑</td><td>对象有独立生命周期、权限、审计和多区域</td><td>需要路由、面包屑、保存状态</td><td>Agent 配置、正式服务单详情、员工档案</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout" style="margin-top:16px"><strong>硬规则</strong><br />不要为一个 AI 缺失字段跳新页面；优先当页编辑或抽屉编辑。不要用 Modal 承载完整业务表单；Modal 只做确认和小范围阻断修复。</div>
+        </section>
+
+        <section class="card section">
+          <h2>AI 草稿进入正式业务的流程</h2>
+          <div class="step-line">
+            <div class="step-dot active">1</div><span>输入/选择对象</span>
+            <div class="line"></div><div class="step-dot active">2</div><span>AI 识别/生成草稿</span>
+            <div class="line"></div><div class="step-dot active">3</div><span>人工编辑与补全</span>
+            <div class="line"></div><div class="step-dot">4</div><span>提交前确认</span>
+            <div class="line"></div><div class="step-dot">5</div><span>记录结果与失败原因</span>
+          </div>
+          <div class="table-wrap" style="margin-top:18px">
+            <table>
+              <thead><tr><th>场景</th><th>正式提交前必须确认</th><th>确认容器</th></tr></thead>
+              <tbody>
+                <tr><td>创建入职任务</td><td>员工身份、必填字段、冲突/重复处理</td><td>当页表格 + 异常时 Modal</td></tr>
+                <tr><td>提交服务单</td><td>业务类型、员工、时间范围、用途、必填字段</td><td>当页表单 + 推断字段确认 Modal</td></tr>
+                <tr><td>发送客户回复</td><td>回复内容、政策引用、敏感信息</td><td>编辑器 + 发送确认</td></tr>
+                <tr><td>服务单加急</td><td>权限、SLA 规则、不可承诺边界、留痕</td><td>高风险 Modal</td></tr>
+                <tr><td>应用政策答案</td><td>来源时效、适用范围、客户边界</td><td>来源区 + 导出/引用确认</td></tr>
+                <tr><td>Agent 配置变更</td><td>影响路由、版本、回滚路径</td><td>详情页 + 发布确认 Modal</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>记录区不是日志，而是业务结果</h2>
+          <p>记录行必须让用户知道这次 AI/业务处理的结果和下一步，而不是只显示操作时间。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>顺序</th><th>字段</th><th>要求</th><th>错误示例</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>状态</td><td>草稿、待补充、部分成功、已完成、失败</td><td>只写“成功”，不说明解析成功还是提交成功</td></tr>
+                <tr><td>2</td><td>业务标题</td><td>批量入职、参保证明服务单、加急判断</td><td>“查看”旁边没有对象</td></tr>
+                <tr><td>3</td><td>结果摘要</td><td>识别 20 人，成功 15 人，失败 2 人</td><td>只写“操作完成”</td></tr>
+                <tr><td>4</td><td>人和时间</td><td>操作人、创建时间或更新时间</td><td>散落在页面右侧造成视线跳跃</td></tr>
+                <tr><td>5</td><td>下一步</td><td>继续处理、导出失败员工、查看进度</td><td>多个“查看全部/查看”并列</td></tr>
+                <tr><td>6</td><td>展开详情</td><td>展示明细、失败原因、缺失字段、建议动作</td><td>展开后又塞完整长表单</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>逐产品落地规则</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>产品</th><th>首屏主任务</th><th>结果后主任务</th><th>抽屉/弹窗/跳转规则</th></tr></thead>
+              <tbody>
+                <tr><td>智能入职</td><td>输入客户资料</td><td>员工表确认和异常补全</td><td>员工详情用抽屉；少量字段行内改；异常提交用 Modal；正式员工档案跳转。</td></tr>
+                <tr><td>智能特单</td><td>描述业务需求</td><td>服务单表单确认</td><td>员工消歧用抽屉；缺字段在表单内补；推断字段提交前 Modal；正式服务单详情跳转。</td></tr>
+                <tr><td>政策库</td><td>输入政策问题</td><td>政策方案、来源、追问</td><td>来源原文用抽屉；多城市对比复杂时用配置面板；导出和订阅用 Modal。</td></tr>
+                <tr><td>加急</td><td>查看服务单事实</td><td>AI 判断和人工确认</td><td>右侧判断面板；高风险确认用 Modal；审批流跳转或抽屉。</td></tr>
+                <tr><td>智能助手</td><td>客户对话</td><td>动作面板和转单/接管</td><td>动作详情用右侧面板；转服务单进入表单抽屉或特单页；人工接管保留上下文。</td></tr>
+                <tr><td>运营后台</td><td>Agent 表格与异常</td><td>配置详情、失败样本、发布回滚</td><td>详情用右侧面板；配置长流程用新页面；发布/回滚用 Modal。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>三类角色怎么用</h2>
+          <div class="grid-3">
+            <div class="callout"><strong>产品经理</strong><br />PRD 必须写明页面模式、AI 角色、容器选择、布局选择、编辑方式、提交守卫和记录字段。</div>
+            <div class="callout"><strong>UI 设计师</strong><br />先选页面模板，再选抽屉/弹窗/行内编辑；审查模块关系、主次权重、按钮数量和字段状态。</div>
+            <div class="callout"><strong>前端工程师</strong><br />实现 `pageMode`、`fieldStatus`、`containerMode`、`editMode`、`submitGuard`、`recordStatus` 等状态映射。</div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>交互 QA 硬性标准</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>不通过项</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>5 秒内看不出主任务</td><td>输入、结果、确认和记录权重混在一起。</td></tr>
+                <tr><td>AI 看起来会自动提交正式数据</td><td>缺少人工确认、提交守卫或业务边界提示。</td></tr>
+                <tr><td>抽屉/弹窗/页面选择解释不清</td><td>没有按任务风险、内容复杂度和上下文保留来选容器。</td></tr>
+                <tr><td>两个独立模块贴在一起</td><td>缺少间距或缺少共享父容器，用户看不懂从属关系。</td></tr>
+                <tr><td>一个缺失字段跳新页面</td><td>应优先行内编辑或抽屉编辑。</td></tr>
+                <tr><td>高风险动作只用 Toast</td><td>正式提交、发送、加急、配置发布必须有二次确认或留痕。</td></tr>
+                <tr><td>记录动作只有“查看”</td><td>动作必须带对象，如查看详情、查看全部记录、继续处理。</td></tr>
+                <tr><td>AI 过程比业务结果更突出</td><td>解析完成后主表格/表单/答案应成为主角。</td></tr>
+                <tr><td>三栏布局没有三个稳定职责</td><td>不能为了显得复杂而做三等分。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

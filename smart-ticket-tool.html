@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>智能特单办理 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="focused-product-page ticket-tool-page">
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>产品演示</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./smart-onboarding-tool.html">智能入职</a>
+          <a class="nav-item active" href="./smart-ticket-tool.html">智能特单</a>
+        </nav>
+      </aside>
+
+      <main class="page onboarding-tool-page">
+        <div class="product-screen onboarding-product-shell">
+          <aside class="product-nav">
+            <div class="product-logo">101HR</div>
+            <a class="product-item" href="./product-samples.html">返回工具集</a>
+            <div class="product-item">客服 IM</div>
+            <div class="product-item on">智能特单</div>
+            <div class="product-item">服务单中心</div>
+            <div class="product-item">客户资料</div>
+            <div class="product-item">政策库</div>
+          </aside>
+
+          <div class="product-main onboarding-product-main">
+            <header class="page-head onboarding-page-head">
+              <div>
+                <a class="back-link" href="./product-samples.html">返回工具集</a>
+                <h1>智能特单办理</h1>
+                <p>通过 AI 识别业务需求，自动生成可确认、可提交的服务单草稿。</p>
+              </div>
+              <button class="btn" data-ticket-action="open-guide">操作指南</button>
+            </header>
+
+            <section class="context-strip hr-ai-b-context-strip">
+              <div class="context-summary">
+                <div>
+                  <span>当前商户信息</span>
+                  <strong>用工人事 · 岗位外包测试商户</strong>
+                </div>
+                <span class="tag">服务单草稿模式</span>
+              </div>
+            </section>
+
+            <section class="onboarding-alert hr-ai-c-boundary-alert" id="ticket-boundary-alert">
+              <div class="alert-icon">i</div>
+              <div><strong>AI 识别结果不会自动提交</strong><span>请确认业务类型、员工信息、时间范围和用途后，再提交服务单。</span></div>
+              <button class="alert-close" data-ticket-action="close-alert">关闭</button>
+            </section>
+
+            <section class="onboarding-steps hr-ai-c-step-strip" aria-label="智能特单办理流程">
+              <div class="step-item active"><span>1</span><strong>描述需求</strong></div>
+              <div class="step-line"></div>
+              <div class="step-item" id="ticket-step-ai"><span>2</span><strong>AI 识别</strong></div>
+              <div class="step-line"></div>
+              <div class="step-item" id="ticket-step-form"><span>3</span><strong>确认表单</strong></div>
+              <div class="step-line"></div>
+              <div class="step-item" id="ticket-step-submit"><span>4</span><strong>提交服务单</strong></div>
+            </section>
+
+            <section class="onboarding-grid">
+              <section class="card onboarding-card primary-task-card hr-ai-c-primary-task-input hr-ai-m-ticket-request">
+                <div class="card-title-row">
+                  <div><h2>1. 描述业务需求</h2><p>不用选择复杂特单分类，直接描述要办理的业务，AI 会生成服务单草稿。</p></div>
+                  <span class="tag cyan">AI 业务识别</span>
+                </div>
+                <div class="material-layout">
+                  <div class="material-main">
+                    <div class="scenario-tags hr-ai-c-prompt-chip-group">
+                      <button data-ticket-template="给【张三】开具 2024年1月至2026年4月的社保缴纳证明，用于买房办理公积金贷款。"># 参保证明出具</button>
+                      <button data-ticket-template="帮我查询张三上次参保证明服务单的办理进度，客户催得比较急。"># 进度查询</button>
+                      <button data-ticket-template="客户想了解上海社保缴纳证明能否用于公积金贷款，请生成政策咨询服务单草稿。"># 政策咨询</button>
+                    </div>
+                    <label class="textarea-field">
+                      <span>业务需求描述</span>
+                      <textarea id="ticket-input" placeholder="请描述你要办理的业务，例如：给张三开具 2024年1月至2026年4月的社保缴纳证明，用于买房办理公积金贷款。">给【张三】开具 2024年1月至2026年4月的社保缴纳证明，用于买房办理公积金贷款。</textarea>
+                    </label>
+                    <div class="upload-area hr-ai-c-upload-trigger" data-ticket-action="mock-upload">
+                      <div><strong>上传业务附件</strong><span>用于上传证明材料、员工名单、业务附件。</span></div>
+                      <button class="btn icon-btn" title="选择附件" aria-label="选择附件" data-icon="upload" type="button"></button>
+                    </div>
+                    <div class="file-list" id="ticket-file-list"><div class="empty-mini">暂无上传附件</div></div>
+                    <div class="action-row">
+                      <button class="btn primary" id="ticket-generate-btn" data-ticket-action="generate" disabled>生成服务单草稿</button>
+                      <button class="btn" data-ticket-action="clear-input">清空</button>
+                      <span class="inline-help" id="ticket-input-help">请输入业务需求，或上传业务附件。</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </section>
+
+            <section class="card onboarding-card ai-process-card hr-ai-c-process-detail is-hidden" id="ticket-process-section">
+              <div class="card-title-row">
+                <div><h2 id="ticket-process-title">AI 正在识别业务需求</h2><p id="ticket-process-summary">正在解析需求、提取员工和业务字段，并生成服务单草稿。</p></div>
+                <button class="btn" data-ticket-action="toggle-process">查看详情</button>
+              </div>
+              <div class="parse-progress" id="ticket-progress"><div class="spin"></div><div><strong>AI 正在识别业务需求...</strong><span>需求解析、意图识别、信息提取、表单生成和智能预填正在执行。</span></div></div>
+              <div class="process-list is-hidden" id="ticket-process-list"></div>
+            </section>
+
+            <section class="card onboarding-card hr-ai-c-intent-summary is-hidden" id="ticket-summary-section">
+              <div class="card-title-row">
+                <div><h2>2. AI 识别结果</h2><p>AI 已识别业务类型并生成表单草稿。请补充缺失字段后再提交。</p></div>
+                <span class="tag warn">待补充</span>
+              </div>
+              <div class="ticket-summary-grid">
+                <div><span>业务类型</span><strong>社保公积金相关业务 / 社保参保证明开具</strong></div>
+                <div><span>关联员工</span><strong>张三</strong></div>
+                <div><span>开具时间</span><strong>2024年01月 - 2026年04月</strong></div>
+                <div><span>开具方</span><strong>51社保开具</strong></div>
+                <div><span>用途</span><strong>买房 / 公积金贷款</strong></div>
+                <div><span>当前状态</span><strong>仍有 3 个字段待补充</strong></div>
+              </div>
+            </section>
+
+            <section class="card onboarding-card hr-ai-m-ticket-editor hr-ai-b-ticket-draft is-hidden" id="ticket-form-section">
+              <div class="card-title-row">
+                <div><h2>3. 业务表单确认：社保参保证明开具</h2><p>请确认以下表单信息。标记为“待补充”或“需确认”的字段需要处理后才能提交。</p></div>
+                <span class="tag danger">3 项待补充</span>
+              </div>
+              <div class="field-legend hr-ai-c-field-legend">
+                <span class="tag">AI 已识别</span>
+                <span class="tag warn">AI 推断，需确认</span>
+                <span class="tag danger">待补充</span>
+              </div>
+              <div class="ticket-form-grid hr-ai-b-generated-form">
+                <label class="field-atom hr-ai-b-field-atom"><span>问题类型 <em>AI 已识别</em></span><input value="社保公积金相关业务 / 社保参保证明开具" /></label>
+                <label class="field-atom hr-ai-b-field-atom"><span>开始月份 <em>AI 已识别</em></span><input value="2024年01月" /></label>
+                <label class="field-atom hr-ai-b-field-atom"><span>结束月份 <em>AI 已识别</em></span><input value="2026年04月" /></label>
+                <label class="field-atom hr-ai-b-field-atom"><span>开具方 <em>AI 已识别</em></span><input value="51社保开具" /></label>
+                <label class="field-atom hr-ai-b-field-atom danger"><span>具体用途 <em>待补充</em></span><input placeholder="请输入具体用途" /></label>
+                <label class="field-atom hr-ai-b-field-atom"><span>标准模板 <em>推荐</em></span><input value="是（推荐）" /></label>
+                <label class="switch-card"><span>纸质版邮寄</span><label class="switch-row"><input type="checkbox" checked /><i></i><strong>开启</strong></label></label>
+                <label class="field-atom hr-ai-b-field-atom"><span>收件人姓名 <em>AI 已识别</em></span><input value="张三" /></label>
+                <label class="field-atom hr-ai-b-field-atom"><span>联系电话 <em>AI 已识别</em></span><input value="138****8888" /></label>
+                <label class="field-atom hr-ai-b-field-atom warn"><span>参保地城市 <em>需确认</em></span><input value="上海市" /></label>
+                <label class="field-atom hr-ai-b-field-atom danger wide"><span>邮寄地址 <em>待补充</em></span><input placeholder="省 / 市 / 区 / 详细地址" /></label>
+              </div>
+              <div class="table-wrap ticket-employee-table">
+                <table>
+                  <thead><tr><th>员工姓名</th><th>身份证号</th><th>参保库名称</th><th>参保地城市</th><th>操作</th></tr></thead>
+                  <tbody>
+                    <tr><td>张三</td><td>310115********5214</td><td><span class="tag danger">待补充</span></td><td><span class="tag warn">上海市，需确认</span></td><td><button class="link-btn" data-ticket-action="edit-employee">查看详情</button> <button class="link-btn" data-ticket-action="remove-row">删除</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="result-bottom-bar">
+                <div><strong>提交前检查</strong><span id="ticket-submit-help">当前仍有必填字段未补充，请完善后再提交服务单。</span></div>
+                <div class="toolbar">
+                  <button class="btn" data-ticket-action="cancel">取消</button>
+                  <button class="btn" data-ticket-action="save-draft">保存草稿</button>
+                  <button class="btn primary" data-ticket-action="submit-ticket">确认并提交申请</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="card onboarding-card record-card hr-ai-b-ticket-records">
+              <div class="card-title-row">
+                <div><h2>服务单记录</h2><p>展示智能特单办理记录，包括草稿、提交结果和办理进度。</p></div>
+                <span class="tag">服务单追踪</span>
+              </div>
+              <div class="record-filter">
+                <div class="tabs"><button class="active" data-ticket-record-day="today">今日</button><button data-ticket-record-day="all">全部</button></div>
+                <div class="toolbar record-status-tabs">
+                  <button class="filter-pill active" data-ticket-filter="all">全部</button>
+                  <button class="filter-pill" data-ticket-filter="草稿">草稿</button>
+                  <button class="filter-pill warn" data-ticket-filter="待补充">待补充</button>
+                  <button class="filter-pill success" data-ticket-filter="已提交">已提交</button>
+                  <button class="filter-pill" data-ticket-filter="处理中">处理中</button>
+                  <button class="filter-pill success" data-ticket-filter="已完成">已完成</button>
+                  <button class="filter-pill danger" data-ticket-filter="失败">失败</button>
+                </div>
+              </div>
+              <div class="record-list hr-ai-b-history-record-list" id="ticket-record-list"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="onboarding-drawer-mask is-hidden" id="ticket-guide-drawer">
+      <aside class="onboarding-drawer">
+        <div class="drawer-head"><h2>智能特单办理操作指南</h2><button class="btn" data-ticket-action="close-guide">关闭</button></div>
+        <div class="drawer-content">
+          <section><h3>1. 这个工具可以做什么</h3><p>直接描述要办理的业务，AI 会识别业务类型并生成服务单草稿。</p></section>
+          <section><h3>2. 支持的业务类型</h3><p>当前重点支持参保证明出具、办理进度查询、政策咨询等特单场景。</p></section>
+          <section><h3>3. 如何描述业务需求</h3><p>建议包含员工姓名、业务类型、时间范围、用途和特殊要求。</p></section>
+          <section><h3>4. AI 如何生成服务单草稿</h3><p>AI 会识别意图、提取字段、匹配表单并预填字段，但不会自动提交。</p></section>
+          <section><h3>5. 哪些字段需要人工确认</h3><p>待补充、AI 推断、低置信度和冲突字段都需要人工确认。</p></section>
+          <section><h3>6. 提交后在哪里查看进度</h3><p>提交成功后，可在服务单中心查看办理进度。</p></section>
+          <section><h3>7. 数据安全说明</h3><p>请确保附件和员工信息属于当前商户授权范围。</p></section>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./smart-ticket-tool.js"></script>
+  </body>
+</html>

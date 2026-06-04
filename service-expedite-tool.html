@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>服务单加急助手 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="focused-product-page expedite-tool-page">
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>服务单加急</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./smart-onboarding-tool.html">智能入职</a>
+          <a class="nav-item" href="./smart-ticket-tool.html">智能特单</a>
+          <a class="nav-item" href="./smart-policy-assistant.html">AI 政策库</a>
+          <a class="nav-item active" href="./service-expedite-tool.html">服务单加急</a>
+          <a class="nav-item" href="./smart-assistant-tool.html">智能助手</a>
+          <a class="nav-item" href="./ai-ops-dashboard.html">运营后台</a>
+        </nav>
+      </aside>
+
+      <main class="page ai-workflow-page">
+        <header class="page-head">
+          <div>
+            <a class="back-link" href="./product-samples.html">返回工具集</a>
+            <h1>服务单加急助手</h1>
+            <p>嵌入服务单详情页，基于节点时长、客户紧急原因、权限和历史操作给出可确认的加急建议。</p>
+          </div>
+          <button class="btn" data-scenario-action="scenario-guide">操作指南</button>
+        </header>
+
+        <section class="banner info">
+          <strong>AI 不会自动承诺完成时间</strong>
+          <span>AI 只提供加急判断和留痕建议，确认后才会写入服务单备注或发起加急申请。</span>
+        </section>
+
+        <section class="onboarding-steps hr-ai-c-step-strip" aria-label="服务单加急流程">
+          <div class="step-item active"><span>1</span><strong>查看服务单</strong></div>
+          <div class="step-line"></div>
+          <div class="step-item"><span>2</span><strong>规则判断</strong></div>
+          <div class="step-line"></div>
+          <div class="step-item"><span>3</span><strong>权限校验</strong></div>
+          <div class="step-line"></div>
+          <div class="step-item"><span>4</span><strong>人工确认</strong></div>
+          <div class="step-line"></div>
+          <div class="step-item"><span>5</span><strong>留痕追踪</strong></div>
+        </section>
+
+        <section class="workflow-split hr-ai-m-expedite-workflow">
+          <article class="card workflow-main hr-ai-b-ticket-context">
+            <div class="card-title-row">
+              <div><h2>SO20260519032 · 社保减员</h2><p>当前节点：供应商处理中 · 停留 32 小时 · 客户要求尽快反馈。</p></div>
+              <span class="tag warn">待处理</span>
+            </div>
+            <div class="summary-grid">
+              <div><span>员工</span><strong>张三</strong></div>
+              <div><span>客户</span><strong>天津稻荷餐饮</strong></div>
+              <div><span>SLA 关注线</span><strong>24h</strong></div>
+              <div><span>当前权限</span><strong>无加急打标权限</strong></div>
+            </div>
+            <div class="timeline-card compact">
+              <div><strong>2026-05-27 10:20</strong><span>客户提交社保减员申请。</span></div>
+              <div><strong>2026-05-27 14:02</strong><span>供应商处理中，等待回传结果。</span></div>
+              <div><strong>2026-05-28 18:30</strong><span>客户反馈员工新单位入职，要求尽快完成。</span></div>
+            </div>
+          </article>
+
+          <aside class="card workflow-side hr-ai-b-sla-assist">
+            <div class="card-title-row">
+              <div><h2>AI 加急判断</h2><p>先判断规则，再确认是否可执行。</p></div>
+              <span class="tag danger">高风险动作</span>
+            </div>
+            <div id="expedite-summary" class="decision-empty">
+              <strong>尚未判断</strong>
+              <p>点击后检查节点停留、紧急原因、权限、重复加急和不可承诺边界。</p>
+            </div>
+            <button class="btn primary full-action" data-scenario-action="evaluate-expedite">判断是否可加急</button>
+          </aside>
+        </section>
+
+        <section id="expedite-result" class="card section is-hidden">
+          <div class="card-title-row">
+            <div><h2>规则判断结果</h2><p>满足关注条件，但当前账号无直接打标权限，可保存建议或发起审批。</p></div>
+            <span class="tag warn">需人工确认</span>
+          </div>
+          <div class="rule-stack hr-ai-c-rule-check-list">
+            <div><span class="tag success">满足</span><strong>节点停留超过关注阈值</strong><p>供应商节点停留 32 小时，超过内部关注线 24 小时。</p></div>
+            <div><span class="tag warn">部分满足</span><strong>客户紧急原因成立</strong><p>员工需办理新单位入职，但不能承诺今日完成。</p></div>
+            <div><span class="tag danger">阻断</span><strong>权限不足</strong><p>当前账号不能直接添加加急标记，只能保存建议或申请主管审批。</p></div>
+          </div>
+          <div class="toolbar right">
+            <button class="btn" data-scenario-action="save-expedite-advice">保存加急建议</button>
+            <button class="btn soft" data-scenario-action="start-expedite-approval">发起主管审批</button>
+            <button class="btn primary" data-scenario-action="confirm-expedite">确认留痕</button>
+          </div>
+        </section>
+
+        <section id="expedite-approval-result" class="card section audit-result-card is-hidden">
+          <div class="card-title-row">
+            <div><h2>主管审批申请</h2><p>已生成给主管的说明，包含服务单号、规则判断、客户紧急原因和不可承诺边界。</p></div>
+            <span class="tag warn">待审批</span>
+          </div>
+          <div class="audit-result-grid hr-ai-b-approval-summary">
+            <div><span>申请对象</span><strong>主管审批</strong><p>服务单优先级调整权限。</p></div>
+            <div><span>申请原因</span><strong>供应商节点 32h</strong><p>超过 24h 关注线。</p></div>
+            <div><span>替代动作</span><strong>保存建议</strong><p>审批前不修改正式优先级。</p></div>
+            <div><span>客户话术</span><strong>不承诺今日</strong><p>仅承诺持续跟进。</p></div>
+          </div>
+        </section>
+
+        <section id="expedite-audit-result" class="card section audit-result-card is-hidden">
+          <div class="card-title-row">
+            <div><h2>确认结果与留痕</h2><p>系统已保存 AI 判断、确认人、不可承诺边界和后续处理建议。</p></div>
+            <span class="tag success">已留痕</span>
+          </div>
+          <div class="audit-result-grid hr-ai-b-audit-summary">
+            <div><span>写入位置</span><strong>服务单备注</strong><p>保存加急建议，不修改服务单优先级。</p></div>
+            <div><span>确认人</span><strong>王敏</strong><p>2026/05/28 18:42</p></div>
+            <div><span>不可承诺</span><strong>不承诺今日完成</strong><p>对客户回复时保留边界说明。</p></div>
+            <div><span>下一步</span><strong>主管审批</strong><p>无直接打标权限，已生成审批说明。</p></div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>加急记录</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>状态</th><th>服务单</th><th>判断结果</th><th>确认人</th><th>时间</th><th>下一步</th></tr></thead>
+              <tbody id="expedite-records">
+                <tr><td><span class="tag warn">待审批</span></td><td>SO20260518021</td><td>满足 SLA，权限需审批</td><td>王敏</td><td>2026/5/28 16:20</td><td><button class="link-btn">查看审批</button></td></tr>
+                <tr><td><span class="tag success">已留痕</span></td><td>SO20260517008</td><td>已保存加急建议</td><td>李四</td><td>2026/5/27 11:12</td><td>查看日志</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./scenario-tools.js"></script>
+  </body>
+</html>

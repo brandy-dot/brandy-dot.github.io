@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>状态矩阵 - 101HR AI v2.0</title><link rel="stylesheet" href="./styles.css" /></head>
+  <body>
+    <div class="shell"><aside class="nav"><div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>状态矩阵</span></div></div><nav class="nav-list"><a class="nav-item" href="./index.html">总览</a><a class="nav-item" href="./requirement-analysis.html">业务差异</a><a class="nav-item" href="./component-library.html">组件库</a><a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a><a class="nav-item" href="./trust-patterns.html">可信表达</a><a class="nav-item active" href="./state-matrix.html">状态矩阵</a><a class="nav-item" href="./layout-patterns.html">布局模式</a><a class="nav-item" href="./frontend-tokens.html">前端落地</a><a class="nav-item" href="./delivery-matrix.html">目标闭环</a></nav></aside>
+      <main class="page">
+        <header class="page-head"><div><h1>场景化状态矩阵</h1><p>所有产品共享基础状态，但专属状态按业务定义，不再统一叫 low-confidence。</p></div><span class="tag warn">Step 3</span></header>
+        <section class="card">
+          <h3>基础状态</h3>
+          <div class="grid-3">
+            <div class="pattern-card"><span class="tag">initial</span><strong>初始</strong><span>等待输入、等待选择对象或等待上传。</span></div>
+            <div class="pattern-card"><span class="tag">processing</span><strong>处理中</strong><span>识别、检索、生成、调用工具、执行。</span></div>
+            <div class="pattern-card"><span class="tag success">success</span><strong>成功</strong><span>可采纳、已创建、已提交、可引用。</span></div>
+            <div class="pattern-card"><span class="tag danger">failed</span><strong>失败</strong><span>保留输入和草稿，说明失败原因。</span></div>
+            <div class="pattern-card"><span class="tag">empty</span><strong>空状态</strong><span>没有结果、没有匹配对象、无历史记录。</span></div>
+            <div class="pattern-card"><span class="tag warn">disabled</span><strong>禁用/无权限</strong><span>解释不可操作原因和申请路径。</span></div>
+          </div>
+        </section>
+        <section class="card section">
+          <h3>场景专属状态</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>产品</th><th>专属状态</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>智能入职</td><td>needs-review / is-missing / is-conflict / partial-submitted</td><td>字段核对、缺资料、字段冲突、部分提交。</td></tr>
+                <tr><td>特单</td><td>multi-intent / ambiguous-person / missing-field / create-failed</td><td>多意图、人员不唯一、字段缺失、创建失败。</td></tr>
+                <tr><td>政策库</td><td>source-conflict / expired / no-source / not-citable</td><td>来源冲突、政策过期、无来源、不可引用。</td></tr>
+                <tr><td>服务单加急</td><td>not-matched / permission-blocked / duplicate-action / execution-failed</td><td>规则不满足、权限阻断、重复加急、执行失败。</td></tr>
+                <tr><td>Chat/助手</td><td>intent-ambiguous / tool-running / tool-failed / handoff-required</td><td>意图不明、工具调用中、调用失败、需人工接管。</td></tr>
+                <tr><td>运营后台</td><td>config-missing / route-failed / api-failed / sample-pending</td><td>配置缺失、路由失败、接口失败、样本待处理。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="card section">
+          <h3>新增组件状态补齐</h3>
+          <p>组件库已补到 84 个组件。这里同步补齐 54-84 的状态口径，避免新增组件只有样式、没有可落地的交互状态。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>编号</th><th>组件</th><th>核心状态</th><th>使用边界</th></tr></thead>
+              <tbody>
+                <tr><td>54</td><td>字段输入原子</td><td>prefilled / edited / validation-error / source-missing / blocked</td><td>用于预填表单和字段校验；不要用它表达政策可信度。</td></tr>
+                <tr><td>55</td><td>数据列表行原子</td><td>default / hover / selected / expanded / disabled / batch-selected</td><td>用于表格、草稿列表、候选对象列表；选中态必须联动详情区。</td></tr>
+                <tr><td>56</td><td>来源证据列表</td><td>official / internal / stale / conflict / missing-source</td><td>用于政策、客服答案和客户回复引用；来源冲突时不能直接给确定结论。</td></tr>
+                <tr><td>57</td><td>结果应用条</td><td>draft / edited / copied / applying / applied / reverted</td><td>用于生成结果进入业务系统前；必须支持编辑、应用、撤销或保留草稿。</td></tr>
+                <tr><td>58</td><td>批量选择与操作条</td><td>none-selected / partial-selected / all-selected / blocked-selected / submitting</td><td>用于批量入职、批量复核和后台列表；阻断项不可被批量提交绕过。</td></tr>
+                <tr><td>59</td><td>员工草稿行</td><td>ready / needs-review / blocked / selected / submitted</td><td>用于智能入职草稿列表；行状态要直接影响右侧处理建议和提交按钮。</td></tr>
+                <tr><td>60</td><td>服务单动作组</td><td>draft-saved / create-ready / create-loading / send-confirm / create-failed</td><td>用于特单、参保证明和进度查询转服务单；创建和发送必须分开确认。</td></tr>
+                <tr><td>61</td><td>模板字段映射行</td><td>mapped / unmapped / mismatch / required / locked</td><td>用于入职模板、证明模板和回复模板；模板变化时要展示字段映射变化。</td></tr>
+                <tr><td>62</td><td>工具权限状态</td><td>available / no-permission / apply-pending / approved / denied</td><td>用于工具入口、加急和后台操作；无权限时给申请路径和替代动作。</td></tr>
+                <tr><td>63</td><td>API 调用状态</td><td>idle / calling / success / timeout / retrying / failed</td><td>用于工具调用、Agent 调试和接口执行；失败时保留草稿和重试入口。</td></tr>
+                <tr><td>64</td><td>失败样本卡</td><td>untagged / tagged / assigned / fixed / archived</td><td>用于运营后台质检闭环；客户侧页面不展示该组件。</td></tr>
+                <tr><td>65</td><td>发布与回滚状态</td><td>draft / gray / published / rollback-ready / rolled-back / release-failed</td><td>用于 Agent、知识库和规则发布；必须显示版本、影响范围和回滚入口。</td></tr>
+                <tr><td>66</td><td>政策可信摘要</td><td>ready / source-warning / stale / conflict / no-source</td><td>用于政策答案顶部；先给适用地区、主题、来源数量和最近更新时间。</td></tr>
+                <tr><td>67</td><td>智能输入工具栏</td><td>collapsed / expanded / uploading / voice-active / context-required</td><td>用于核心输入区；工具默认轻量，不把上传、语音和模板都做成大按钮。</td></tr>
+                <tr><td>68</td><td>业务提醒横幅</td><td>info / warning / blocking / dismissible / dismissed</td><td>用于 AI 边界、业务限制和风险提示；必须给下一步。</td></tr>
+                <tr><td>69</td><td>可折叠 AI 处理过程</td><td>summary / expanded / running / completed / failed</td><td>默认展示摘要，展开后显示步骤、耗时和失败原因。</td></tr>
+                <tr><td>70</td><td>AI 生成表单确认</td><td>generated / edited / missing-required / confirm-required / submitted</td><td>用于特单草稿；提交前必须校验缺失和需确认字段。</td></tr>
+                <tr><td>71</td><td>字段状态图例与智能字段</td><td>identified / inferred / missing / conflict / corrected</td><td>贴近字段展示，避免把整块表单染色。</td></tr>
+                <tr><td>72</td><td>政策答案与引用来源卡</td><td>answer-ready / citation-linked / source-expanded / feedback-open / exported</td><td>答案和来源要有主次；来源是证据，不是另一个答案卡。</td></tr>
+                <tr><td>73</td><td>推荐问题 / 任务模板卡</td><td>default / selected / prompt-filled / sent / disabled</td><td>点击后生成专业 prompt 或启动配置面板，不只是填关键词。</td></tr>
+                <tr><td>74</td><td>底部输入 Dock</td><td>focused / compact / sticky / sending / disabled</td><td>用于政策库和助手；输入为主时前置，回答后可压缩为 sticky 输入。</td></tr>
+                <tr><td>75</td><td>历史任务 / 记录列表</td><td>empty / filtered / expanded / actionable / archived</td><td>记录必须展示业务结果和可继续动作，不只是时间日志。</td></tr>
+                <tr><td>76</td><td>操作指南与辅助浮层入口</td><td>closed / opened / section-active / dismissed</td><td>帮助入口轻量存在，不抢首屏主流程。</td></tr>
+                <tr><td>77</td><td>能力边界条</td><td>default / source-required / warning / action-ready / dismissed</td><td>用于说明 AI 默认输出、来源要求、风险处理和后续动作，不用于普通营销卖点。</td></tr>
+                <tr><td>78</td><td>业务记录行</td><td>default / actionable / expanded / blocked / completed / archived</td><td>用于服务单、入职和运营任务记录；行内必须有业务结果和下一步。</td></tr>
+                <tr><td>79</td><td>业务上下文条</td><td>ready / required-missing / editable / locked / changed</td><td>用于客户、租户、业务模式和资料来源等 AI 判断前置上下文；缺失时阻断主动作。</td></tr>
+                <tr><td>80</td><td>主任务输入卡</td><td>empty / ready / uploading / generating / generated / blocked</td><td>用于输入是页面主任务的场景；必须明确主按钮、边界提示和示例，不用于普通备注输入。</td></tr>
+                <tr><td>81</td><td>当前任务状态条</td><td>initial / active / generated / editable / locked / completed</td><td>用于主输入完成后压缩步骤和上下文；不能作为页面标题或普通说明条使用。</td></tr>
+                <tr><td>82</td><td>员工确认工作区</td><td>empty / filtered / abnormal-first / row-selected / submitting / submitted</td><td>用于智能入职批量确认；必须支持异常优先、筛选搜索和提交前阻断。</td></tr>
+                <tr><td>83</td><td>政策主问答输入</td><td>empty / focused / mode-selected / sending / answered / compact</td><td>用于政策问题是主任务的页面；回答模式和输入动作必须在同一输入区内。</td></tr>
+                <tr><td>84</td><td>场景模板组</td><td>default / prompt-preview / selected / sent / disabled</td><td>用于首页或工具集的专业任务入口；点击后生成完整 prompt 或启动配置面板。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="card section">
+          <h3>状态到产品样板的映射</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>页面</th><th>必须可见状态</th><th>验证方式</th></tr></thead>
+              <tbody>
+                <tr><td><a href="./smart-onboarding-tool.html">智能入职</a></td><td>草稿、待补充、需确认、字段映射、提交结果、记录展开</td><td>生成入职草稿后，员工表和右侧建议应随状态变化。</td></tr>
+                <tr><td><a href="./smart-ticket-tool.html">智能特单</a></td><td>意图识别、待补充字段、需确认字段、服务单草稿、提交阻断</td><td>生成草稿后，缺失字段阻止直接提交。</td></tr>
+                <tr><td><a href="./smart-policy-assistant.html">AI 政策库</a></td><td>来源可信、来源冲突/过期、推荐追问、逐条反馈、导出/订阅</td><td>发送问题后，答案结构和参考依据必须同时出现。</td></tr>
+                <tr><td><a href="./service-expedite-tool.html">服务单加急</a></td><td>SLA 满足、权限阻断、不可承诺边界、确认留痕</td><td>判断后出现规则结果和确认留痕入口。</td></tr>
+                <tr><td><a href="./smart-assistant-tool.html">智能助手</a></td><td>多意图、工具调用、可执行动作、人工接管入口</td><td>发送后右侧动作面板应出现服务单/政策/查询任务。</td></tr>
+                <tr><td><a href="./ai-ops-dashboard.html">运营后台</a></td><td>运行中、配置缺失、API 失败、失败样本待标注、发布状态</td><td>点击补字段或修复后，详情区展示对应运营处理路径。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="card section">
+          <h3>状态命名规则</h3>
+          <div class="grid-3">
+            <div class="rule-tile"><strong>基础状态共用</strong>initial、processing、success、failed、empty、disabled 只表达通用系统反馈。</div>
+            <div class="rule-tile"><strong>业务状态优先</strong>入职用缺件、阻断、可提交；政策用来源冲突、过期、不可引用；服务单用权限、重复、执行失败。</div>
+            <div class="rule-tile"><strong>少用泛化词</strong>不要把不同问题都写成 low-confidence，应改成可行动的原因：缺字段、来源冲突、人员不唯一、接口超时。</div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

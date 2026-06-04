@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>智能咨询后台 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="focused-product-page ops-dashboard-page">
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>运营后台</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./smart-onboarding-tool.html">智能入职</a>
+          <a class="nav-item" href="./smart-ticket-tool.html">智能特单</a>
+          <a class="nav-item" href="./smart-policy-assistant.html">AI 政策库</a>
+          <a class="nav-item" href="./service-expedite-tool.html">服务单加急</a>
+          <a class="nav-item" href="./smart-assistant-tool.html">智能助手</a>
+          <a class="nav-item active" href="./ai-ops-dashboard.html">运营后台</a>
+        </nav>
+      </aside>
+
+      <main class="page ai-workflow-page">
+        <header class="page-head">
+          <div>
+            <a class="back-link" href="./product-samples.html">返回工具集</a>
+            <h1>AI 智能咨询运营后台</h1>
+            <p>管理 Agent、路由、知识库、API 和失败样本。这里是能力运营页面，不承载客户侧办理流程。</p>
+          </div>
+          <button class="btn primary" data-scenario-action="ops-refresh">刷新状态</button>
+        </header>
+
+        <section class="ops-kpis hr-ai-b-metrics-strip">
+          <div><span>今日请求</span><strong id="ops-requests">12,482</strong></div>
+          <div><span>意图命中率</span><strong>86.4%</strong></div>
+          <div><span>人工接管率</span><strong>9.8%</strong></div>
+          <div><span>失败样本</span><strong id="ops-failures">37</strong></div>
+        </section>
+
+        <section class="ops-layout hr-ai-m-ops-layout">
+          <article class="card hr-ai-b-agent-list">
+            <div class="card-title-row">
+              <div><h2>Agent 与依赖状态</h2><p>优先处理配置缺失、API 失败和失败样本待回流。</p></div>
+              <span class="tag">运营配置型</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>意图</th><th>Agent</th><th>依赖</th><th>状态</th><th>动作</th></tr></thead>
+                <tbody>
+                  <tr><td>智能入职</td><td>入职解析 Agent</td><td>OCR、员工 API、入职模板</td><td><span class="tag success">运行中</span></td><td><button class="btn" data-scenario-action="ops-detail">查看</button></td></tr>
+                  <tr><td>参保证明</td><td>特单 Agent</td><td>服务单 API、用途模板</td><td><span class="tag warn">配置缺失</span></td><td><button class="btn" data-scenario-action="ops-fix">补字段</button></td></tr>
+                  <tr><td>加急</td><td>流程代理 Agent</td><td>消息 API、权限中心</td><td><span class="tag danger">API 失败</span></td><td><button class="btn" data-scenario-action="ops-repair">修复</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <aside class="card hr-ai-b-agent-detail" id="ops-detail">
+            <div class="card-title-row">
+              <div><h2>配置详情</h2><p>选中一条 Agent 后查看路由、依赖和失败样本。</p></div>
+              <span class="tag success">运行中</span>
+            </div>
+            <div class="closure-list">
+              <div><strong>入职解析 Agent</strong><p>依赖 OCR、员工 API、入职模板。最近 24 小时失败率 1.8%。</p></div>
+              <div><strong>知识库版本</strong><p>onboarding-kb-2026.05.28，已发布。</p></div>
+              <div><strong>失败样本</strong><p>3 条字段映射失败，已进入样本库。</p></div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="ops-release-grid hr-ai-m-release-workflow section">
+          <article class="card">
+            <div class="card-title-row">
+              <div><h2>配置发布与回滚</h2><p>运营后台必须能看到版本、影响范围和回滚入口。</p></div>
+              <span class="tag">灰度发布</span>
+            </div>
+            <div class="release-steps">
+              <div><span>当前版本</span><strong>agent-routing-2026.05.28</strong><p>覆盖智能入职、参保证明、加急三个意图。</p></div>
+              <div><span>灰度范围</span><strong>20% 客服账号</strong><p>观察接口失败率和人工接管率。</p></div>
+              <div><span>回滚条件</span><strong>接口失败率 > 5%</strong><p>触发后回退到 2026.05.20 版本。</p></div>
+            </div>
+            <div class="toolbar right"><button class="btn" data-scenario-action="ops-view-change">查看变更</button><button class="btn danger" data-scenario-action="ops-rollback">回滚</button><button class="btn primary" data-scenario-action="ops-publish">发布全量</button></div>
+          </article>
+          <article class="card">
+            <div class="card-title-row">
+              <div><h2>待处理异常</h2><p>比指标更重要的是能直接处理影响业务的问题。</p></div>
+              <span class="tag warn">5 项</span>
+            </div>
+            <div class="ops-alert-list">
+              <div><strong>参保证明用途模板缺失</strong><p>影响智能特单和智能助手转单。</p><button class="btn" data-scenario-action="ops-fix">补字段</button></div>
+              <div><strong>消息 API token 过期</strong><p>影响加急通知供应商。</p><button class="btn" data-scenario-action="ops-repair">修复</button></div>
+            </div>
+          </article>
+        </section>
+
+        <section id="ops-release-result" class="card section audit-result-card is-hidden">
+          <div class="card-title-row">
+            <div><h2>发布校验结果</h2><p>发布前自动检查影响范围、失败率、回滚条件和样本覆盖，避免直接把问题推到客户侧。</p></div>
+            <span class="tag success">可发布</span>
+          </div>
+          <div class="audit-result-grid hr-ai-b-release-summary">
+            <div><span>影响范围</span><strong>3 个意图</strong><p>智能入职、参保证明、加急。</p></div>
+            <div><span>失败率</span><strong>1.8%</strong><p>低于 5% 回滚线。</p></div>
+            <div><span>样本覆盖</span><strong>23 条</strong><p>新增用途模板和字段映射样本。</p></div>
+            <div><span>回滚版本</span><strong>2026.05.20</strong><p>已准备一键回退。</p></div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <div class="card-title-row">
+            <div><h2>失败样本回流</h2><p>错误答案、接口失败、来源过期要沉淀成可分派、可修复的样本。</p></div>
+            <span class="tag warn">待处理</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>样本</th><th>错误类型</th><th>归因</th><th>处理状态</th><th>动作</th></tr></thead>
+              <tbody>
+                <tr><td>“北京证明今日可出具”</td><td>过度承诺</td><td>政策边界缺失</td><td><span class="tag warn">待标注</span></td><td><button class="link-btn" data-scenario-action="ops-mark-sample">标注</button></td></tr>
+                <tr><td>员工标签映射失败</td><td>字段未匹配</td><td>客户自定义字段</td><td><span class="tag">已分派</span></td><td><button class="link-btn" data-scenario-action="ops-detail">查看</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./scenario-tools.js"></script>
+  </body>
+</html>

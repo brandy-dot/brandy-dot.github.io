@@ -1,0 +1,424 @@
+{
+  "meta": {
+    "name": "101HR AI Figma Page Manifest",
+    "version": "2.0.0",
+    "updatedAt": "2026-06-03",
+    "canvas": {
+      "desktopFrame": "1440x960",
+      "templateFrame": "1440x1200",
+      "componentFrame": "1200x900"
+    }
+  },
+  "globalRules": [
+    "Create pages in the listed order.",
+    "Create Variables before components.",
+    "Bind every component color, text, spacing, radius and shadow to Variables.",
+    "Use 101HR bright blue navigation; do not use generic Ant Design, Arco or Material default styling.",
+    "Use admin density and operational hierarchy; do not generate marketing page compositions."
+  ],
+  "pages": [
+    {
+      "order": 1,
+      "name": "Cover",
+      "purpose": "Explain system identity, scope, version and build sequence.",
+      "frames": [
+        "Overview",
+        "Product Modes",
+        "Role Usage"
+      ],
+      "requiredContent": [
+        "101HR AI v2.0",
+        "B-side AI admin workbench",
+        "UI / FE / PM usage"
+      ]
+    },
+    {
+      "order": 2,
+      "name": "Variables",
+      "purpose": "Store and document Figma Variables collections and modes.",
+      "collections": [
+        "Primitive",
+        "Theme / Light",
+        "Theme / Dark",
+        "Layout",
+        "Typography",
+        "Component",
+        "Motion",
+        "Chart"
+      ],
+      "frames": [
+        "Primitive Colors",
+        "Light Theme",
+        "Dark Theme",
+        "Spacing",
+        "Radius",
+        "Shadow",
+        "Typography",
+        "Component Tokens"
+      ]
+    },
+    {
+      "order": 3,
+      "name": "Icons",
+      "purpose": "Reusable line icon set for admin operations.",
+      "frames": [
+        "Navigation Icons",
+        "Action Icons",
+        "AI Icons",
+        "Status Icons",
+        "File Icons"
+      ],
+      "requiredIcons": [
+        "back",
+        "upload",
+        "attachment",
+        "send",
+        "voice",
+        "search",
+        "filter",
+        "expand",
+        "collapse",
+        "delete",
+        "edit",
+        "download",
+        "copy",
+        "check",
+        "warning",
+        "error",
+        "info",
+        "source",
+        "history",
+        "guide"
+      ]
+    },
+    {
+      "order": 4,
+      "name": "Charts",
+      "purpose": "Reusable admin chart components using chart tokens.",
+      "frames": [
+        "KPI",
+        "Trend Line",
+        "Bar",
+        "Horizontal Bar",
+        "Donut",
+        "Funnel",
+        "Heatmap",
+        "Failure Distribution"
+      ],
+      "qa": [
+        "Each chart has title, unit, time range and empty state."
+      ]
+    },
+    {
+      "order": 5,
+      "name": "Basic Components",
+      "purpose": "Primitive reusable controls.",
+      "frames": [
+        "Button",
+        "IconButton",
+        "Input",
+        "Textarea",
+        "Select",
+        "Checkbox",
+        "Radio",
+        "Switch",
+        "Tag",
+        "Badge",
+        "Tooltip",
+        "Upload",
+        "Tabs",
+        "Segmented",
+        "SearchInput"
+      ],
+      "componentPrefix": "Component/Basic"
+    },
+    {
+      "order": 6,
+      "name": "Data Components",
+      "purpose": "Tables, records, statistics and source display.",
+      "frames": [
+        "Table",
+        "FilterBar",
+        "RecordList",
+        "DescriptionList",
+        "Statistic",
+        "Timeline",
+        "SourceCard",
+        "ResultSummary",
+        "FieldMappingTable",
+        "EmployeeReviewTable",
+        "TicketRecordList"
+      ],
+      "componentPrefix": "Component/Data"
+    },
+    {
+      "order": 7,
+      "name": "Feedback Components",
+      "purpose": "Alerts, dialogs and feedback surfaces.",
+      "frames": [
+        "Alert",
+        "Toast",
+        "Modal",
+        "Drawer",
+        "Popover",
+        "Empty",
+        "Loading",
+        "Progress",
+        "ConfirmBar",
+        "InlineError"
+      ],
+      "componentPrefix": "Component/Feedback"
+    },
+    {
+      "order": 8,
+      "name": "Navigation Components",
+      "purpose": "Admin navigation and task progress.",
+      "frames": [
+        "AppSidebar",
+        "ProductSidebar",
+        "Topbar",
+        "Breadcrumb",
+        "BackLink",
+        "StepStrip",
+        "Tabs",
+        "SubMenu"
+      ],
+      "componentPrefix": "Component/Navigation"
+    },
+    {
+      "order": 9,
+      "name": "Interaction Patterns",
+      "purpose": "Document reusable AI-admin interaction decisions before templates are built.",
+      "frames": [
+        "Page Mode Matrix",
+        "Container Decision",
+        "Drawer vs Page",
+        "Modal vs Drawer",
+        "Layout Decision",
+        "Editing Decision",
+        "AI Draft To Formal Data",
+        "Records And History",
+        "Interaction QA"
+      ],
+      "sourceFile": "interaction-guidelines.md",
+      "componentPrefix": "Pattern/Interaction"
+    },
+    {
+      "order": 10,
+      "name": "AI Components",
+      "purpose": "Reusable AI-specific patterns shared by all product samples.",
+      "frames": [
+        "AIBoundaryAlert",
+        "AIPrimaryInput",
+        "AIProcessDetail",
+        "FieldStatusTag",
+        "IntentSummary",
+        "TrustSummary",
+        "SourceTrace",
+        "FollowUpQuestions",
+        "ActionPanel",
+        "AIResultSummary"
+      ],
+      "componentPrefix": "Component/AI"
+    },
+    {
+      "order": 11,
+      "name": "Business Components",
+      "purpose": "101HR domain components composed from base and AI components.",
+      "frames": [
+        "EmployeeDraftTable",
+        "FieldMappingConfirm",
+        "ServiceTicketDraft",
+        "PolicyAnswerPackage",
+        "ServiceExpediteDecision",
+        "AssistantActionQueue",
+        "AgentDependencyTable",
+        "FailureSampleTable"
+      ],
+      "componentPrefix": "Component/Business"
+    },
+    {
+      "order": 12,
+      "name": "Templates - Workbench",
+      "purpose": "General admin workbench templates.",
+      "frames": [
+        "Input First Workbench",
+        "Result First Workbench",
+        "Split Decision Workbench",
+        "Tracking Workbench"
+      ],
+      "componentPrefix": "Template/Admin"
+    },
+    {
+      "order": 13,
+      "name": "Templates - List",
+      "purpose": "List and record management pages.",
+      "frames": [
+        "Dense List",
+        "Record Tracking",
+        "Filter And Table",
+        "Empty List"
+      ],
+      "componentPrefix": "Template/Admin/List"
+    },
+    {
+      "order": 14,
+      "name": "Templates - Card",
+      "purpose": "Card-based admin layouts with clear priority.",
+      "frames": [
+        "KPI And Issue Cards",
+        "Task Cards",
+        "Source Cards",
+        "Compact Recommendation Cards"
+      ],
+      "componentPrefix": "Template/Admin/Card"
+    },
+    {
+      "order": 15,
+      "name": "Templates - Form",
+      "purpose": "Forms with AI prefill and field status.",
+      "frames": [
+        "AI Prefill Form",
+        "Dense Business Form",
+        "Exception Form",
+        "Confirm Submit Form"
+      ],
+      "componentPrefix": "Template/Admin/Form"
+    },
+    {
+      "order": 16,
+      "name": "Templates - Detail",
+      "purpose": "Detail pages with timeline, source and action areas.",
+      "frames": [
+        "Service Ticket Detail",
+        "Employee Detail",
+        "Policy Source Detail",
+        "Agent Detail"
+      ],
+      "componentPrefix": "Template/Admin/Detail"
+    },
+    {
+      "order": 17,
+      "name": "Templates - AI Onboarding",
+      "purpose": "Smart onboarding tool for resident customer-success /代操作 users.",
+      "frames": [
+        "Default Input",
+        "AI Parsed Result",
+        "Field Mapping",
+        "Employee Confirmation",
+        "Submit Result",
+        "Record Tracking"
+      ],
+      "sourceFile": "smart-onboarding-tool.html"
+    },
+    {
+      "order": 18,
+      "name": "Templates - AI Ticket",
+      "purpose": "Smart ticket handling and AI service-ticket draft generation.",
+      "frames": [
+        "Demand Input",
+        "AI Recognition",
+        "Service Form Confirm",
+        "Submit Result",
+        "Service Record"
+      ],
+      "sourceFile": "smart-ticket-tool.html"
+    },
+    {
+      "order": 19,
+      "name": "Templates - Policy Assistant",
+      "purpose": "Trusted policy Q&A and solution assistant.",
+      "frames": [
+        "Home Prompt",
+        "Policy Answer",
+        "Source Trace",
+        "Multi-city Compare",
+        "Subscription Modal"
+      ],
+      "sourceFile": "smart-policy-assistant.html"
+    },
+    {
+      "order": 20,
+      "name": "Templates - Service Expedite",
+      "purpose": "Embedded service-ticket expedite decision support.",
+      "frames": [
+        "Ticket Context",
+        "AI Decision",
+        "Permission Blocked",
+        "Confirm Expedite",
+        "Expedite Record"
+      ],
+      "sourceFile": "service-expedite-tool.html"
+    },
+    {
+      "order": 21,
+      "name": "Templates - Smart Assistant",
+      "purpose": "Conversation action assistant with right-side executable action panel.",
+      "frames": [
+        "Conversation",
+        "Action Recognition",
+        "Fallback Handoff",
+        "Recent Processing"
+      ],
+      "sourceFile": "smart-assistant-tool.html"
+    },
+    {
+      "order": 22,
+      "name": "Templates - AI Ops",
+      "purpose": "AI operations dashboard for agents, dependencies, configuration and failure samples.",
+      "frames": [
+        "Overview KPI",
+        "Agent Dependency",
+        "Config Release",
+        "Pending Exceptions",
+        "Failure Sample Backflow"
+      ],
+      "sourceFile": "ai-ops-dashboard.html"
+    },
+    {
+      "order": 23,
+      "name": "Dark Theme",
+      "purpose": "Dark theme validation frames for main components and templates.",
+      "frames": [
+        "Dark Variables",
+        "Dark Basic Components",
+        "Dark AI Components",
+        "Dark Data Components",
+        "Dark Workbench"
+      ],
+      "qa": [
+        "Dark mode must be calm and readable, not cyber or decorative."
+      ]
+    },
+    {
+      "order": 24,
+      "name": "Code Connect",
+      "purpose": "Document Figma component to code component mapping.",
+      "frames": [
+        "Naming Map",
+        "Button Mapping",
+        "Input Mapping",
+        "Table Mapping",
+        "AI Input Mapping",
+        "Business Template Mapping"
+      ],
+      "qa": [
+        "Variant names must match code props."
+      ]
+    },
+    {
+      "order": 25,
+      "name": "QA",
+      "purpose": "Visual, variable, Auto Layout, naming, accessibility and business-flow checks.",
+      "frames": [
+        "Hard Fail Rules",
+        "Visual Consistency",
+        "Variables Binding",
+        "Component Variants",
+        "Auto Layout",
+        "Template Review",
+        "Role Signoff"
+      ]
+    }
+  ]
+}

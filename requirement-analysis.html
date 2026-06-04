@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>业务差异 - 101HR AI v2.0</title><link rel="stylesheet" href="./styles.css" /></head>
+  <body>
+    <div class="shell"><aside class="nav"><div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>业务差异</span></div></div><nav class="nav-list"><a class="nav-item" href="./index.html">总览</a><a class="nav-item active" href="./requirement-analysis.html">业务差异</a><a class="nav-item" href="./component-library.html">组件库</a><a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a><a class="nav-item" href="./trust-patterns.html">可信表达</a><a class="nav-item" href="./state-matrix.html">状态矩阵</a><a class="nav-item" href="./layout-patterns.html">布局模式</a><a class="nav-item" href="./frontend-tokens.html">前端落地</a></nav></aside>
+      <main class="page">
+        <header class="page-head"><div><h1>业务差异与 AI 模式判断</h1><p>v2.0 先回答“这个需求到底要完成什么事”，再决定界面和组件。</p></div><span class="tag">Step 1</span></header>
+        <section class="card">
+          <h3>产品需求总表</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>产品/需求</th><th>业务目标</th><th>AI 类型</th><th>推荐承载</th><th>可信表达</th><th>不推荐</th></tr></thead>
+              <tbody>
+                <tr><td><strong>51社保工具集入口</strong></td><td>聚合不同智能工具，让用户找到入口</td><td>入口导航型</td><td>工具集首页/弹窗入口</td><td>能力说明、适用对象、权限状态</td><td>把入口做成聊天首页</td></tr>
+                <tr><td><strong>智能入职工具</strong></td><td>把客户资料转成可提交入职任务</td><td>字段抽取 + 审核 + 执行</td><td>批量解析工作台</td><td>字段来源、字段状态、原文对照</td><td>纯聊天、静默提交</td></tr>
+                <tr><td><strong>智能特单办理</strong></td><td>识别客户诉求，生成服务单草稿和回复</td><td>意图识别 + 预填 + 生成</td><td>轻量分流提单</td><td>意图、字段来源、候选对象</td><td>重型后台、全流程聊天化</td></tr>
+                <tr><td><strong>101HR AI 政策库/小鲲</strong></td><td>给出可引用的政策答案</td><td>问答检索 + 来源校验</td><td>可信问答工作台</td><td>官方来源、更新时间、适用范围、冲突状态</td><td>可信度百分比、无来源答案</td></tr>
+                <tr><td><strong>服务单加急</strong></td><td>判断是否可加急并确认执行</td><td>规则判断 + 代理执行</td><td>服务单内嵌助手</td><td>规则命中、执行影响、权限、日志</td><td>独立大页面、自动承诺完成</td></tr>
+                <tr><td><strong>101HR 智能助手/Chat</strong></td><td>客服内部辅助、调试、对话转动作</td><td>对话 + 工具调用 + 转单</td><td>对话区 + 动作面板</td><td>意图、工具调用、人工接管</td><td>承载复杂批量表格核对</td></tr>
+                <tr><td><strong>AI 智能咨询/运营后台</strong></td><td>管理 Agent、知识库、API、失败样本</td><td>运营配置型</td><td>指标 + 表格 + 配置面板</td><td>命中率、失败率、调用日志、配置状态</td><td>做成普通业务处理页</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-3 section">
+          <div class="card"><span class="tag">MVP 1</span><h3>先做三个核心样板</h3><p>智能入职、特单、政策库，覆盖字段抽取、分流提单、可信问答三类核心 AI 能力。</p></div>
+          <div class="card"><span class="tag warn">MVP 2</span><h3>再补执行与对话</h3><p>服务单加急和 Chat 智能助手，重点补强确认、工具调用、人工接管。</p></div>
+          <div class="card"><span class="tag purple">MVP 3</span><h3>最后做运营后台</h3><p>沉淀 Agent、路由、知识库、失败样本、配置发布和前端数据模型。</p></div>
+        </section>
+      </main>
+    </div>
+    <script src="./interactions.js"></script>
+  </body>
+</html>

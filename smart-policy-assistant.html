@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>101HR AI 政策库 - 101HR AI v2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="focused-product-page">
+    <div class="shell">
+      <aside class="nav">
+        <div class="brand"><div class="logo">AI</div><div><strong>101HR AI</strong><span>产品演示</span></div></div>
+        <nav class="nav-list">
+          <a class="nav-item" href="./index.html">总览</a>
+          <a class="nav-item" href="./requirement-analysis.html">业务差异</a>
+          <a class="nav-item" href="./component-library.html">组件库</a>
+          <a class="nav-item" href="./product-samples.html">产品样板</a>
+          <a class="nav-item" href="./interaction-guidelines.html">交互指导</a>
+          <a class="nav-item" href="./trust-patterns.html">可信表达</a>
+          <a class="nav-item" href="./state-matrix.html">状态矩阵</a>
+          <a class="nav-item" href="./layout-patterns.html">布局模式</a>
+          <a class="nav-item" href="./frontend-tokens.html">前端落地</a>
+          <a class="nav-item" href="./smart-onboarding-tool.html">智能入职</a>
+          <a class="nav-item" href="./smart-ticket-tool.html">智能特单</a>
+          <a class="nav-item active" href="./smart-policy-assistant.html">AI 政策库</a>
+        </nav>
+      </aside>
+
+      <main class="page policy-assistant-page">
+        <div class="product-screen policy-product-shell">
+          <aside class="product-nav">
+            <div class="product-logo">101HR</div>
+            <a class="product-item" href="./product-samples.html">返回工具集</a>
+            <div class="product-item">服务单中心</div>
+            <div class="product-item">政策库</div>
+            <div class="product-item on">AI政策助手</div>
+            <div class="product-item">参保信息大全</div>
+            <div class="product-item">政策变化</div>
+            <div class="product-item">政策解读</div>
+            <div class="product-item">政策官网</div>
+            <div class="product-item">案例库</div>
+            <div class="product-item">原文政策库</div>
+            <div class="product-item">我的订阅</div>
+          </aside>
+
+          <div class="product-main policy-main">
+            <header class="policy-topbar">
+              <div>
+                <h1>101HR AI 政策库</h1>
+                <p>基于官方政策原文、案例库和 101HR 经办规则，为 HR 提供可溯源的政策解答与办理方案。</p>
+              </div>
+              <div class="toolbar">
+                <a class="btn" href="./product-samples.html">返回工具集</a>
+                <button class="btn" data-policy-action="new-chat">新对话</button>
+                <button class="btn" data-policy-action="open-history">历史</button>
+              </div>
+            </header>
+
+            <section class="policy-input-dock policy-primary-composer hr-ai-policy-primary-composer hr-ai-c-policy-primary-input" id="policy-home">
+              <div class="policy-composer-head">
+                <div>
+                  <span class="tag success">AI 政策助手</span>
+                  <strong>输入政策问题，生成可溯源办理方案</strong>
+                  <span>优先写清城市、业务场景、时间范围和想要的输出形式。AI 会先给结论摘要，再展开依据、清单和风险。</span>
+                </div>
+              </div>
+              <div class="mode-tabs policy-mode-tabs hr-ai-c-mode-tabs" id="mode-tabs" aria-label="回答模式">
+                <button class="active" data-policy-mode="综合回答">综合回答</button>
+                <button data-policy-mode="仅搜索原文政策">仅搜索原文政策</button>
+                <button data-policy-mode="案例辅助分析">案例辅助分析</button>
+                <button data-policy-mode="多城市对比">多城市对比</button>
+              </div>
+              <div class="dock-input-row">
+                <textarea id="policy-input" placeholder="请输入你的政策问题，例如：北京新员工入职社保公积金如何办理？"></textarea>
+              </div>
+              <div class="dock-tools">
+                <span id="mode-description">结合政策、案例和经办规则输出完整方案。</span>
+                <div class="policy-tool-actions">
+                  <button class="btn icon-btn" title="附件上传" aria-label="附件上传" data-policy-action="mock-upload" data-icon="upload"></button>
+                  <button class="btn icon-btn" title="语音输入" aria-label="语音输入" data-policy-action="voice" data-icon="voice"></button>
+                  <button class="btn" data-policy-action="official-only">红头文件优先</button>
+                  <button class="btn" data-policy-action="open-compare">多城市对比</button>
+                  <button class="btn primary policy-send-btn" data-policy-action="send">发送</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="policy-assurance-bar hr-ai-c-trust-boundary" aria-label="AI 政策助手能力边界">
+              <div><span>默认输出</span><strong>政策方案</strong><em>先给结论，再给依据和办理建议</em></div>
+              <div><span>来源要求</span><strong>可追溯</strong><em>关键结论绑定原文政策或案例编号</em></div>
+              <div><span>风险处理</span><strong>需复核</strong><em>过期、冲突、范围不明会提示人工确认</em></div>
+              <div><span>后续动作</span><strong>可导出</strong><em>支持收藏、导出、订阅和继续追问</em></div>
+            </section>
+
+            <section class="policy-scenario-card compact-scenario-card hr-ai-m-policy-scenario-card" id="scenario-card">
+              <div class="card-title-row">
+                <div><h2>常用任务模板</h2><p>模板用于快速生成专业问题，是输入区的辅助，不抢主路径。</p></div>
+                <button class="btn" data-policy-action="open-compare">多城市对比</button>
+              </div>
+              <div class="policy-scenario-layout">
+                <div class="policy-featured-templates" aria-label="推荐模板">
+                  <button class="policy-template-card is-primary" data-policy-prompt="请查询【城市】当前年度社保缴纳基数上下限和单位/个人缴纳比例，并说明适用险种、政策来源、更新时间和 HR 注意事项。">
+                    <span>高频查询</span>
+                    <strong>社保缴纳标准</strong>
+                    <em>基数上下限、缴纳比例、政策来源和 HR 注意事项</em>
+                  </button>
+                  <button class="policy-template-card" data-policy-prompt="请生成【城市】新员工入职社保公积金办理方案，包括办理时限、材料清单、操作流程、风险提示和政策依据。">
+                    <span>经办方案</span>
+                    <strong>新员工入职</strong>
+                    <em>办理时限、材料清单、流程、风险和政策依据</em>
+                  </button>
+                  <button class="policy-template-card" data-policy-action="open-compare">
+                    <span>工具计算</span>
+                    <strong>多城市成本对比</strong>
+                    <em>选择城市和主题，生成政策差异与成本对比表</em>
+                  </button>
+                </div>
+                <div class="policy-template-board" aria-label="更多模板">
+                  <section class="policy-template-section">
+                    <h3>高频查询</h3>
+                    <div class="policy-template-list">
+                      <button data-policy-prompt="请说明【城市】当前公积金缴存基数、缴存比例、上下限、调整周期和政策依据。">公积金缴存规则</button>
+                      <button data-policy-prompt="请说明【城市】生育津贴申领条件、所需材料、办理流程、到账周期、常见驳回原因和政策依据。">生育津贴申领</button>
+                      <button data-policy-prompt="请说明【城市】工伤认定标准、申报时限、材料清单、办理流程和常见风险。">工伤认定标准</button>
+                    </div>
+                  </section>
+                  <section class="policy-template-section">
+                    <h3>经办场景</h3>
+                    <div class="policy-template-list">
+                      <button data-policy-prompt="请生成【城市】员工离职社保停缴办理方案，包括停缴节点、材料要求、风险提示和政策依据。">离职社保停缴</button>
+                      <button data-policy-prompt="请说明员工异地参保时，HR 需要确认的参保城市、合同主体、材料清单、办理风险和政策依据。">异地参保</button>
+                      <button data-policy-prompt="请生成【城市】待遇申领办理方案，包含申领条件、材料清单、办理流程、到账周期和风险提示。">待遇申领</button>
+                    </div>
+                  </section>
+                  <section class="policy-template-section">
+                    <h3>工具计算</h3>
+                    <div class="policy-template-list">
+                      <button data-policy-prompt="请根据【城市】薪酬个税规则，说明员工月薪、专项扣除、社保公积金对个税的影响，并给出计算口径。">薪酬个税计算</button>
+                      <button data-policy-prompt="请说明解除劳动合同经济补偿金的计算方式、适用条件、封顶规则和风险提示。">补偿金计算</button>
+                      <button data-policy-prompt="请测算【城市】员工社保公积金单位成本，并列出基数、比例、政策来源和更新时间。">社保成本测算</button>
+                    </div>
+                  </section>
+                  <section class="policy-template-section">
+                    <h3>政策跟踪</h3>
+                    <div class="policy-template-list">
+                      <button data-policy-prompt="请查询【城市】近期社保公积金政策变化，并说明影响范围、执行时间和 HR 待办事项。">政策变化</button>
+                      <button data-policy-prompt="请说明【城市】社保公积金调基时间、申报窗口、调整范围、操作提醒和风险提示。">调基提醒</button>
+                      <button data-policy-prompt="请说明【城市】社保增减员节点、截止时间、补缴风险和经办建议。">增减员节点</button>
+                      <button data-policy-prompt="请查询【城市】社保公积金缴纳截止日，并说明逾期风险和经办建议。">缴纳截止日</button>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <section class="policy-answer-workspace result-workspace hr-ai-m-policy-workbench is-hidden" id="answer-workspace">
+              <section class="policy-conversation hr-ai-c-answer-stream">
+                <article class="policy-user-question">
+                  <span class="tag">用户问题</span>
+                  <p id="question-text">请详细说明北京市的社保缴纳基数和比例标准，包括上下限和各行业差异。</p>
+                </article>
+
+                <article class="card policy-answer-card">
+                  <div class="answer-status" id="answer-status">
+                    <div class="spin"></div>
+                    <strong>正在检索政策来源...</strong>
+                    <span>官方红头文件、政策解读、案例库和 101HR 经办规则正在匹配。</span>
+                  </div>
+
+                  <div class="policy-answer-content is-hidden" id="policy-answer-content">
+                    <div class="trust-summary hr-ai-c-trust-summary">
+                      <div><span>适用地区</span><strong>北京市</strong></div>
+                      <div><span>政策主题</span><strong>社保缴纳标准</strong></div>
+                      <div><span>可信来源</span><strong>3 个官方文件，1 个案例</strong></div>
+                      <div><span>最近来源日期</span><strong>2025-01-15</strong></div>
+                      <div class="trust-note"><strong>时效提示</strong><span>请以最新官方文件为准。</span></div>
+                    </div>
+
+                    <section class="solution-card conclusion hr-ai-b-policy-answer-section">
+                      <div class="solution-head"><h2>结论摘要</h2><span class="tag success">可引用</span></div>
+                      <p>根据北京市人社局发布的政策口径，2025 年度北京市社保缴费基数上下限为：上限 35,283 元/月，下限 6,821 元/月。企业申报时应结合员工实际工资、当地上下限和客户服务方案，不建议简单按最低基数统一申报。<sup>[1]</sup></p>
+                    </section>
+
+                    <section class="solution-card hr-ai-b-policy-answer-section">
+                      <div class="solution-head"><h2>政策要点</h2><span class="tag">逐条可反馈</span></div>
+                      <div class="policy-point-list hr-ai-c-feedback-list">
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="养老保险：单位 16%，个人 8%。"><span>养老保险：单位 16%，个人 8%。<sup>[1]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="医疗保险：单位 9.8%，个人 2% + 3 元大病统筹。"><span>医疗保险：单位 9.8%，个人 2% + 3 元大病统筹。<sup>[2]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="失业保险：单位 0.5%，个人 0.5%。"><span>失业保险：单位 0.5%，个人 0.5%。<sup>[1]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="工伤保险按行业风险等级浮动，个人不缴纳。"><span>工伤保险：单位 0.2%-1.9%，按行业风险等级浮动，个人不缴纳。<sup>[1]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="生育保险由单位缴纳，个人不缴纳。"><span>生育保险：单位 0.8%，个人不缴纳。<sup>[2]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                      </div>
+                    </section>
+
+                    <section class="solution-card hr-ai-b-policy-answer-section">
+                      <div class="solution-head"><h2>HR 办理清单</h2><button class="btn" data-policy-action="export-checklist">生成办理清单</button></div>
+                      <ol class="policy-checklist">
+                        <li>入职 30 日内完成社保增员登记。</li>
+                        <li>核对员工身份证、手机号、劳动合同信息。</li>
+                        <li>确认参保城市、合同主体、参保类型和客户服务方案。</li>
+                        <li>完成公积金开户或转入，确认缴存比例。</li>
+                        <li>次月复核社保公积金扣缴结果和异常名单。</li>
+                      </ol>
+                    </section>
+
+                    <section class="solution-card risk hr-ai-b-policy-answer-section">
+                      <div class="solution-head"><h2>风险提示</h2><span class="tag warn">需人工复核</span></div>
+                      <div class="risk-list">
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="低于缴费基数下限申报可能存在稽核风险。"><span>低于缴费基数下限申报可能存在稽核风险。<sup>[1]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="超过办理期限可能影响员工待遇享受。"><span>超过办理期限可能影响员工待遇享受。<sup>[3]</sup></span><button data-policy-action="feedback">反馈</button></div>
+                        <div class="policy-point hr-ai-c-feedback-item" data-point="工伤比例需按行业风险等级确认。"><span>工伤比例需按行业风险等级确认，不能套用统一比例。</span><button data-policy-action="feedback">反馈</button></div>
+                      </div>
+                    </section>
+
+                    <section class="solution-actions">
+                      <button class="btn" data-policy-action="favorite">收藏</button>
+                      <button class="btn" data-policy-action="export-word">导出 Word</button>
+                      <button class="btn" data-policy-action="export-pdf">导出 PDF</button>
+                      <button class="btn" data-policy-action="copy-answer">复制答案</button>
+                      <button class="btn primary" data-policy-action="open-subscribe">订阅政策变化</button>
+                    </section>
+
+                    <section class="follow-up-card hr-ai-c-follow-up">
+                      <h2>推荐追问</h2>
+                      <div class="follow-up-list">
+                        <button data-follow-up="北京失业保险单位和个人缴纳比例是多少？">北京失业保险单位和个人缴纳比例是多少？</button>
+                        <button data-follow-up="北京公积金缴存比例和基数如何确定？">北京公积金缴存比例和基数如何确定？</button>
+                        <button data-follow-up="新员工入职超过30天未缴社保有什么风险？">新员工入职超过30天未缴社保有什么风险？</button>
+                      </div>
+                    </section>
+                  </div>
+                </article>
+              </section>
+
+              <aside class="policy-evidence-panel">
+                <section class="card evidence-card">
+                  <div class="card-title-row">
+                    <div><h2>参考依据</h2><p>关键结论均对应来源编号。</p></div>
+                    <span class="tag success">来源可信</span>
+                  </div>
+                  <div class="source-list">
+                    <article class="source-card hr-ai-b-source-card official">
+                      <span class="tag danger">原文政策 [1]</span>
+                      <h3>京人社发〔2025〕11号：关于发布2025年度北京市社会保险缴费基数上下限的通告</h3>
+                      <p>北京市人力资源和社会保障局 · 发布 2025-01-15 · 更新 2025-01-15</p>
+                      <div class="toolbar"><button class="btn">查看原文</button><button class="btn">下载原文</button><button class="btn">复制引用</button></div>
+                    </article>
+                    <article class="source-card hr-ai-b-source-card official">
+                      <span class="tag danger">原文政策 [2]</span>
+                      <h3>京人社发〔2024〕8号：北京市城镇职工基本医疗保险规定</h3>
+                      <p>北京市医疗保障局 · 发布 2024-06-20 · 更新 2024-06-20</p>
+                      <div class="toolbar"><button class="btn">查看原文</button><button class="btn">复制引用</button></div>
+                    </article>
+                    <article class="source-card hr-ai-b-source-card rule">
+                      <span class="tag">经办规则 [3]</span>
+                      <h3>北京市新员工社会保险登记管理暂行办法</h3>
+                      <p>北京市社会保险基金管理中心 · 发布 2023-08-10 · 更新 2023-08-10</p>
+                      <div class="toolbar"><button class="btn">查看规则</button><button class="btn">复制引用</button></div>
+                    </article>
+                    <article class="source-card hr-ai-b-source-card case">
+                      <span class="tag success">案例 [4]</span>
+                      <h3>社保基数争议仲裁案——员工胜诉获补缴</h3>
+                      <p>劳动争议案例 · 2024 · 用于风险提示参考</p>
+                      <div class="toolbar"><button class="btn">查看案例</button><button class="btn">复制引用</button></div>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="card policy-side-tools">
+                  <h2>常用工具</h2>
+                  <button data-policy-action="open-compare">多城市对比</button>
+                  <button data-policy-action="open-subscribe">订阅调基提醒</button>
+                  <button data-policy-action="open-subscribe">订阅增减员节点</button>
+                  <button data-policy-action="open-history">搜索历史会话</button>
+                </section>
+              </aside>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="onboarding-drawer-mask is-hidden" id="history-drawer">
+      <aside class="onboarding-drawer">
+        <div class="drawer-head"><h2>历史会话</h2><button class="btn" data-policy-action="close-history">关闭</button></div>
+        <div class="drawer-content">
+          <input class="record-search" placeholder="搜索城市、政策主题、关键词" />
+          <article class="history-item"><strong>北京社保缴纳标准</strong><p>最近问题：北京市社保基数和比例 · 北京 · 社保缴纳标准 · 已收藏 · 已导出</p><span>2026-05-28 15:20</span></article>
+          <article class="history-item"><strong>上海生育津贴申领</strong><p>最近问题：申领材料和到账周期 · 上海 · 生育待遇</p><span>2026-05-27 18:12</span></article>
+          <article class="history-item"><strong>多城市成本对比</strong><p>北京、上海、深圳 · 社保缴纳标准 · 已导出</p><span>2026-05-26 11:05</span></article>
+        </div>
+      </aside>
+    </div>
+
+    <div class="modal-mask is-hidden" id="feedback-modal">
+      <div class="modal">
+        <div class="modal-head"><h2>反馈这条内容</h2><button class="btn" data-policy-action="close-feedback">关闭</button></div>
+        <p id="feedback-target">当前反馈条目</p>
+        <div class="feedback-options">
+          <button>内容错误</button><button>政策已过期</button><button>引用来源不匹配</button><button>缺少办理材料</button><button>缺少城市差异</button><button>表述不清楚</button><button>其他</button>
+        </div>
+        <textarea class="modal-textarea" placeholder="补充说明，可选"></textarea>
+        <div class="modal-actions"><button class="btn" data-policy-action="close-feedback">取消</button><button class="btn primary" data-policy-action="submit-feedback">提交反馈</button></div>
+      </div>
+    </div>
+
+    <div class="modal-mask is-hidden" id="compare-modal">
+      <div class="modal compare-modal">
+        <div class="modal-head"><h2>多城市政策对比</h2><button class="btn" data-policy-action="close-compare">关闭</button></div>
+        <div class="compare-config">
+          <label class="form-field"><span>选择城市</span><select><option>北京、上海、深圳、杭州</option><option>北京、广州、成都、南京</option></select></label>
+          <label class="form-field"><span>选择主题</span><select><option>社保缴纳标准</option><option>公积金缴存比例</option><option>生育待遇</option><option>工伤待遇</option></select></label>
+          <button class="btn primary" data-policy-action="generate-compare">生成对比表</button>
+        </div>
+        <div class="table-wrap compare-table is-hidden" id="compare-table">
+          <table>
+            <thead><tr><th>城市</th><th>政策主题</th><th>基数下限</th><th>基数上限</th><th>单位比例</th><th>个人比例</th><th>政策来源</th><th>更新时间</th><th>差异说明</th><th>风险提示</th></tr></thead>
+            <tbody>
+              <tr><td>北京</td><td>社保缴纳标准</td><td>6,821</td><td>35,283</td><td>按险种</td><td>按险种</td><td>京人社发〔2025〕11号</td><td>2025-01-15</td><td>基数上限较高</td><td>关注调基窗口</td></tr>
+              <tr><td>上海</td><td>社保缴纳标准</td><td>7,384</td><td>36,921</td><td>按险种</td><td>按险种</td><td>沪人社规〔2025〕6号</td><td>2025-04-01</td><td>年度调基节点不同</td><td>需核对客户方案</td></tr>
+              <tr><td>深圳</td><td>社保缴纳标准</td><td>5,282</td><td>26,412</td><td>按险种</td><td>按险种</td><td>深社保规〔2025〕2号</td><td>2025-03-18</td><td>医保档位差异大</td><td>注意一二三档选择</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-actions"><button class="btn">导出 Excel</button><button class="btn">导出 PDF</button><button class="btn primary">收藏对比结果</button></div>
+      </div>
+    </div>
+
+    <div class="modal-mask is-hidden" id="subscribe-modal">
+      <div class="modal">
+        <div class="modal-head"><h2>订阅政策提醒</h2><button class="btn" data-policy-action="close-subscribe">关闭</button></div>
+        <div class="subscribe-form">
+          <label class="form-field"><span>订阅城市</span><select><option>北京</option><option>上海</option><option>深圳</option><option>杭州</option></select></label>
+          <label class="form-field"><span>订阅主题</span><select><option>政策变化</option><option>调基提醒</option><option>社保缴纳截止日</option><option>增减员节点提醒</option><option>待遇政策变化</option></select></label>
+          <label class="form-field"><span>提醒方式</span><select><option>站内通知 + 邮件</option><option>站内通知</option><option>邮件</option></select></label>
+          <label class="form-field"><span>提醒频率</span><select><option>实时</option><option>每周汇总</option><option>每月汇总</option></select></label>
+        </div>
+        <div class="modal-actions"><button class="btn" data-policy-action="close-subscribe">取消</button><button class="btn primary" data-policy-action="confirm-subscribe">确认订阅</button></div>
+      </div>
+    </div>
+
+    <script src="./smart-policy-assistant.js"></script>
+  </body>
+</html>
