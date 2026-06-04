@@ -17,6 +17,9 @@ The work fails immediately if any item is true:
 - Module relationships are visually unclear: two modules touch, or one module is split into ambiguous containers.
 - Buttons replace icon actions so heavily that the action area becomes noisy.
 - Status colors are decorative rather than semantic.
+- The page cannot explain which module is primary, secondary and tertiary.
+- A large AI input remains visually primary after a business draft/result has already been generated.
+- Step strip style differs across sample pages without a documented reason.
 
 ## 1. Functional Completeness
 
@@ -45,6 +48,44 @@ The work fails immediately if any item is true:
 - [ ] The number of visible text buttons is controlled; icon buttons are used for compact actions.
 - [ ] Status colors match business meaning.
 - [ ] Tables, forms and lists are used where they fit the workflow better than cards.
+
+## 2.1 Visual Governance Check
+
+- [ ] Every visible block is classified as same module, separate module or parent-child module.
+- [ ] Same-module sections use one shared container with internal hierarchy.
+- [ ] Separate modules use at least `Layout/Space/ModuleGap`.
+- [ ] Parent-child modules reduce child visual weight through softer fill, smaller radius or no extra border.
+- [ ] The primary work module is visually dominant.
+- [ ] Secondary modules support the primary task and do not compete with it.
+- [ ] Tertiary metadata is visibly lighter than primary business content.
+- [ ] Borders are used for inputs, tables, upload zones, focus and selected states, not general decoration.
+- [ ] No module uses both strong border and strong shadow.
+- [ ] Page-level cards and child blocks do not share identical visual weight.
+- [ ] AI processing details are compact after completion.
+- [ ] Scenario templates are visually secondary to the input/composer.
+- [ ] Record rows follow status -> title -> result -> owner/time -> action order.
+- [ ] Large blank areas in record rows are not used unless reserved for expansion.
+
+## 2.2 Action And Component Density Check
+
+- [ ] Each module has no more than one primary action unless it is explicitly an action toolbar.
+- [ ] Upload, attachment, delete, copy, download, expand, collapse, voice and send use IconButton when context is clear.
+- [ ] Icon-only actions have tooltip labels.
+- [ ] Buttons in the same group have the same height and baseline.
+- [ ] Filter chips, tabs and segmented controls use hug-content width by default.
+- [ ] A tab named "全部" is not wider than neighboring tabs unless full-width tabs are intentionally specified.
+- [ ] Row-level actions use precise labels such as `查看进度`, `继续处理`, `导出失败员工`.
+- [ ] Vague actions such as standalone `查看` are avoided unless the object is unambiguous.
+
+## 2.3 Tag And Status Check
+
+- [ ] Every colored tag has a documented semantic meaning.
+- [ ] Field-level tags are placed next to field label or field value.
+- [ ] Module-level tags are placed in the module header.
+- [ ] Tags do not float in arbitrary corners.
+- [ ] Tag text is vertically centered.
+- [ ] Dense rows show no more than two tags unless the row is a status summary.
+- [ ] Decorative color bars or tags used only for "AI feeling" are removed.
 
 ## 3. Figma Variables Check
 
@@ -127,6 +168,11 @@ The work fails immediately if any item is true:
 - [ ] The confirmation point before formal business data submission is visible.
 - [ ] Records show status, business title, result summary, owner/time and next action in predictable order.
 - [ ] Vague record actions such as simultaneous “查看 / 查看全部 / 查看全部 3 条” are not used.
+- [ ] Current workflow state is declared: before processing, processing, draft generated, confirmation, submitted or tracking.
+- [ ] AI input priority matches the current workflow state.
+- [ ] Generated business results outrank AI input after draft generation.
+- [ ] Same-module vs separate-module relationship is visually evident without reading annotations.
+- [ ] StepStrip uses the shared compact style and does not create double dividers.
 
 ## 9. Code Connect Readiness
 

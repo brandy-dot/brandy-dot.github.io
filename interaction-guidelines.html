@@ -28,9 +28,9 @@
         <header class="page-head">
           <div>
             <h1>101HR AI 交互指导与落地方案</h1>
-            <p>把产品经理原型和当前样板中反复出现的问题，沉淀成页面、抽屉、弹窗、两栏/三栏、当页编辑与记录追踪的决策规则。</p>
+            <p>把产品经理原型和当前样板中反复出现的问题，沉淀成页面、抽屉、弹窗、两栏/三栏、当页编辑、记录追踪与视觉治理规则。</p>
           </div>
-          <span class="tag warn">Interaction v2.1</span>
+          <span class="tag warn">Interaction + Visual v2.2</span>
         </header>
 
         <section class="card section">
@@ -41,6 +41,50 @@
             <div class="callout"><strong>仍缺少</strong><br />容器选型、布局选型、编辑方式、提交守卫和记录区的统一交互规则。</div>
             <div class="callout"><strong>使用对象</strong><br />PM 写 PRD，UI 选布局和组件，前端落状态和交互，QA 按规则验收。</div>
             <div class="callout"><strong>判断原则</strong><br />AI 不是主角，业务对象、人工确认、异常恢复和追踪记录才是主流程。</div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>视觉治理：先判断模块关系，再决定样式</h2>
+          <p>当前页面反复出现的问题，不是单个组件“不好看”，而是模块关系没有先定义。每个区域先判断它是同一模块、独立模块，还是父子模块，再决定容器、间距、描边和阴影。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>关系</th><th>视觉处理</th><th>不通过表现</th><th>修复方式</th></tr></thead>
+              <tbody>
+                <tr><td>同一模块的不同部分</td><td>一个共享容器，内部用标题、正文、底部操作区分层</td><td>两个圆角容器贴在一起，看不懂是一个还是两个模块</td><td>合并为一个容器，使用内部 16px 间距和单一分割线</td></tr>
+                <tr><td>两个独立模块</td><td>使用 24px 模块间距，标题和主任务各自独立</td><td>卡片贴在一起，信息关系混乱</td><td>拉开模块间距，删除重复边框</td></tr>
+                <tr><td>父子模块</td><td>父容器白底，子模块使用浅底或无边框局部区域</td><td>子模块和父模块同样重，层级坍塌</td><td>降低子模块背景和边框权重</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>视觉收敛硬规则</h2>
+          <div class="grid-3">
+            <div class="callout"><strong>描边</strong><br />输入、表格、上传区、选中和聚焦需要描边；普通卡片优先用白底、浅阴影和间距，不叠加重描边。</div>
+            <div class="callout"><strong>间距</strong><br />8px 用于紧凑控件，16px 用于同模块子区，24px 用于独立模块。独立模块小于 16px 即不通过。</div>
+            <div class="callout"><strong>按钮</strong><br />一个模块通常只有一个主按钮。上传、附件、删除、展开、复制、下载优先使用 IconButton + Tooltip。</div>
+            <div class="callout"><strong>标签</strong><br />标签只能表达业务状态、用户下一步或来源/AI 边界，不能放在任意角落当装饰。</div>
+            <div class="callout"><strong>输入区</strong><br />AI 生成草稿后，输入区必须压缩为任务摘要，不能继续和确认表格/业务表单抢主视觉。</div>
+            <div class="callout"><strong>步骤条</strong><br />六个样板共用同一 StepStrip：紧凑横向、单一激活色、弱连接线，不允许双分割线。</div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>操作密度：什么时候用按钮，什么时候用图标</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>动作类型</th><th>推荐组件</th><th>示例</th><th>控制规则</th></tr></thead>
+              <tbody>
+                <tr><td>主流程动作</td><td>Primary Button</td><td>生成入职草稿、确认提交入职、提交服务单</td><td>模块内只保留一个主按钮，位置稳定。</td></tr>
+                <tr><td>次级明确动作</td><td>Secondary Button</td><td>保存草稿、查看详情、继续处理</td><td>不和主按钮抢视觉，按钮高度一致。</td></tr>
+                <tr><td>工具动作</td><td>IconButton + Tooltip</td><td>上传、附件、删除、复制、下载、展开、语音、发送</td><td>图标表达清楚时不要使用大文本按钮。</td></tr>
+                <tr><td>模式切换</td><td>Tabs / Segmented</td><td>今日/全部、综合回答/原文政策、多城市对比</td><td>默认 hug-content，不让“全部”异常变宽。</td></tr>
+                <tr><td>场景快捷入口</td><td>Chip / Task item</td><td>参保证明出具、新员工入职、社保缴纳标准</td><td>作为输入辅助，不抢主输入区域。</td></tr>
+                <tr><td>记录下一步</td><td>Text link / compact button</td><td>查看进度、导出失败员工、继续补充</td><td>动作必须带对象，避免“查看/查看全部/查看全部 3 条”并列。</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 

@@ -1,7 +1,7 @@
 # 101HR AI Design System Specification
 
-Version: v2.0 executable package
-Date: 2026-06-03
+Version: v2.2 executable package
+Date: 2026-06-04
 Source pages: `component-library.html`, `product-samples.html`, `smart-onboarding-tool.html`, `smart-ticket-tool.html`, `smart-policy-assistant.html`, `service-expedite-tool.html`, `smart-assistant-tool.html`, `ai-ops-dashboard.html`, `frontend-tokens.html`, `styles.css`
 
 ## 0. Decision Summary
@@ -122,6 +122,26 @@ Avoid:
 - Tags used as decoration rather than semantic status confuse users.
 - Chat surfaces can be either under-prioritized or over-prioritized if the page mode is not declared.
 - Component library and product samples can diverge if QA does not check both.
+
+### 1.8 Current Optimization Direction
+
+The next standardization layer is interaction and visual governance. The goal is to make every page answer:
+
+1. What is the primary business task?
+2. Which module is primary, secondary and tertiary?
+3. Which container relationship is being used: same module, separate module or parent-child module?
+4. Which actions are text buttons and which are icon actions?
+5. Which tags are semantic business states and which should be removed?
+6. Does the page still work if AI processing detail is collapsed?
+
+This governance layer is required because the pages can otherwise regress into:
+
+- too many equal cards,
+- too many visible text buttons,
+- unclear adjacent containers,
+- decorative status tags,
+- inconsistent step strips,
+- and input areas competing with generated business results.
 
 ## 2. Design Goal And Scope
 
@@ -412,6 +432,71 @@ Use borders sparingly:
 - Dashed border only for upload or empty drop zones.
 - Focus border is blue and must be paired with focus shadow.
 - Do not use decorative colored side bars unless status or selection is explicit.
+
+## 18.1 Surface And Container Governance
+
+Before drawing a card, decide the module relationship.
+
+| Relationship | Token treatment | Rule |
+| --- | --- | --- |
+| Same module | One white container, internal `Layout/Space/SectionGap` | Header, body, footer belong to one card. Do not split them into touching cards. |
+| Separate module | Separate white containers with `Layout/Space/ModuleGap` | Each module needs its own title and primary task. |
+| Parent-child | Parent white container, child subtle fill or no separate border | Child block should not equal parent weight. |
+
+Container acceptance:
+
+- No two independent cards may touch.
+- No double divider lines between step strip and summary.
+- Nested cards may appear only for repeated list items, modals, drawers, or framed tools.
+- Business tables and forms are primary surfaces; avoid wrapping every row in card-like containers.
+
+## 18.2 Action And Button Governance
+
+Action type determines component choice:
+
+- Primary workflow actions use `Component/Basic/Button` with `variant=primary`.
+- Secondary explicit actions use `variant=secondary`.
+- Upload, attachment, voice, send, delete, expand, collapse, copy and download use `Component/Basic/IconButton` when the surrounding context already names the action.
+- Mode choices use `Segmented` or `Tabs`, not multiple buttons.
+- Scenario templates use chips or task items, not primary buttons.
+
+Button acceptance:
+
+- One module usually has one primary action.
+- Buttons in one action group must share height and baseline.
+- Icon-only actions require tooltip.
+- Record actions must name the object or outcome.
+
+## 18.3 Tag Governance
+
+Tags are semantic, not decorative.
+
+A tag is allowed only if it expresses:
+
+- business status,
+- required user action,
+- AI/source status,
+- risk or permission boundary.
+
+Tag acceptance:
+
+- Text is vertically centered.
+- Field-level tags sit near field label or value.
+- Module-level tags sit in the module header.
+- Decorative tags such as vague "AI 感" labels fail QA.
+
+## 18.4 Input Priority Governance
+
+AI input is prominent only in input-first states.
+
+| Workflow state | Primary surface | Input rule |
+| --- | --- | --- |
+| Before processing | Input or composer | Large and focused, with examples and primary action |
+| Processing | Compact process summary | Input disabled or visually secondary |
+| Draft generated | Confirmation table/form/answer | Input collapses to task summary and "modify input" |
+| Tracking | Record list or result summary | Input is hidden or secondary |
+
+If the generated business result exists, the result must outrank the input.
 
 ## 19. Shadow System
 

@@ -1,7 +1,7 @@
 # 101HR AI Interaction Guidelines
 
-Version: v2.1 interaction package
-Date: 2026-06-03
+Version: v2.2 interaction and visual governance package
+Date: 2026-06-04
 Scope: 101HR AI product renovation, product-manager prototypes, component library, sample pages and frontend implementation.
 
 ## 0. Conclusion
@@ -239,7 +239,131 @@ Field states must guide the user's next action.
 
 Do not use color bars as decoration. Color must mean a state that changes user action.
 
-## 11. Per-Product Interaction Requirements
+## 11. Visual Governance Rules
+
+Visual hierarchy must make the workflow understandable before the user reads every label. The system should feel like a 101HR business workbench, not a pile of equal cards.
+
+### 11.1 Module Relationship
+
+Every block on the page must be one of three relationship types:
+
+| Relationship | Visual treatment | Failure symptom |
+| --- | --- | --- |
+| Same module, different parts | One shared container with internal header, body and footer spacing | Two rounded cards touch each other and users cannot tell whether they are one module |
+| Separate modules | `Layout/Space/ModuleGap` between containers | Modules visually stick together |
+| Parent-child module | Parent surface contains child block with lighter background and smaller radius | Child card has same weight as parent and hierarchy collapses |
+
+Rules:
+
+- Do not stack two white rounded cards with 0-8px gap.
+- Do not use double divider lines between step strip, task summary and result area.
+- If a step strip belongs to the current task, it stays inside the same task container or has a clear 16-24px relationship to the task content.
+- Result tables and business forms are primary work surfaces; avoid putting them inside multiple nested cards.
+
+### 11.2 Border And Surface Use
+
+Use borders to express controls, table boundaries, focus, upload zones and selected states. Do not use borders as general decoration.
+
+| Element | Preferred treatment | Avoid |
+| --- | --- | --- |
+| Page background | Light gray-blue work background | Pure white full page |
+| Primary work surface | White surface, soft shadow or subtle border, not both heavy | Thick border + shadow + nested border |
+| Input / Select / Textarea | 1px border, blue focus border | Large decorative outline |
+| Upload zone | Dashed border and icon action | Large text button competing with input |
+| Table | Header fill + row separators | Card inside card for every row |
+| Status tag | Small semantic fill, centered text | Decorative colored bars or tags with no action meaning |
+
+### 11.3 Spacing Hierarchy
+
+Spacing should encode relationship:
+
+| Gap | Use |
+| --- | --- |
+| 4px | icon and text, tag internal gap |
+| 8px | compact controls in the same action group |
+| 12px | label to field, section title to helper text |
+| 16px | related submodules inside one card |
+| 24px | independent modules |
+| 32px | page title to first primary work block when no alert is present |
+
+Hard fail:
+
+- Independent modules use less than 16px gap.
+- Page-level modules and child modules use the same gap and same card style.
+- Buttons, tags or filters are vertically misaligned.
+
+### 11.4 Action Density
+
+Too many text buttons make an AI workbench look noisy. Choose action type by intent.
+
+| Action type | Component | Examples |
+| --- | --- | --- |
+| Main irreversible or workflow action | Primary Button | 生成入职草稿, 确认提交入职, 提交服务单 |
+| Secondary explicit action | Secondary Button | 保存草稿, 查看详情 |
+| Compact tool action | IconButton with tooltip | 上传, 附件, 删除, 展开, 复制, 下载, 语音, 发送 |
+| Mode switch | Segmented / Tabs | 综合回答, 原文政策优先, 今日/全部 |
+| Optional scenario shortcut | Chip / Task template item | 参保证明出具, 新员工入职 |
+| Row next step | Text link or compact button | 继续处理, 查看进度, 导出失败员工 |
+
+Rules:
+
+- A module should usually have one primary button.
+- Inline tool actions should not become full text buttons unless the meaning is ambiguous.
+- Button heights must be consistent within one action group.
+- Record rows should not show multiple vague actions like "查看", "查看全部", "查看全部 3 条" at the same visual level.
+
+### 11.5 Tag And Status Discipline
+
+Tags are not decorations. Each tag must answer one of these:
+
+1. What is the business state?
+2. What must the user do?
+3. What is the AI/source confidence or limitation?
+
+Rules:
+
+- Tag text must be vertically centered and fixed to the token height.
+- Use no more than 2 visible tags in a dense row unless the row is explicitly a status summary.
+- Do not place a tag in an arbitrary corner if it does not label the whole module.
+- Put field-level tags near field labels or values; put module-level tags in the module header.
+
+### 11.6 Input Area Priority
+
+Input area priority changes by workflow state:
+
+| State | Primary visual object | Input treatment |
+| --- | --- | --- |
+| Before AI processing | Input card / composer | Large, focused, with examples and one primary action |
+| During AI processing | Processing summary | Input disabled or collapsed, loading visible |
+| After draft generated | Table / form / structured answer | Input collapses to current-task summary and "修改输入" |
+| Tracking state | Record list / result summary | Input becomes secondary entry or hidden |
+
+Hard rule: after AI has generated a draft, do not keep the large input competing with confirmation table or business form.
+
+### 11.7 Record Readability
+
+Record rows should scan in one horizontal rhythm:
+
+Status -> title -> result summary -> owner/time -> next action.
+
+Rules:
+
+- Status sits at the left edge or before the title, not floating at a random corner.
+- Owner/time should be secondary metadata, not the dominant right-side block.
+- The row's main action should be named by outcome: "继续处理", "查看进度", "导出失败员工".
+- Large blank areas in records are a failure unless they reserve space for expanded details.
+
+### 11.8 Step Strip Uniformity
+
+All sample pages use the same StepStrip visual language:
+
+- Compact horizontal strip.
+- One active step color.
+- Connectors are subtle, not double lines.
+- Step strip should not be more visually prominent than the current task.
+- If the step strip is inside a container, do not add another divider immediately below it.
+
+## 12. Per-Product Interaction Requirements
 
 ### 智能入职
 
@@ -292,7 +416,7 @@ Do not use color bars as decoration. Color must mean a state that changes user a
 - Configuration changes require version, impact scope and rollback confirmation.
 - Failure samples use table/list and batch operations.
 
-## 12. Role-Based Usage
+## 13. Role-Based Usage
 
 ### Product Manager
 
@@ -312,6 +436,9 @@ PRD must include:
 - Layout choice.
 - Editing method.
 - Required states.
+- Visual priority: primary module, secondary module, tertiary metadata.
+- Action model: primary action, secondary actions and icon-only tool actions.
+- Record model: status, business title, result summary, owner/time and next action.
 
 ### UI Designer
 
@@ -322,6 +449,9 @@ Use this file to choose:
 - Column ratio.
 - Field status display.
 - Record list structure.
+- Module relationship: same module, separate module or parent-child module.
+- Spacing tier: dense gap, section gap or module gap.
+- Button/tag density and icon action use.
 
 Design review must fail if:
 
@@ -329,6 +459,8 @@ Design review must fail if:
 - The same visual weight is given to input, AI process, result and records.
 - Buttons replace icon actions and make the page noisy.
 - AI process steals focus from business result after processing completes.
+- A tag floats without clear ownership.
+- Two containers look stuck together or split one logical module.
 
 ### Frontend Engineer
 
@@ -350,8 +482,11 @@ Implementation must expose:
 - `containerMode`
 - `editMode`
 - `submitGuard`
+- `visualPriority`
+- `moduleRelation`
+- `actionDensity`
 
-## 13. Responsive Rules
+## 14. Responsive Rules
 
 Desktop:
 
@@ -372,7 +507,7 @@ Mobile:
 - Tables become horizontal scroll, card rows or simplified columns.
 - Primary action sticks to bottom only when the user is in a confirmation step.
 
-## 14. QA Checklist For Interaction
+## 15. QA Checklist For Interaction And Visual Governance
 
 Hard fail if any item is true:
 
@@ -385,4 +520,7 @@ Hard fail if any item is true:
 - Record actions use vague labels such as "查看" without an object.
 - AI process detail is more prominent than the business result after processing completes.
 - Three-column layout is used without three persistent roles.
-
+- Borders, cards, tags or buttons are used decoratively without business meaning.
+- Step strip, tabs or filter chips use different styles across the six sample pages.
+- Input, AI process, result and records have equal visual weight.
+- The page cannot explain whether a highlighted block is a module, submodule or status label.

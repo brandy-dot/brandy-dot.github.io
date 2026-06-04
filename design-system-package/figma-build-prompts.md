@@ -11,6 +11,7 @@ The visual direction is professional, restrained, bright 101HR blue, light gray-
 Do not use generic Ant Design, Arco or Material default visual styling.
 Do not create marketing pages, decorative AI hero pages, glassmorphism, cyber tech style, excessive gradients or flashy dark mode.
 Every component must be reusable, named, variant-ready, Auto Layout based and ready for Code Connect.
+Before drawing any page or component, classify module relationships as same module, separate module or parent-child module. Use spacing, surface and action density to express hierarchy instead of adding repeated borders.
 ```
 
 ## Phase 1: Pages And Variables
@@ -60,12 +61,20 @@ Typography:
 Color, spacing, radius, shadow:
 - Create visual reference frames for each token group.
 - Show correct and incorrect examples for borders, card separation and module spacing.
+- Add a Visual Governance reference frame showing:
+  1. same module in one container,
+  2. separate modules with ModuleGap,
+  3. parent-child modules with reduced child weight,
+  4. over-bordered card failure,
+  5. stuck-container failure,
+  6. double-divider failure.
 
 Acceptance:
 - No unbound colors.
 - Icons are not broken or distorted.
 - Charts do not duplicate random styles.
 - Spacing references include independent module gap and related submodule gap.
+- Visual Governance examples are present and labeled as pass/fail.
 ```
 
 ## Phase 3: Basic Components
@@ -139,18 +148,23 @@ Required frames:
 6. Editing Decision
 7. AI Draft To Formal Data
 8. Records And History
-9. Interaction QA
+9. Visual Governance
+10. Action Density
+11. Tag And Status Discipline
+12. Interaction QA
 
 Rules:
 - This page is not a visual component page; it is the decision layer that tells PM, UI and frontend when to use each component/template.
 - Show examples for 智能入职、智能特单办理、AI 政策库、服务单加急、智能助手 and 智能咨询后台.
 - Every pattern must say when to use it, when not to use it, and what component/template it maps to.
 - Include hard-fail examples: ambiguous adjacent containers, unnecessary modal, overwide three-column layout, vague record actions, and AI submitting formal data without confirmation.
+- Include visual hard-fail examples: overuse of borders, tags used as decoration, too many text buttons, large input competing with generated results, and inconsistent StepStrip style.
 
 Acceptance:
 - PM can choose the page mode before writing the PRD.
 - UI can choose page/drawer/modal/layout/editing mode before drawing.
 - Frontend can map the decision to route, drawer, modal, inline edit and record expansion states.
+- UI can classify module relationship and action density before adding cards/buttons.
 ```
 
 ## Phase 6: Admin Templates
@@ -181,12 +195,19 @@ Template rules:
 - Service expedite is embedded decision support: ticket context and AI decision have clear roles.
 - Smart assistant uses a conventional chat input: rounded input bar, compact tool icons, send icon or button aligned to the right.
 - AI ops cards must visibly separate from the page background.
+- Every template must mark primary, secondary and tertiary modules.
+- Same logical modules must be one container with internal hierarchy.
+- Separate modules must use ModuleGap and not appear visually stuck together.
+- Generated business results must visually outrank the AI input after processing.
+- Text-button count must be controlled; compact tool actions use IconButton.
+- Tags must be semantic and placed near the object they describe.
 
 Acceptance:
 - Every sample page has Return to Toolset interaction.
 - Every page has AI boundary or explicit confirmation rule when AI influences business data.
 - Every page has realistic record/result states.
 - Templates do not look like a marketing page or pure component showcase.
+- Templates pass Visual Governance and Action Density checks.
 ```
 
 ## Phase 7: QA Report
@@ -214,6 +235,9 @@ Hard fail if:
 - Primary task is unclear.
 - AI appears to submit formal business data without user confirmation.
 - Cards and modules are visually indistinguishable.
+- Module relationships are ambiguous.
+- Decorative tags, borders or buttons are used without business meaning.
+- StepStrip, tabs, tags or buttons drift between templates.
 ```
 
 ## Repair Prompt: layout 混乱
@@ -226,6 +250,7 @@ If two blocks are one logical module, combine them into one container with heade
 If two blocks are separate modules, add Layout/Space/ModuleGap between them.
 Remove unnecessary borders and double divider lines.
 Use table/form/list surfaces based on business need, not repeated cards.
+After repair, mark primary, secondary and tertiary modules in a small annotation frame and verify that the visual hierarchy matches that annotation.
 ```
 
 ## Repair Prompt: 图表重复
@@ -246,6 +271,40 @@ Replace broken or manually drawn inconsistent icons with the Icons page componen
 Use 16, 18, 20 or 24px line icon sizes only.
 Icon-only buttons must include tooltip examples.
 Do not use text buttons for upload, attachment, expand, collapse or delete when an icon button is clearer.
+```
+
+## Repair Prompt: 描边和卡片过多
+
+```text
+Audit this frame for border and card overuse.
+Classify every visible container as same module, separate module or parent-child module.
+Merge touching same-module cards into one container with header/body/footer.
+Remove decorative borders that do not express input, table, focus, upload, selected or error state.
+Use whitespace, typography and subtle fills to express hierarchy.
+Keep business tables/forms as primary surfaces instead of wrapping every item in cards.
+Fail the frame if primary, secondary and tertiary modules cannot be identified within 5 seconds.
+```
+
+## Repair Prompt: 按钮过多
+
+```text
+Audit all actions in this frame.
+Keep only one primary button per module unless the module is explicitly an action toolbar.
+Convert upload, attachment, delete, copy, download, expand, collapse, voice and send actions to IconButton with tooltip when context is clear.
+Use Tabs or Segmented for mode switching instead of button groups.
+Rename vague row actions such as 查看 to specific actions such as 查看进度, 继续处理 or 导出失败员工.
+Ensure all buttons in the same action group share height and baseline.
+```
+
+## Repair Prompt: 标签语义不清
+
+```text
+Audit all tags in this frame.
+For each tag, identify whether it means business status, required user action, AI/source state, risk or permission boundary.
+Remove tags that are decorative or only create AI feeling.
+Move field-level tags next to field labels or values.
+Move module-level tags into module headers.
+Center tag text vertically and bind tag height to Component/Tag tokens.
 ```
 
 ## Repair Prompt: 组件变体不足
