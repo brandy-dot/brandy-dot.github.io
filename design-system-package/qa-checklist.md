@@ -20,6 +20,8 @@ The work fails immediately if any item is true:
 - The page cannot explain which module is primary, secondary and tertiary.
 - A large AI input remains visually primary after a business draft/result has already been generated.
 - Step strip style differs across sample pages without a documented reason.
+- Container choice, layout choice, editing method, submit guard or record model is missing from the page specification.
+- A formal business action can be triggered without a submit guard.
 
 ## 1. Functional Completeness
 
@@ -155,6 +157,7 @@ The work fails immediately if any item is true:
 
 - [ ] Page mode is declared before layout: task processing, intent routing, trusted Q&A, process embedded, conversation action or operations configuration.
 - [ ] AI input priority matches the workflow: input-first pages foreground input; result-first pages foreground table/form/answer.
+- [ ] The page declares all five required decisions: container choice, layout choice, editing method, submit guard and record model.
 - [ ] Drawer is used for side detail or single-object editing while preserving context.
 - [ ] Modal is used only for high-risk confirmation or small blocking decisions.
 - [ ] New page is used only when the object has its own lifecycle, route, permissions or audit trail.
@@ -166,7 +169,14 @@ The work fails immediately if any item is true:
 - [ ] Inline table editing is limited to low-risk, high-frequency, small field corrections.
 - [ ] Drawer editing is used for multi-field object correction without losing table/list context.
 - [ ] The confirmation point before formal business data submission is visible.
+- [ ] Submit guard type is declared: disabled until complete, confirmation modal, partial submit, approval path or audit requirement.
+- [ ] Missing required fields block full submit.
+- [ ] AI-inferred fields trigger confirmation before formal submit.
+- [ ] Batch tasks with mixed eligible and abnormal items support partial submit or exception handling.
+- [ ] Permission failure provides approval path or safe alternative, not only an error message.
+- [ ] Formal submit results create or update a record with success, failure and skipped counts where applicable.
 - [ ] Records show status, business title, result summary, owner/time and next action in predictable order.
+- [ ] Record model is declared: recent list, full list/table, row expansion, drawer detail or dedicated record page.
 - [ ] Vague record actions such as simultaneous “查看 / 查看全部 / 查看全部 3 条” are not used.
 - [ ] Current workflow state is declared: before processing, processing, draft generated, confirmation, submitted or tracking.
 - [ ] AI input priority matches the current workflow state.

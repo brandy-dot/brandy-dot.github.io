@@ -1,7 +1,7 @@
 # 101HR AI Design System Specification
 
-Version: v2.2 executable package
-Date: 2026-06-04
+Version: v2.3 executable interaction package
+Date: 2026-06-05
 Source pages: `component-library.html`, `product-samples.html`, `smart-onboarding-tool.html`, `smart-ticket-tool.html`, `smart-policy-assistant.html`, `service-expedite-tool.html`, `smart-assistant-tool.html`, `ai-ops-dashboard.html`, `frontend-tokens.html`, `styles.css`
 
 ## 0. Decision Summary
@@ -714,8 +714,68 @@ Required decisions before layout:
 - Container mode: full page, drawer, modal, popover, inline expansion or toast.
 - Layout mode: one-column workflow, two-column support panel, three-pane workspace, list-detail or chat-action.
 - Editing mode: inline table edit, inline form edit, drawer edit, modal edit or new page edit.
-- Confirmation point: what the human must confirm before AI output becomes formal business data.
-- Record behavior: whether history is a compact recent list, row expansion, drawer detail or a dedicated list page.
+- Submit guard: disabled until complete, confirmation modal, partial submit, approval path or audit requirement.
+- Record behavior: recent support list, full work queue, row expansion, drawer detail or dedicated record page.
+
+### 31.1 Container Mode Rules
+
+| Container | Required condition |
+| --- | --- |
+| Full page | Complete workflow with input, confirmation, exception handling and records. |
+| Drawer | Side detail or object editing while preserving current list/form/table context. |
+| Modal | High-risk confirmation or a small blocking decision. |
+| Popover / Tooltip | Short hint, source snippet, confidence explanation or tooltip. |
+| Inline expansion | Row-level details such as missing fields, failure reason or next step. |
+| Toast | Low-risk feedback that does not change formal business state. |
+
+### 31.2 Layout Mode Rules
+
+| Layout | Required condition |
+| --- | --- |
+| One-column workflow | Dense table/form, sequential confirmation or 6+ important fields/columns. |
+| Two-column support panel | One primary work surface and one supporting AI/detail panel, usually 65/35 or 70/30. |
+| Three-pane workspace | All panes have persistent roles: navigation, primary list/conversation and detail/result. |
+| List-detail | User selects a record/object and inspects detail. |
+| Chat-action | Conversation remains useful while executable actions are shown in a distinct panel. |
+
+### 31.3 Editing Mode Rules
+
+| Editing mode | Required condition |
+| --- | --- |
+| Inline table edit | 1-3 low-risk row fields, immediate validation. |
+| Inline form edit | The form is the page's primary business object. |
+| Drawer edit | One object has multiple fields/sources, but list/table context must remain visible. |
+| Modal edit | One small required value blocks a current action. |
+| New page edit | Object has its own lifecycle, route, permissions, audit or multiple sections. |
+
+### 31.4 Submit Guard Rules
+
+| Guard type | Required condition |
+| --- | --- |
+| Disabled until complete | Required fields are missing. |
+| Confirmation modal | Inferred fields, high-risk actions or irreversible state changes exist. |
+| Partial submit | Batch task contains eligible and abnormal items at the same time. |
+| Approval path | Current role lacks permission. |
+| Audit required | Formal business data or customer-facing content changes. |
+
+### 31.5 Record Model Rules
+
+Record rows must follow this scanning order:
+
+1. Status.
+2. Business title.
+3. Result summary.
+4. Owner and time.
+5. Next action.
+6. Expand/detail affordance.
+
+Record display choice:
+
+- Recent support list when records are secondary.
+- Full list/table when records are the main work queue.
+- Row expansion for quick diagnosis.
+- Drawer detail for one record while preserving list context.
+- Dedicated page for long audit/history.
 
 Hard rules:
 
@@ -725,6 +785,7 @@ Hard rules:
 - Three columns are allowed only when all panes have persistent roles.
 - AI process details are summarized by default unless the page is an operations/debugging surface.
 - Records must show business result and next action, not only operation logs.
+- AI-generated draft cannot enter formal business data without the declared submit guard.
 
 ## 32. Code Connect Mapping Suggestions
 

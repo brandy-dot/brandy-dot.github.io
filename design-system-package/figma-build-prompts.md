@@ -140,30 +140,34 @@ Acceptance:
 Build the Interaction Patterns page from interaction-guidelines.md.
 
 Required frames:
-1. Page Mode Matrix
-2. Container Decision
-3. Drawer vs Page
-4. Modal vs Drawer
-5. Layout Decision
-6. Editing Decision
-7. AI Draft To Formal Data
-8. Records And History
-9. Visual Governance
-10. Action Density
-11. Tag And Status Discipline
-12. Interaction QA
+1. Five Decision Chain
+2. Page Mode Matrix
+3. Container Decision
+4. Drawer vs Page
+5. Modal vs Drawer
+6. Layout Decision
+7. Editing Decision
+8. Submit Guard Matrix
+9. Record Model Matrix
+10. AI Draft To Formal Data
+11. Records And History
+12. Visual Governance
+13. Action Density
+14. Tag And Status Discipline
+15. Interaction QA
 
 Rules:
 - This page is not a visual component page; it is the decision layer that tells PM, UI and frontend when to use each component/template.
 - Show examples for 智能入职、智能特单办理、AI 政策库、服务单加急、智能助手 and 智能咨询后台.
 - Every pattern must say when to use it, when not to use it, and what component/template it maps to.
+- Every AI product template must declare: container choice, layout choice, editing method, submit guard and record model.
 - Include hard-fail examples: ambiguous adjacent containers, unnecessary modal, overwide three-column layout, vague record actions, and AI submitting formal data without confirmation.
 - Include visual hard-fail examples: overuse of borders, tags used as decoration, too many text buttons, large input competing with generated results, and inconsistent StepStrip style.
 
 Acceptance:
 - PM can choose the page mode before writing the PRD.
 - UI can choose page/drawer/modal/layout/editing mode before drawing.
-- Frontend can map the decision to route, drawer, modal, inline edit and record expansion states.
+- Frontend can map the decision to route, drawer, modal, inline edit, submit guard and record expansion states.
 - UI can classify module relationship and action density before adding cards/buttons.
 ```
 
@@ -234,6 +238,7 @@ Hard fail if:
 - Variables are not bound.
 - Primary task is unclear.
 - AI appears to submit formal business data without user confirmation.
+- Container choice, layout choice, editing method, submit guard or record model is missing.
 - Cards and modules are visually indistinguishable.
 - Module relationships are ambiguous.
 - Decorative tags, borders or buttons are used without business meaning.

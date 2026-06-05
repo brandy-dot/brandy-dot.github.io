@@ -1,12 +1,12 @@
 # 101HR AI Interaction Guidelines
 
-Version: v2.2 interaction and visual governance package
-Date: 2026-06-04
+Version: v2.3 interaction decision package
+Date: 2026-06-05
 Scope: 101HR AI product renovation, product-manager prototypes, component library, sample pages and frontend implementation.
 
 ## 0. Conclusion
 
-The current interaction output is not yet enough for long-term product, design and frontend collaboration.
+The previous interaction output was not yet enough for long-term product, design and frontend collaboration.
 
 It is enough for visual exploration and sample-page review because the six AI product directions already have page shapes, components and basic states. It is not enough for production delivery because many decisions are still implicit:
 
@@ -17,7 +17,32 @@ It is enough for visual exploration and sample-page review because the six AI pr
 - How AI-generated content moves from suggestion to editable draft to confirmed business data.
 - How records, errors, sources and confirmation actions should be placed so users understand the workflow.
 
-This document turns those decisions into reusable interaction rules. PM can use it to write PRDs, UI designers can use it to select layouts and components, and frontend engineers can use it to map interaction states to code.
+This v2.3 document turns those decisions into reusable interaction rules. PM can use it to write PRDs, UI designers can use it to select layouts and components, and frontend engineers can use it to map interaction states to code.
+
+### 0.1 Five Required Interaction Decisions
+
+Every 101HR AI page must explicitly declare these five decisions before design or implementation starts:
+
+| Decision | Required output | Why it matters |
+| --- | --- | --- |
+| Container choice | Full page, drawer, modal, popover, inline expansion or toast | Prevents "two containers stuck together" and unclear module relationships. |
+| Layout choice | One-column workflow, two-column support panel, three-pane workspace, list-detail or chat-action | Prevents equal-width columns and weak hierarchy. |
+| Editing method | Inline edit, drawer edit, modal edit or new page edit | Prevents jumping to a new page for one missing field, or using a modal for a long form. |
+| Submit guard | Disabled, confirmation modal, partial submit, approval path or audit requirement | Prevents AI from appearing to directly change formal business data. |
+| Record model | Recent list, full list, row expansion, drawer detail or dedicated record page | Prevents records from becoming vague operation logs. |
+
+### 0.2 Decision Chain
+
+Use this order. Do not skip steps.
+
+1. Identify the business object: employee, service ticket, policy topic, SLA case, conversation or agent.
+2. Identify the workflow state: before processing, processing, draft generated, confirmation, submitted or tracking.
+3. Choose the primary surface: input, table, form, answer, service-ticket facts, conversation or operations table.
+4. Choose container mode based on content complexity, risk and context preservation.
+5. Choose layout based on primary/support relationship, not visual symmetry.
+6. Choose editing mode based on field count, risk, object lifecycle and context preservation.
+7. Define submit guard for every formal business-state change.
+8. Define record model and next-action language.
 
 ## 1. Core Interaction Principle
 
@@ -76,6 +101,8 @@ Examples:
 
 ## 4. Container Decision: Page, Drawer, Modal, Popover, Inline
 
+Container choice is not a visual preference. It is determined by task scope, content length, risk level and whether the user must keep the current context visible.
+
 | Container | Use when | Do not use when | 101HR AI examples |
 | --- | --- | --- | --- |
 | Full page | The task is a complete workflow with input, confirmation, exception handling and records. | The user only needs to inspect a detail or perform a small correction. | 智能入职、智能特单、AI 政策助手、运营后台 |
@@ -84,6 +111,26 @@ Examples:
 | Popover | The user needs a short explanation, field source, confidence or tooltip-like hint. | The content is long, editable or has multiple actions. | Field source snippet, source number explanation, tag meaning |
 | Inline expansion | The user needs quick row-level details without leaving the table/list. | Expanded content contains a full form or long record history. | Record row details, process steps, recent handling details |
 | Toast | A low-risk action completed or failed and does not block workflow. | The result changes business state and must be recorded. | Copied, exported, saved filter |
+
+### 4.1 Container Selection Rules
+
+Ask these questions in order:
+
+| Question | If yes | If no |
+| --- | --- | --- |
+| Is this a complete workflow with input, confirmation, exceptions and records? | Use full page. | Continue. |
+| Must the user keep the current list/table/form visible while inspecting or editing? | Use drawer. | Continue. |
+| Is the action high-risk, irreversible or a formal business-state change? | Use modal for confirmation only. | Continue. |
+| Is the content short explanatory help or source/confidence hint? | Use popover or tooltip. | Continue. |
+| Is the content row-level detail that can fit under one record/table row? | Use inline expansion. | Continue. |
+| Is the result low-risk and non-blocking? | Use toast. | Re-evaluate: the interaction is under-specified. |
+
+Hard fail:
+
+- A long business form appears in a modal.
+- A small field correction opens a new page.
+- Two independent modules touch each other because one should have been a drawer or row expansion.
+- A formal submit result is only shown as toast without a record or audit trail.
 
 ### Drawer vs New Page
 
@@ -111,6 +158,8 @@ Use Modal for decision, Drawer for work.
 - Drawer supports: "Inspect or edit this thing without losing context."
 
 ## 5. Layout Decision: One Column, Two Columns, Three Columns
+
+Layout choice must follow the page's primary work object. It should not be chosen because a three-column layout "looks like AI".
 
 | Layout | Use when | Main risk | 101HR AI rule |
 | --- | --- | --- | --- |
@@ -144,6 +193,24 @@ Use three columns only when all three panes are persistent and semantically diff
 
 Do not use three equal cards merely to show "input / output / suggestion". That creates weak hierarchy and wastes space.
 
+### 5.1 Layout Selection Rules
+
+| Condition | Recommended layout | Notes |
+| --- | --- | --- |
+| Dense table or editable form has 6+ important columns/fields | One-column workflow | Give the table/form full width; put source/process details below or in drawer. |
+| Main object plus supporting AI judgment | Two-column 65/35 or 70/30 | Main object stays left and wider; AI judgment is right/supporting. |
+| Conversation plus concrete action/result panel | Chat-action two-column | Chat composer follows normal chat conventions; action panel is not styled like chat. |
+| List selection plus detail inspection | List-detail | Detail can be right panel on desktop and drawer on narrower screens. |
+| Navigation + conversation/list + detail/result all persist | Three-pane workspace | Only valid if each pane has stable independent responsibility. |
+| Monitoring/configuration dashboard | Dashboard/list-detail | KPI and table dominate; no large AI composer by default. |
+
+Hard fail:
+
+- Three equal columns with no stable pane responsibilities.
+- Two columns are equal width while one side is clearly primary.
+- A dense result table is squeezed into a narrow side panel.
+- Input, process, result and records have equal visual weight.
+
 ## 6. Editing Decision: Inline, Drawer, Modal, New Page
 
 | Editing method | Use when | Constraints | Examples |
@@ -155,6 +222,24 @@ Do not use three equal cards merely to show "input / output / suggestion". That 
 | New page edit | The object has complex lifecycle, audit, permissions or multiple sections. | Must support route, breadcrumb, record and save status. | Agent config, formal service-ticket detail, employee profile |
 
 Hard rule: do not open a new page just to modify one missing AI field. Use inline edit or drawer.
+
+### 6.1 Editing Selection Rules
+
+| Condition | Editing method | Example |
+| --- | --- | --- |
+| 1-3 low-risk fields in a row need correction | Inline table edit | 手机号、证件号、参保城市 |
+| The current form is the main business object | Inline form edit | 服务单草稿、政策订阅配置 |
+| One object has many fields/sources but the user should keep the list visible | Drawer edit | 员工详情、字段映射、来源详情 |
+| One small missing value blocks the current action | Modal edit | 提交前补充确认原因 |
+| The object has its own permissions, audit, tabs or lifecycle | New page edit | Agent 配置、正式服务单详情、员工档案 |
+
+Editing constraints:
+
+- Inline edit must show validation in place.
+- Drawer edit must show save/cancel and changed fields.
+- Modal edit must never become a long form.
+- New page edit must include route, return path and save-state handling.
+- AI-filled values and user-edited values must be visually distinguishable until submit.
 
 ## 7. AI Draft To Business Data Flow
 
@@ -181,6 +266,26 @@ Never jump from AI result directly to formal submission.
 | Apply policy answer | Source freshness, scope, city, customer applicability |
 | Change agent configuration | Affected route, version, rollback path |
 
+### 7.1 Submit Guard Model
+
+Every formal business action must declare a guard type.
+
+| Guard type | Use when | Required behavior | Examples |
+| --- | --- | --- | --- |
+| Disabled until complete | Required fields are missing. | Primary submit button is disabled or shows field-level error on click. | 服务单用途缺失、入职手机号缺失 |
+| Confirmation modal | Fields are complete but inferred, high-risk or irreversible. | Modal states affected object, risk, user choice and audit result. | 加急确认、发送客户回复、提交正式服务单 |
+| Partial submit | Some items are eligible and some are abnormal. | Modal lets user submit eligible items, process abnormal items or cancel. | 仅提交可入职员工、仅提交可创建服务单 |
+| Approval path | User lacks permission. | Show application path and safe alternative action. | 无加急权限、无敏感信息查看权限 |
+| Audit required | Formal data or customer-facing content changes. | Persist operator, time, AI suggestion, user confirmation and result. | 入职提交、服务单创建、配置发布 |
+
+Hard rules:
+
+- AI-generated draft cannot become formal data without a visible human confirmation point.
+- Missing required fields block full submit.
+- Inferred fields trigger confirmation even when they are not missing.
+- Permission failure should not end with only "无权限"; provide application path or safe alternative.
+- Submit result must create or update a record row with success/failure/skipped counts.
+
 ## 8. Records And History Interaction
 
 Records are not logs. They should show business result and next action.
@@ -202,6 +307,32 @@ Record list rules:
 - "All records" can open full page or expand module if history is the page's secondary task.
 - Row expansion shows employee/detail rows, missing fields, failure reason and next step.
 - If records become the primary task, use a dedicated list page.
+
+### 8.1 Record Zone Selection Rules
+
+| Record role | Display model | Use when |
+| --- | --- | --- |
+| Recent support record | Compact recent list | Records are secondary and only help continue the latest work. |
+| Operational work queue | Full list/table | Records are the user's main task, need filters, search and batch actions. |
+| Row-level diagnosis | Row expansion | User needs quick missing fields, failure reason or next step. |
+| Single record detail | Drawer detail | User needs source, timeline or detail while keeping list context. |
+| Long audit/history | Dedicated page | Record has independent lifecycle, permissions or deep audit. |
+
+Record row required fields:
+
+1. Status with semantic tag.
+2. Business title with object name.
+3. Result summary with numbers or business outcome.
+4. Owner and time as secondary metadata.
+5. Next action with precise verb and object.
+6. Expand/detail affordance when detail exists.
+
+Action language rules:
+
+- Use "查看详情" for one row detail.
+- Use "查看全部记录" for the record module.
+- Use "继续处理", "查看进度", "导出失败员工", "重新解析失败员工" when the action is outcome-specific.
+- Do not show "查看", "查看全部", "查看全部 3 条" at the same level.
 
 ## 9. AI Process Visibility
 
